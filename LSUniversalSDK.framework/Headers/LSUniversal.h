@@ -117,6 +117,19 @@ typedef NS_ENUM(NSInteger, cameraUsedOnStart_t) {
 	camera_none,
 };
 
+@interface LSSurveyInfos: NSObject
+@property (nonatomic, readonly)NSString *url;
+
+@property (nonatomic, readonly)BOOL displayPopup;
+@property (nonatomic, readonly)NSString *popupLabel;
+@property (nonatomic, readonly)NSString *buttonLabel;
+
+@end
+
+typedef struct {
+	NSInteger position;
+	NSInteger length;
+}LSACDProgress_s;
 
 @protocol LSUniversalLogDelegate <NSObject>
 
@@ -151,9 +164,11 @@ typedef NS_ENUM(NSInteger, cameraUsedOnStart_t) {
 - (void)callReport:(lsCallReport_s)callEnd;
 
 @optional
+- (void)acdProgressEvent:(LSACDProgress_s)queue;
+- (void)acdAcceptedEvent:(NSString *)agentUID;
 - (void)connectionParameters:(NSDictionary *)parameters;
 - (void)cameraUsedOnStart:(cameraUsedOnStart_t)isFront;
-
+- (void)callSurvey:(LSSurveyInfos *)infos;
 @end
 
 /**
