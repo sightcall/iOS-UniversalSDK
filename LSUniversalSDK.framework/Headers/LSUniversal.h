@@ -111,10 +111,10 @@ typedef struct {
 } lsCallReport_s;
 
 
-typedef NS_ENUM(NSInteger, cameraUsedOnStart_t) {
-	camera_front,
-	camera_rear,
-	camera_none,
+typedef NS_ENUM(NSInteger, lsCameraUsedOnStart_t) {
+	lsCameraUsedOnStart_front,
+	lsCameraUsedOnStart_rear,
+	lsCameraUsedOnStart_none,
 };
 
 @interface LSSurveyInfos: NSObject
@@ -167,8 +167,92 @@ typedef struct {
 - (void)acdProgressEvent:(LSACDProgress_s)queue;
 - (void)acdAcceptedEvent:(NSString *)agentUID;
 - (void)connectionParameters:(NSDictionary *)parameters;
-- (void)cameraUsedOnStart:(cameraUsedOnStart_t)isFront;
+- (void)cameraUsedOnStart:(lsCameraUsedOnStart_t)isFront;
 - (void)callSurvey:(LSSurveyInfos *)infos;
+@end
+
+/**
+ *  The customization delegate allows to change a few things in the LSUniversal callViewController's view.
+ *  The button customization allows for changing the buttons look and content. Their size is computed by the SDK. The content is dependant on the button's state. See each buttons callback for details.
+ */
+@protocol LSCustomizationDelegate <NSObject>
+@optional
+
+/**
+ * @param b The LSButton describing the mute status of the app.
+ */
+- (void)customizeMuteToggle:(UIButton *)b;
+
+/**
+ *  Tapping this button stops/starts the video out stream capture.
+ *  b.state == UIControlStateNormal - The video is being sent
+ *  b.state == UIControlStateSelected - The video is not being sent
+ *  @param b
+ */
+- (void)customizeCameraToggle:(UIButton *)b;
+
+/**
+ * Tapping this button changes the video out source.
+ *  b.state == UIControlStateNormal - Using the front camera
+ *  b.state == UIControlStateSelected - Using another camera
+ *
+ *  @param b
+ */
+- (void)customizeCameraSource:(UIButton *)b;
+
+/**
+ *  Tapping that button changes the audio route used to play/record the audio, if possible.
+ *  b.state == UIControlStateNormal - Using the loudspeaker
+ *  b.state == UIControlStateSelected - Not using the loudspeaker
+ *  This button changes automatically when connecting a headset with a mic.
+ *
+ *  @param b
+ */
+- (void)customizeSpeakerRoute:(UIButton *)b;
+
+/**
+ *  This button pauses/resumes the video out stream capture.
+ *  b.state == UIControlStateNormal - VideoOut is playing
+ *  b.state == UIControlStateSelected - VideoOut is paused
+ *
+ *  @param b
+ */
+- (void)customizeVideoPauseToggle:(UIButton *)b;
+
+/**
+ *  Tapping that button will display the media selector popup.
+ *
+ *  @param b
+ */
+- (void)customizeShareMedia:(UIButton *)b;
+
+/**
+ *  Tapping this button starts/stops the torch, when using the back camera. It does nothing if using the front camera.
+ *  b.state == UIControlStateNormal - The torch is not on
+ *  b.state == UIControlStateSelected - The torch is on
+ *
+ *  @param b
+ */
+- (void)customizeTorchToggle:(UIButton *)b;
+
+/**
+ *  Tapping this button will erase any drawings (on share, video out or player)
+ *  @param b
+ */
+- (void)customizeEraseDrawings:(UIButton *)b;
+/**
+ *  Tapping this button will end the ongoing call.
+ *
+ *  @param b
+ */
+- (void)customizeHangup:(UIButton *)b;
+/**
+ *  Tapping this button will stop an ongoing share out.
+ *
+ *  @param b
+ */
+- (void)customizeStopShare:(UIButton *)b;
+
 @end
 
 /**
@@ -206,6 +290,11 @@ typedef struct {
 @property (nonatomic) id<LSUniversalLogDelegate> logDelegate;
 
 /**
+ *  This delegate is called upon when the call menu is resized.
+ */
+@property (nonatomic) id<LSCustomizationDelegate> customizationDelegate;
+
+/**
  *  The current connection status. When the connection goes from connecting to active, the call is created.
  */
 @property (nonatomic, readonly) lsConnectionStatus_t status;
@@ -240,3 +329,4 @@ typedef struct {
 - (void)abort;
 
 @end
+
