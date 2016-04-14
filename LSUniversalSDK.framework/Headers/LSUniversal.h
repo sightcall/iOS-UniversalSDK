@@ -21,6 +21,7 @@ extern NSString * const kParametersCalleeID;
 extern NSString * const kParametersButtons;
 extern NSString * const kParametersSharedURL;
 extern NSString * const kParametersVideoOut;
+extern NSString * const kParametersUsingVideoOut;
 extern NSString * const kParametersVideoFull;
 extern NSString * const kParametersVideoSmall;
 extern NSString * const kParametersVideoPtrOut;
