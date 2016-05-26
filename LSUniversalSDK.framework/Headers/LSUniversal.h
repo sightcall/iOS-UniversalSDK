@@ -68,6 +68,10 @@ typedef NS_ENUM(NSInteger, lsConnectionStatus_t){
 	 *	 The LSUniversalSDK is disconnecting.
 	 */
 	lsConnectionStatus_disconnecting,
+	/*
+	 *  The connection was lost.
+	 */
+	lsConnectionStatus_networkLoss
 };
 
 /**
