@@ -297,7 +297,7 @@ typedef struct {
 /**
  *  This delegate is called upon when the call menu is resized.
  */
-@property (nonatomic) id<LSCustomizationDelegate> customizationDelegate;
+@property (nonatomic) NSObject<LSCustomizationDelegate> *customizationDelegate;
 
 /**
  *  The current connection status. When the connection goes from connecting to active, the call is created.
