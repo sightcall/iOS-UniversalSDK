@@ -14,8 +14,11 @@
 extern NSString * const kParametersMode;
 extern NSString * const kParametersHash;
 extern NSString * const kParametersAppID;
-extern NSString * const kParametersACDMask;
-extern NSString * const kParametersACDValue;
+extern NSString * const kParametersACDProduct;
+extern NSString * const kParametersACDLanguage;
+extern NSString * const kParametersACDLocation;
+
+
 extern NSString * const kParametersACDInfo;
 extern NSString * const kParametersCalleeID;
 extern NSString * const kParametersButtons;
