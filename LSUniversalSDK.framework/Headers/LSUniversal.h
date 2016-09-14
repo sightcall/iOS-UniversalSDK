@@ -125,14 +125,32 @@ typedef NS_ENUM(NSInteger, lsCameraUsedOnStart_t) {
 	lsCameraUsedOnStart_none,
 };
 
+/**
+ *  An object of this type describes the data needed to display the survey at call's end.
+ *  If displayPopup, ask the user if she wants to participate in a survey. Otherwise, just use url to open a webbrowser
+ */
 @interface LSSurveyInfos: NSObject
+/**
+ *  The URL of the survey. If displayPopup, ask the user if she accepts to participate in a survey. Otherwise, just open it in 
+ *  a webbrowser (e.g. using UIApplication openURL: )
+ */
 @property (nonatomic, readonly)NSString *url;
-
+/**
+ *  If YES, the user is to be presented with an alert view to confirm wether or not they want to go to the survey. 
+ *  If NO, just open url
+ */
 @property (nonatomic, readonly)BOOL displayPopup;
+/**
+ *  If displayPopup, this is the popup title.
+ */
 @property (nonatomic, readonly)NSString *popupLabel;
+/**
+ *  If displayPopup, this is the popup text.
+ */
 @property (nonatomic, readonly)NSString *buttonLabel;
 
 @end
+
 
 typedef struct {
 	NSInteger position;
@@ -172,10 +190,31 @@ typedef struct {
 - (void)callReport:(lsCallReport_s)callEnd;
 
 @optional
+
+/**
+ *  Describe the position in the queue (and the length of it) if the usecase is using ACD. Eventually, acdAcceptedEvent: is called.
+ *
+ *  @param queue The position and length of the queue.
+ *  @sa acdAcceptedEvent:
+ */
 - (void)acdProgressEvent:(LSACDProgress_s)queue;
+
+/**
+ *  The user was accepted by an agent using the ACD system. The call begins soon after (i.e. connectionEvent: will soon be called with lsConnectionStatus_calling).
+ *
+ *  @param agentUID The UID of the agent that accepted the call.
+ *  @sa acdProgressEvent:
+ */
 - (void)acdAcceptedEvent:(NSString *)agentUID;
+
 - (void)connectionParameters:(NSDictionary *)parameters;
 - (void)cameraUsedOnStart:(lsCameraUsedOnStart_t)isFront;
+
+/**
+ *  Should this method be called, it will be at the end of a call. It contains all informations needed to open the survey webpage defined in the administration portal.
+ *
+ *  @param infos The informations needed to open the survey page and optionaly open a popup to prompt the user before that.
+ */
 - (void)callSurvey:(LSSurveyInfos *)infos;
 @end
 
