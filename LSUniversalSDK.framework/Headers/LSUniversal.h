@@ -42,6 +42,62 @@ extern NSString * const kParametersMPSuffix;
 extern NSString * const kParametersMPHash;
 extern NSString * const kParametersTimeout;
 
+@protocol LSMobile2MobileNotification <NSObject>
+
+/**
+ *  TRUE if the module has credentials. FALSE otherwise.
+ *  Having credentials is not a guarantee of having any usecases.
+ */
+@property (nonatomic, readonly, getter=isRegistered) BOOL registered;
+
+/**
+ *  If this is different from nil, notifications can be sent. This array can be empty. The UsecaseID can be found in each entry of
+ *  this array.
+ */
+@property (nonatomic, readonly) NSArray *usecases;
+
+/**
+ *	 The application notification token. It must be set for the registration to work.
+ */
+@property (nonatomic)NSString *notificationToken;
+
+
+/**
+ *  Sign-in. Mandatory to fetch the usecases.
+ *
+ *  @param block The HTTP status returned by the request, or 0 if the request wasn't sent.
+ */
+- (void)signInAndNotify:(void (^)(NSInteger))block;
+
+/**
+ *  Fetches the usecase for the logged in user.
+ *
+ *  @param block This block sets the usecases.
+ */
+- (void)fetchUsecasesAndNotify:(void (^)(NSInteger, NSArray *))block;
+
+/**
+ *  Sends a notification to a guest. This notification will be sent as an SMS. Notification will only works if the
+ *
+ *  @param usecaseID   The usecase ID.
+ *  @param phoneNumber The Guest Phone number. Either in international format (ex +33601234567) or national format & country code.
+ *  @param cc          Country code of the number, if not in international format.
+ *  @param block  The notification block
+ */
+- (void)sendNotificationForUsecase:(NSInteger)usecaseID ToPhone:(NSString *)phoneNumber
+							andContryCode:(NSString *)cc andNotify:(void (^)(NSInteger))block;
+
+/**
+ *  Sends a notification to a guest. This notification will be sent as an e-mail
+ *
+ *  @param usecaseID The usecase ID.
+ *  @param email     The email to send the notification to.
+ *  @param block  The notification block
+ */
+- (void)sendNotificationForUsecase:(NSInteger)usecaseID ToEmail:(NSString *)email
+								 andNotify:(void (^)(NSInteger))block;
+
+@end
 
 /**
  *  Describes the state of the current connection.
@@ -216,6 +272,11 @@ typedef struct {
  *  @param infos The informations needed to open the survey page and optionaly open a popup to prompt the user before that.
  */
 - (void)callSurvey:(LSSurveyInfos *)infos;
+
+/**
+ *  The mobile2mobile object can be used to send notification to other users.
+ */
+- (void)notificationUsecaseAvailable;
 @end
 
 /**
@@ -346,6 +407,11 @@ typedef struct {
  */
 @property (nonatomic, readonly) lsConnectionStatus_t status;
 
+/**
+ *  This object is responsible for sending the notifications to a remote contact (e.g. in the Agent-to-guest case). It needs the Apple Notification token to work (see APNS).
+ *	 Make sure the app can send a notification before trying to send one (check the LSMobile2MobileNotification protocol for more info).
+ */
+@property (nonatomic, readonly) NSObject <LSMobile2MobileNotification> *mobile2mobile;
 /**
  *  Connects the LSUniversalSDK to SightCall's cloud. The dictionary is a <String *: String *> dictionary, with the key being URL Scheme parameters and the values their value.
  *
