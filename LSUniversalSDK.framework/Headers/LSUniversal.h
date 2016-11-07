@@ -9,38 +9,36 @@
 #import <Foundation/Foundation.h>
 #import <LSUniversalSDK/LSUniversalSDK.h>
 
-
 /** @name Connection parameters ID keys.*/
-extern NSString * const kParametersMode;
-extern NSString * const kParametersHash;
-extern NSString * const kParametersAppID;
-extern NSString * const kParametersACDProduct;
-extern NSString * const kParametersACDLanguage;
-extern NSString * const kParametersACDLocation;
+extern NSString *const kParametersMode;
+extern NSString *const kParametersHash;
+extern NSString *const kParametersAppID;
+extern NSString *const kParametersACDProduct;
+extern NSString *const kParametersACDLanguage;
+extern NSString *const kParametersACDLocation;
 
-
-extern NSString * const kParametersACDInfo;
-extern NSString * const kParametersCalleeID;
-extern NSString * const kParametersButtons;
-extern NSString * const kParametersSharedURL;
-extern NSString * const kParametersVideoOut;
-extern NSString * const kParametersUsingVideoOut;
-extern NSString * const kParametersVideoFull;
-extern NSString * const kParametersVideoSmall;
-extern NSString * const kParametersVideoPtrOut;
-extern NSString * const kParametersAudioMute;
-extern NSString * const kParametersPinCode;
-extern NSString * const kParametersInternalToken;
-extern NSString * const kParametersTokenLivesight;
-extern NSString * const kParametersExternalToken;
-extern NSString * const kParametersVideoProfile;
-extern NSString * const kParametersUID;
-extern NSString * const kParametersDisplayName;
-extern NSString * const kParametersSentText;
-extern NSString * const kParametersMPID;
-extern NSString * const kParametersMPSuffix;
-extern NSString * const kParametersMPHash;
-extern NSString * const kParametersTimeout;
+extern NSString *const kParametersACDInfo;
+extern NSString *const kParametersCalleeID;
+extern NSString *const kParametersButtons;
+extern NSString *const kParametersSharedURL;
+extern NSString *const kParametersVideoOut;
+extern NSString *const kParametersUsingVideoOut;
+extern NSString *const kParametersVideoFull;
+extern NSString *const kParametersVideoSmall;
+extern NSString *const kParametersVideoPtrOut;
+extern NSString *const kParametersAudioMute;
+extern NSString *const kParametersPinCode;
+extern NSString *const kParametersInternalToken;
+extern NSString *const kParametersTokenLivesight;
+extern NSString *const kParametersExternalToken;
+extern NSString *const kParametersVideoProfile;
+extern NSString *const kParametersUID;
+extern NSString *const kParametersDisplayName;
+extern NSString *const kParametersSentText;
+extern NSString *const kParametersMPID;
+extern NSString *const kParametersMPSuffix;
+extern NSString *const kParametersMPHash;
+extern NSString *const kParametersTimeout;
 
 @protocol LSMobile2MobileNotification <NSObject>
 
@@ -48,19 +46,18 @@ extern NSString * const kParametersTimeout;
  *  TRUE if the module has credentials. FALSE otherwise.
  *  Having credentials is not a guarantee of having any usecases.
  */
-@property (nonatomic, readonly, getter=isRegistered) BOOL registered;
+@property(nonatomic, readonly, getter=isRegistered) BOOL registered;
 
 /**
  *  If this is different from nil, notifications can be sent. This array can be empty. The UsecaseID can be found in each entry of
  *  this array.
  */
-@property (nonatomic, readonly) NSArray *usecases;
+@property(nonatomic, readonly) NSArray *usecases;
 
 /**
  *	 The application notification token. It must be set for the registration to work.
  */
-@property (nonatomic)NSString *notificationToken;
-
+@property(nonatomic) NSString *notificationToken;
 
 /**
  *  Sign-in. Mandatory to fetch the usecases.
@@ -84,8 +81,7 @@ extern NSString * const kParametersTimeout;
  *  @param cc          Country code of the number, if not in international format.
  *  @param block  The notification block
  */
-- (void)sendNotificationForUsecase:(NSInteger)usecaseID ToPhone:(NSString *)phoneNumber
-							andContryCode:(NSString *)cc andNotify:(void (^)(NSInteger))block;
+- (void)sendNotificationForUsecase:(NSInteger)usecaseID ToPhone:(NSString *)phoneNumber andContryCode:(NSString *)cc andNotify:(void (^)(NSInteger))block;
 
 /**
  *  Sends a notification to a guest. This notification will be sent as an e-mail
@@ -94,19 +90,26 @@ extern NSString * const kParametersTimeout;
  *  @param email     The email to send the notification to.
  *  @param block  The notification block
  */
-- (void)sendNotificationForUsecase:(NSInteger)usecaseID ToEmail:(NSString *)email
-								 andNotify:(void (^)(NSInteger))block;
+- (void)sendNotificationForUsecase:(NSInteger)usecaseID ToEmail:(NSString *)email andNotify:(void (^)(NSInteger))block;
 
 @end
 
 /**
  *  Describes the state of the current connection.
  */
-typedef NS_ENUM(NSInteger, lsConnectionStatus_t){
+typedef NS_ENUM(NSInteger, lsConnectionStatus_t) {
 	/**
 	 *  The LSUniversalSDK is not doing anything. This is the state it should go to after disconnecting.
 	 */
 	lsConnectionStatus_idle,
+	/**
+	 *  The LSUniversalSDK is connected as agent.
+	 */
+	lsConnectionStatus_agentConnected,
+	/**
+	 *  The LSUniversalSDK is refreshing the agent data before a call or because of a registration.
+	 */
+	lsConnectionStatus_agentConnecting,
 	/**
 	 *  The LSUniversalSDK is connecting.
 	 */
@@ -130,13 +133,13 @@ typedef NS_ENUM(NSInteger, lsConnectionStatus_t){
 	/*
 	 *  The connection was lost.
 	 */
-	lsConnectionStatus_networkLoss
+	lsConnectionStatus_networkLoss,	
 };
 
 /**
  *  When a connection error occurs, you are notified of it through connectionError:
  */
-typedef NS_ENUM(NSInteger, lsConnectionError_t){
+typedef NS_ENUM(NSInteger, lsConnectionError_t) {
 	/**
 	 * The error was a network one
 	 */
@@ -154,7 +157,7 @@ typedef NS_ENUM(NSInteger, lsConnectionError_t){
 /**
  *  The call ended, the LSUniversalSDK is disconnecting.
  */
-typedef NS_ENUM(NSInteger, lsCallEnd_t){
+typedef NS_ENUM(NSInteger, lsCallEnd_t) {
 	/**
 	 *  The call ended prematuraly
 	 */
@@ -174,7 +177,6 @@ typedef struct {
 	NSTimeInterval callLength;
 } lsCallReport_s;
 
-
 typedef NS_ENUM(NSInteger, lsCameraUsedOnStart_t) {
 	lsCameraUsedOnStart_front,
 	lsCameraUsedOnStart_rear,
@@ -185,33 +187,32 @@ typedef NS_ENUM(NSInteger, lsCameraUsedOnStart_t) {
  *  An object of this type describes the data needed to display the survey at call's end.
  *  If displayPopup, ask the user if she wants to participate in a survey. Otherwise, just use url to open a webbrowser
  */
-@interface LSSurveyInfos: NSObject
+@protocol LSSurveyInfos <NSObject>
 /**
- *  The URL of the survey. If displayPopup, ask the user if she accepts to participate in a survey. Otherwise, just open it in 
+ *  The URL of the survey. If displayPopup, ask the user if she accepts to participate in a survey. Otherwise, just open it in
  *  a webbrowser (e.g. using UIApplication openURL: )
  */
-@property (nonatomic, readonly)NSString *url;
+@property(nonatomic, readonly) NSString *url;
 /**
- *  If YES, the user is to be presented with an alert view to confirm wether or not they want to go to the survey. 
+ *  If YES, the user is to be presented with an alert view to confirm wether or not they want to go to the survey.
  *  If NO, just open url
  */
-@property (nonatomic, readonly)BOOL displayPopup;
+@property(nonatomic, readonly) BOOL displayPopup;
 /**
  *  If displayPopup, this is the popup title.
  */
-@property (nonatomic, readonly)NSString *popupLabel;
+@property(nonatomic, readonly) NSString *popupLabel;
 /**
  *  If displayPopup, this is the popup text.
  */
-@property (nonatomic, readonly)NSString *buttonLabel;
+@property(nonatomic, readonly) NSString *buttonLabel;
 
 @end
-
 
 typedef struct {
 	NSInteger position;
 	NSInteger length;
-}LSACDProgress_s;
+} LSACDProgress_s;
 
 @protocol LSUniversalLogDelegate <NSObject>
 
@@ -271,7 +272,7 @@ typedef struct {
  *
  *  @param infos The informations needed to open the survey page and optionaly open a popup to prompt the user before that.
  */
-- (void)callSurvey:(LSSurveyInfos *)infos;
+- (void)callSurvey:(id<LSSurveyInfos>)infos;
 
 /**
  *  The mobile2mobile object can be used to send notification to other users.
@@ -365,17 +366,17 @@ typedef struct {
 
 /**
  The LSUniversal object is your point of entry to the connection and call control. The Callflow is simplified to the max:
- 
+
  - Start the connection using parameters;
  - When the connection goes active, the call is created;
  - When the call ends, you are disconnected.
- 
+
  Starting can be done through two methods startWithDictionary: or startWithString: . The latter makes use of the former.
 
  The call internals are controlled through the UI (turning off the camera, muting the mic. etc). As said before, the call is started upon connection.
 
  You are notified of the connection state through the delegate property. You can check the status of the connection anytime by calling currentConnectionStatus.
- 
+
  You can call abort during connection or during a call. It will either directly disconnect the LSUniversalSDK or hangup the call, which will in turn disconnect the LSUniversalSDK. On your end, calls can be ended either trough this abort method or the hangup button in the call view UI. You are notified of call ends by the [LSUniversalDelegate callReport:].
  */
 @interface LSUniversal : NSObject
@@ -385,33 +386,33 @@ typedef struct {
  *  @sa [LSUniversalDelegate connectionEvent:]
  *  @sa [LSUniversalDelegate callReport:]
  */
-@property (nonatomic, readonly) UIViewController *callViewController;
+@property(nonatomic, readonly) UIViewController *callViewController;
 
 /**
  *  The delegate that is notified of connection events and call ends.
  */
-@property (nonatomic) id<LSUniversalDelegate> delegate;
+@property(nonatomic) id<LSUniversalDelegate> delegate;
 
 /**
  *  If the delegate conforms to LSUniversalLogDelegate, this property is set automatically
  */
-@property (nonatomic) id<LSUniversalLogDelegate> logDelegate;
+@property(nonatomic) id<LSUniversalLogDelegate> logDelegate;
 
 /**
  *  This delegate is called upon when the call menu is resized.
  */
-@property (nonatomic) NSObject<LSCustomizationDelegate> *customizationDelegate;
+@property(nonatomic) NSObject<LSCustomizationDelegate> *customizationDelegate;
 
 /**
  *  The current connection status. When the connection goes from connecting to active, the call is created.
  */
-@property (nonatomic, readonly) lsConnectionStatus_t status;
+@property(nonatomic, readonly) lsConnectionStatus_t status;
 
 /**
  *  This object is responsible for sending the notifications to a remote contact (e.g. in the Agent-to-guest case). It needs the Apple Notification token to work (see APNS).
  *	 Make sure the app can send a notification before trying to send one (check the LSMobile2MobileNotification protocol for more info).
  */
-@property (nonatomic, readonly) NSObject <LSMobile2MobileNotification> *mobile2mobile;
+@property(nonatomic, readonly) NSObject<LSMobile2MobileNotification> *mobile2mobile;
 /**
  *  Connects the LSUniversalSDK to SightCall's cloud. The dictionary is a <String *: String *> dictionary, with the key being URL Scheme parameters and the values their value.
  *
@@ -442,4 +443,3 @@ typedef struct {
 - (void)abort;
 
 @end
-

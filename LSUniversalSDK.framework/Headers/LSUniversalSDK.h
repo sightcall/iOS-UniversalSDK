@@ -16,6 +16,4 @@ FOUNDATION_EXPORT const unsigned char LSUniversalSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <LSUniversalSDK/PublicHeader.h>
 
-
-
 #import <LSUniversalSDK/LSUniversal.h>
