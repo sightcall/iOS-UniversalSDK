@@ -81,7 +81,7 @@ extern NSString *const kParametersTimeout;
  *  @param cc          Country code of the number, if not in international format.
  *  @param block  The notification block
  */
-- (void)sendNotificationForUsecase:(NSInteger)usecaseID ToPhone:(NSString *)phoneNumber andContryCode:(NSString *)cc andNotify:(void (^)(NSInteger))block;
+- (void)sendNotificationForUsecase:(NSInteger)usecaseID toPhone:(NSString *)phoneNumber andContryCode:(NSString *)cc andNotify:(void (^)(NSInteger))block;
 
 /**
  *  Sends a notification to a guest. This notification will be sent as an e-mail
@@ -90,9 +90,10 @@ extern NSString *const kParametersTimeout;
  *  @param email     The email to send the notification to.
  *  @param block  The notification block
  */
-- (void)sendNotificationForUsecase:(NSInteger)usecaseID ToEmail:(NSString *)email andNotify:(void (^)(NSInteger))block;
+- (void)sendNotificationForUsecase:(NSInteger)usecaseID toEmail:(NSString *)email andNotify:(void (^)(NSInteger))block;
 
 @end
+
 
 /**
  *  Describes the state of the current connection.
