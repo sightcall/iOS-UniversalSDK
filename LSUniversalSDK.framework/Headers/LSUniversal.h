@@ -33,66 +33,12 @@ extern NSString *const kParametersTokenLivesight;
 extern NSString *const kParametersExternalToken;
 extern NSString *const kParametersVideoProfile;
 extern NSString *const kParametersUID;
+extern NSString *const kParametersSuffix;
 extern NSString *const kParametersDisplayName;
 extern NSString *const kParametersSentText;
 extern NSString *const kParametersMPID;
-extern NSString *const kParametersMPSuffix;
 extern NSString *const kParametersMPHash;
 extern NSString *const kParametersTimeout;
-
-@protocol LSMobile2MobileNotification <NSObject>
-
-/**
- *  TRUE if the module has credentials. FALSE otherwise.
- *  Having credentials is not a guarantee of having any usecases.
- */
-@property(nonatomic, readonly, getter=isRegistered) BOOL registered;
-
-/**
- *  If this is different from nil, notifications can be sent. This array can be empty. The UsecaseID can be found in each entry of
- *  this array.
- */
-@property(nonatomic, readonly) NSArray *usecases;
-
-/**
- *	 The application notification token. It must be set for the registration to work.
- */
-@property(nonatomic) NSString *notificationToken;
-
-/**
- *  Sign-in. Mandatory to fetch the usecases.
- *
- *  @param block The HTTP status returned by the request, or 0 if the request wasn't sent.
- */
-- (void)signInAndNotify:(void (^)(NSInteger))block;
-
-/**
- *  Fetches the usecase for the logged in user.
- *
- *  @param block This block sets the usecases.
- */
-- (void)fetchUsecasesAndNotify:(void (^)(NSInteger, NSArray *))block;
-
-/**
- *  Sends a notification to a guest. This notification will be sent as an SMS. Notification will only works if the
- *
- *  @param usecaseID   The usecase ID.
- *  @param phoneNumber The Guest Phone number. Either in international format (ex +33601234567) or national format & country code.
- *  @param cc          Country code of the number, if not in international format.
- *  @param block  The notification block
- */
-- (void)sendNotificationForUsecase:(NSInteger)usecaseID toPhone:(NSString *)phoneNumber andContryCode:(NSString *)cc andNotify:(void (^)(NSInteger))block;
-
-/**
- *  Sends a notification to a guest. This notification will be sent as an e-mail
- *
- *  @param usecaseID The usecase ID.
- *  @param email     The email to send the notification to.
- *  @param block  The notification block
- */
-- (void)sendNotificationForUsecase:(NSInteger)usecaseID toEmail:(NSString *)email andNotify:(void (^)(NSInteger))block;
-
-@end
 
 
 /**
@@ -210,10 +156,66 @@ typedef NS_ENUM(NSInteger, lsCameraUsedOnStart_t) {
 
 @end
 
+/**
+ * ACD Queue status.
+ */
 typedef struct {
+	/**
+	 * Position in the queue.
+	 */
 	NSInteger position;
+	/**
+	 * Total length of the queue.
+	 */
 	NSInteger length;
 } LSACDProgress_s;
+
+
+/**
+ * ACD Status.
+ */
+typedef NS_ENUM(NSInteger, LSACDStatus_t ) {
+	/**
+	 */
+	acdStatus_invalid = -1,
+	/**
+	 * Waiting for an agent to pick up.
+	 */
+	acdStatus_ongoing,
+	/**
+	 * The service is closed.
+	 */
+	acdStatus_serviceClosed,
+	/**
+	 * The service is unavailable.
+	 */
+	acdStatus_serviceUnavailable,
+	/**
+	 * There is no agent available.
+	 */
+	acdStatus_agentUnavailable,
+};
+
+
+/**
+ * The ACD status structure. `status` and `progress` are independant: there can be an ETA without any information about the queue, and you can be in a queue without any information about an ETA.
+ */
+typedef struct {
+	/**
+	 * Current status of your ACD request.
+	 */
+	LSACDStatus_t status;
+	/**
+	 * Current info about your position in the queue.
+	 */
+	LSACDProgress_s progress;
+	/**
+	 * ETA for an agent to accept your call.
+	 */
+	NSInteger waitingTime;
+} LSACDQueue_s;
+
+
 
 @protocol LSUniversalLogDelegate <NSObject>
 
@@ -227,7 +229,7 @@ typedef struct {
 @protocol LSUniversalDelegate <NSObject>
 
 /**
- *  A connection event occured. You were not connected, the SDK goes to idle.
+ *  A connection event occured. You were not connected, the SDK goes to idle, etc.
  *
  *  @param status The new connection state.
  */
@@ -250,20 +252,29 @@ typedef struct {
 @optional
 
 /**
- *  Describe the position in the queue (and the length of it) if the usecase is using ACD. Eventually, acdAcceptedEvent: is called.
+ *  Describe the position in the queue, the length of it.
  *
- *  @param queue The position and length of the queue.
+ *  @param progressInfo The position and length of the queue.
  *  @sa acdAcceptedEvent:
+ *  @sa acdStatusUpdate:
+ *  @deprecated acdStatusUpdate: update.progress is used instead.
  */
-- (void)acdProgressEvent:(LSACDProgress_s)queue;
+- (void)acdProgressEvent:(LSACDProgress_s)progressInfo __attribute__((deprecated("Please use acdStatusUpdate: update.progress .")));
 
 /**
- *  The user was accepted by an agent using the ACD system. The call begins soon after (i.e. connectionEvent: will soon be called with lsConnectionStatus_calling).
+ *  Called with information about the ACD queue.
+ *  @param update The ACD queue information
+ */
+- (void)acdStatusUpdate:(LSACDQueue_s)update;
+
+/**
+ *  The user was accepted by an agent using the ACD system. The call begins soon after (i.e. connectionEvent: will soon be called with lsConnectionStatus_calling). This method may not be called.
  *
  *  @param agentUID The UID of the agent that accepted the call.
  *  @sa acdProgressEvent:
  */
 - (void)acdAcceptedEvent:(NSString *)agentUID;
+
 
 - (void)connectionParameters:(NSDictionary *)parameters;
 - (void)cameraUsedOnStart:(lsCameraUsedOnStart_t)isFront;
@@ -297,7 +308,7 @@ typedef struct {
  *  Tapping this button stops/starts the video out stream capture.
  *  b.state == UIControlStateNormal - The video is being sent
  *  b.state == UIControlStateSelected - The video is not being sent
- *  @param b
+ *  @param b The button to customize
  */
 - (void)customizeCameraToggle:(UIButton *)b;
 
@@ -306,7 +317,7 @@ typedef struct {
  *  b.state == UIControlStateNormal - Using the front camera
  *  b.state == UIControlStateSelected - Using another camera
  *
- *  @param b
+ *  @param b The button to customize
  */
 - (void)customizeCameraSource:(UIButton *)b;
 
@@ -316,7 +327,7 @@ typedef struct {
  *  b.state == UIControlStateSelected - Not using the loudspeaker
  *  This button changes automatically when connecting a headset with a mic.
  *
- *  @param b
+ *  @param b The button to customize
  */
 - (void)customizeSpeakerRoute:(UIButton *)b;
 
@@ -325,14 +336,14 @@ typedef struct {
  *  b.state == UIControlStateNormal - VideoOut is playing
  *  b.state == UIControlStateSelected - VideoOut is paused
  *
- *  @param b
+ *  @param b The button to customize
  */
 - (void)customizeVideoPauseToggle:(UIButton *)b;
 
 /**
  *  Tapping that button will display the media selector popup.
  *
- *  @param b
+ *  @param b The button to customize
  */
 - (void)customizeShareMedia:(UIButton *)b;
 
@@ -341,25 +352,25 @@ typedef struct {
  *  b.state == UIControlStateNormal - The torch is not on
  *  b.state == UIControlStateSelected - The torch is on
  *
- *  @param b
+ *  @param b The button to customize
  */
 - (void)customizeTorchToggle:(UIButton *)b;
 
 /**
  *  Tapping this button will erase any drawings (on share, video out or player)
- *  @param b
+ *  @param b The button to customize
  */
 - (void)customizeEraseDrawings:(UIButton *)b;
 /**
  *  Tapping this button will end the ongoing call.
  *
- *  @param b
+ *  @param b The button to customize
  */
 - (void)customizeHangup:(UIButton *)b;
 /**
  *  Tapping this button will stop an ongoing share out.
  *
- *  @param b
+ *  @param b The button to customize
  */
 - (void)customizeStopShare:(UIButton *)b;
 
@@ -383,7 +394,7 @@ typedef struct {
 @interface LSUniversal : NSObject
 
 /**
- *  A UIViewController that is used by the SDK to display the video in and out, as well as the buttons used for controlling the call. Display it when the currentConnectionStatus goes to active. Remove it on call end.
+ *  A UIViewController that is used by the SDK to display the video in and out, as well as the buttons used for controlling the call. Display it when the currentConnectionStatus goes to active. Remove it on call end. Available only when the LSUniversalSDK status goes to lsConnectionStatus_callActive.
  *  @sa [LSUniversalDelegate connectionEvent:]
  *  @sa [LSUniversalDelegate callReport:]
  */
@@ -414,6 +425,7 @@ typedef struct {
  *	 Make sure the app can send a notification before trying to send one (check the LSMobile2MobileNotification protocol for more info).
  */
 @property(nonatomic, readonly) NSObject<LSMobile2MobileNotification> *mobile2mobile;
+
 /**
  *  Connects the LSUniversalSDK to SightCall's cloud. The dictionary is a <String *: String *> dictionary, with the key being URL Scheme parameters and the values their value.
  *

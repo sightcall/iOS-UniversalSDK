@@ -35,15 +35,19 @@ In order to fix that, you must compile for a device target. Either build for `Ge
 This means the USDK can't run on a `simulator`.
 
 ### Usage
-To start a connection, create a `LSUniversal` variable and retain it. Then call
+
+To start a connection, create a `LSUniversal` variable and retain it. Then call `startWithString:` with your start URL in string form (see `-[NSURL absoluteString]` for more info).
+
+
+For example, let's say your application received a URL through your UIApplication delegate's `application:openURL:sourceApplication:annotation:` method:
 
 ```objc
-yourSDKPointer = [[LSUniversal alloc] init];
-[yourSDKPointer startWithString: myStringParameters];
-/**
-//Or call this method. The dictionary describes the query used in startWithString.
-[yourSDKPointer startWithDictionary: yourDictionaryParameters];
-*/
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    //yourSDKPointer is a pointer to the LSUniversal instance, that was instantiated somewhere
+    //to start the connection, you would simply call:
+    [yourSDKPointer startWithString: [url absoluteString]];
+}
 ```
 
 ### Delegations
