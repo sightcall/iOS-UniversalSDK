@@ -50,6 +50,22 @@ For example, let's say your application received a URL through your UIApplicatio
 }
 ```
 
+### iOS 10 Privacy
+
+The SDK requires the application to declare a few Privacy keys in its plist.
+
+```
+| Key                                      | Description |
+| "Privacy - Camera usage decription"      | What the app does with the camera |
+| "Privacy - Microphone Usage Description" | What the app does with the microphone |
+```
+
+
+
+### Background
+
+The app integrating the SDK should declare the `Audio, AirPlay and Picture and Picture` background mode.
+
 ### Delegations
 
 #### Connection and Calls
