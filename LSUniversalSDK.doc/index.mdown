@@ -181,9 +181,11 @@ To customize the hangup button, implement the `customizeHangup:` method in myCus
 
 - (void)customizeHangup:(UIButton *)b
 {
-    b.backgroundColor = [UIColor colorWithRed:0. green:1. blue:0. alpha:0.3];
-    [b setImage:[UIImage imageNamed:@"hangup_image"] forState:UIControlStateNormal]; 
-    //hangup_image is an image available in your project
+    dispatch_async(dispatch_get_main_queue(), ^{
+        b.backgroundColor = [UIColor colorWithRed:0. green:1. blue:0. alpha:0.3];
+        [b setImage:[UIImage imageNamed:@"hangup_image"] forState:UIControlStateNormal]; 
+        //hangup_image is an image available in your project
+    });
 }
 
 ```
