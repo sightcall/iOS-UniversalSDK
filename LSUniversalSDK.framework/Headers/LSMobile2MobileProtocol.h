@@ -6,11 +6,11 @@
 //  Copyright © 2016 SightCall. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <LSUniversalSDK/LSUniversalSDK.h>
 
 /**
  */
-@protocol LSMobile2MobileNotification <NSObject>
+@protocol LSMobile2Mobile <NSObject>
 
 /**
  *  TRUE if the module has credentials. FALSE otherwise.

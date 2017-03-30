@@ -6,375 +6,7 @@
 //  Copyright (c) 2014 Charles Thierry. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <LSUniversalSDK/LSUniversalSDK.h>
-
-/** @name Connection parameters ID keys.*/
-extern NSString *const kParametersMode;
-extern NSString *const kParametersHash;
-extern NSString *const kParametersAppID;
-extern NSString *const kParametersACDProduct;
-extern NSString *const kParametersACDLanguage;
-extern NSString *const kParametersACDLocation;
-
-extern NSString *const kParametersACDInfo;
-extern NSString *const kParametersCalleeID;
-extern NSString *const kParametersButtons;
-extern NSString *const kParametersSharedURL;
-extern NSString *const kParametersVideoOut;
-extern NSString *const kParametersUsingVideoOut;
-extern NSString *const kParametersVideoFull;
-extern NSString *const kParametersVideoSmall;
-extern NSString *const kParametersVideoPtrOut;
-extern NSString *const kParametersAudioMute;
-extern NSString *const kParametersPinCode;
-extern NSString *const kParametersInternalToken;
-extern NSString *const kParametersTokenLivesight;
-extern NSString *const kParametersExternalToken;
-extern NSString *const kParametersVideoProfile;
-extern NSString *const kParametersUID;
-extern NSString *const kParametersSuffix;
-extern NSString *const kParametersDisplayName;
-extern NSString *const kParametersSentText;
-extern NSString *const kParametersMPID;
-extern NSString *const kParametersMPHash;
-extern NSString *const kParametersTimeout;
-
-
-/**
- *  Describes the state of the current connection.
- */
-typedef NS_ENUM(NSInteger, lsConnectionStatus_t) {
-	/**
-	 *  The LSUniversalSDK is not doing anything. This is the state it should go to after disconnecting.
-	 */
-	lsConnectionStatus_idle,
-	/**
-	 *  The LSUniversalSDK is connected as agent.
-	 */
-	lsConnectionStatus_agentConnected,
-	/**
-	 *  The LSUniversalSDK is refreshing the agent data before a call or because of a registration.
-	 */
-	lsConnectionStatus_agentConnecting,
-	/**
-	 *  The LSUniversalSDK is connecting.
-	 */
-	lsConnectionStatus_connecting,
-	/**
-	 *  The LSUniversalSDK is connected. Depending on the authentication process, a call is being created.
-	 */
-	lsConnectionStatus_active,
-	/**
-	 *  A call was started.
-	 */
-	lsConnectionStatus_calling,
-	/**
-	 *	A call is active.
-	 */
-	lsConnectionStatus_callActive,
-	/**
-	 *	 The LSUniversalSDK is disconnecting.
-	 */
-	lsConnectionStatus_disconnecting,
-	/*
-	 *  The connection was lost.
-	 */
-	lsConnectionStatus_networkLoss,	
-};
-
-/**
- *  When a connection error occurs, you are notified of it through connectionError:
- */
-typedef NS_ENUM(NSInteger, lsConnectionError_t) {
-	/**
-	 * The error was a network one
-	 */
-	lsConnectionError_networkError,
-	/**
-	 *  The credentials given in the dictionary (or string) were incorrect.
-	 */
-	lsConnectionError_badCredentials,
-	/**
-	 *  An unknown error occured.
-	 */
-	lsConnectionError_unknown,
-};
-
-/**
- *  The call ended, the LSUniversalSDK is disconnecting.
- */
-typedef NS_ENUM(NSInteger, lsCallEnd_t) {
-	/**
-	 *  The call ended prematuraly
-	 */
-	lsCallEnd_unexpected,
-	/**
-	 *  The call was ended by the remote client
-	 */
-	lsCallEnd_remote,
-	/**
-	 *  the call was ended on your end.
-	 */
-	lsCallEnd_local,
-};
-
-typedef struct {
-	lsCallEnd_t callEnd;
-	NSTimeInterval callLength;
-} lsCallReport_s;
-
-typedef NS_ENUM(NSInteger, lsCameraUsedOnStart_t) {
-	lsCameraUsedOnStart_front,
-	lsCameraUsedOnStart_rear,
-	lsCameraUsedOnStart_none,
-};
-
-/**
- *  An object of this type describes the data needed to display the survey at call's end.
- *  If displayPopup, ask the user if she wants to participate in a survey. Otherwise, just use url to open a webbrowser
- */
-@protocol LSSurveyInfos <NSObject>
-/**
- *  The URL of the survey. If displayPopup, ask the user if she accepts to participate in a survey. Otherwise, just open it in
- *  a webbrowser (e.g. using UIApplication openURL: )
- */
-@property(nonatomic, readonly) NSString *url;
-/**
- *  If YES, the user is to be presented with an alert view to confirm wether or not they want to go to the survey.
- *  If NO, just open url
- */
-@property(nonatomic, readonly) BOOL displayPopup;
-/**
- *  If displayPopup, this is the popup title.
- */
-@property(nonatomic, readonly) NSString *popupLabel;
-/**
- *  If displayPopup, this is the popup text.
- */
-@property(nonatomic, readonly) NSString *buttonLabel;
-
-@end
-
-/**
- * ACD Queue status.
- */
-typedef struct {
-	/**
-	 * Position in the queue.
-	 */
-	NSInteger position;
-	/**
-	 * Total length of the queue.
-	 */
-	NSInteger length;
-} LSACDProgress_s;
-
-
-/**
- * ACD Status.
- */
-typedef NS_ENUM(NSInteger, LSACDStatus_t ) {
-	/**
-	 */
-	acdStatus_invalid = -1,
-	/**
-	 * Waiting for an agent to pick up.
-	 */
-	acdStatus_ongoing,
-	/**
-	 * The service is closed.
-	 */
-	acdStatus_serviceClosed,
-	/**
-	 * The service is unavailable.
-	 */
-	acdStatus_serviceUnavailable,
-	/**
-	 * There is no agent available.
-	 */
-	acdStatus_agentUnavailable,
-};
-
-
-/**
- * The ACD status structure. `status` and `progress` are independant: there can be an ETA without any information about the queue, and you can be in a queue without any information about an ETA.
- */
-typedef struct {
-	/**
-	 * Current status of your ACD request.
-	 */
-	LSACDStatus_t status;
-	/**
-	 * Current info about your position in the queue.
-	 */
-	LSACDProgress_s progress;
-	/**
-	 * ETA for an agent to accept your call.
-	 */
-	NSInteger waitingTime;
-} LSACDQueue_s;
-
-
-
-@protocol LSUniversalLogDelegate <NSObject>
-
-- (void)logLevel:(NSInteger)level logModule:(NSInteger)module fromMethod:(NSString *)from message:(NSString *)message, ... NS_REQUIRES_NIL_TERMINATION;
-
-@end
-
-/**
- *  The protocol the LSUniversalDelegate is to follow. Make no assumption regarding the thread that is used to trigger those messages.
- */
-@protocol LSUniversalDelegate <NSObject>
-
-/**
- *  A connection event occured. You were not connected, the SDK goes to idle, etc.
- *
- *  @param status The new connection state.
- */
-- (void)connectionEvent:(lsConnectionStatus_t)status;
-
-/**
- *  An error occured. The SDK is most likely now disconnecting.
- *
- *  @param error The error that occured.
- */
-- (void)connectionError:(lsConnectionError_t)error;
-
-/**
- *  The call ended. You should probably dismiss the Call ViewController here.
- *
- *  @param callEnd The reason the call ended.
- */
-- (void)callReport:(lsCallReport_s)callEnd;
-
-@optional
-
-/**
- *  Describe the position in the queue, the length of it.
- *
- *  @param progressInfo The position and length of the queue.
- *  @sa acdAcceptedEvent:
- *  @sa acdStatusUpdate:
- *  @deprecated acdStatusUpdate: update.progress is used instead.
- */
-- (void)acdProgressEvent:(LSACDProgress_s)progressInfo __attribute__((deprecated("Please use acdStatusUpdate: update.progress .")));
-
-/**
- *  Called with information about the ACD queue.
- *  @param update The ACD queue information
- */
-- (void)acdStatusUpdate:(LSACDQueue_s)update;
-
-/**
- *  The user was accepted by an agent using the ACD system. The call begins soon after (i.e. connectionEvent: will soon be called with lsConnectionStatus_calling). This method may not be called.
- *
- *  @param agentUID The UID of the agent that accepted the call.
- *  @sa acdProgressEvent:
- */
-- (void)acdAcceptedEvent:(NSString *)agentUID;
-
-
-- (void)connectionParameters:(NSDictionary *)parameters;
-- (void)cameraUsedOnStart:(lsCameraUsedOnStart_t)isFront;
-
-/**
- *  Should this method be called, it will be at the end of a call. It contains all informations needed to open the survey webpage defined in the administration portal.
- *
- *  @param infos The informations needed to open the survey page and optionaly open a popup to prompt the user before that.
- */
-- (void)callSurvey:(id<LSSurveyInfos>)infos;
-
-/**
- *  The mobile2mobile object can be used to send notification to other users.
- */
-- (void)notificationUsecaseAvailable;
-@end
-
-/**
- *  The customization delegate allows to change a few things in the LSUniversal callViewController's view.
- *  The button customization allows for changing the buttons look and content. Their size is computed by the SDK. The content is dependant on the button's state. See each buttons callback for details.
- */
-@protocol LSCustomizationDelegate <NSObject>
-@optional
-
-/**
- * @param b The LSButton describing the mute status of the app.
- */
-- (void)customizeMuteToggle:(UIButton *)b;
-
-/**
- *  Tapping this button stops/starts the video out stream capture.
- *  b.state == UIControlStateNormal - The video is being sent
- *  b.state == UIControlStateSelected - The video is not being sent
- *  @param b The button to customize
- */
-- (void)customizeCameraToggle:(UIButton *)b;
-
-/**
- * Tapping this button changes the video out source.
- *  b.state == UIControlStateNormal - Using the front camera
- *  b.state == UIControlStateSelected - Using another camera
- *
- *  @param b The button to customize
- */
-- (void)customizeCameraSource:(UIButton *)b;
-
-/**
- *  Tapping that button changes the audio route used to play/record the audio, if possible.
- *  b.state == UIControlStateNormal - Using the loudspeaker
- *  b.state == UIControlStateSelected - Not using the loudspeaker
- *  This button changes automatically when connecting a headset with a mic.
- *
- *  @param b The button to customize
- */
-- (void)customizeSpeakerRoute:(UIButton *)b;
-
-/**
- *  This button pauses/resumes the video out stream capture.
- *  b.state == UIControlStateNormal - VideoOut is playing
- *  b.state == UIControlStateSelected - VideoOut is paused
- *
- *  @param b The button to customize
- */
-- (void)customizeVideoPauseToggle:(UIButton *)b;
-
-/**
- *  Tapping that button will display the media selector popup.
- *
- *  @param b The button to customize
- */
-- (void)customizeShareMedia:(UIButton *)b;
-
-/**
- *  Tapping this button starts/stops the torch, when using the back camera. It does nothing if using the front camera.
- *  b.state == UIControlStateNormal - The torch is not on
- *  b.state == UIControlStateSelected - The torch is on
- *
- *  @param b The button to customize
- */
-- (void)customizeTorchToggle:(UIButton *)b;
-
-/**
- *  Tapping this button will erase any drawings (on share, video out or player)
- *  @param b The button to customize
- */
-- (void)customizeEraseDrawings:(UIButton *)b;
-/**
- *  Tapping this button will end the ongoing call.
- *
- *  @param b The button to customize
- */
-- (void)customizeHangup:(UIButton *)b;
-/**
- *  Tapping this button will stop an ongoing share out.
- *
- *  @param b The button to customize
- */
-- (void)customizeStopShare:(UIButton *)b;
-
-@end
 
 /**
  The LSUniversal object is your point of entry to the connection and call control. The Callflow is simplified to the max:
@@ -403,17 +35,17 @@ typedef struct {
 /**
  *  The delegate that is notified of connection events and call ends.
  */
-@property(nonatomic) id<LSUniversalDelegate> delegate;
+@property(nonatomic, weak) id<LSUniversalDelegate> delegate;
 
 /**
  *  If the delegate conforms to LSUniversalLogDelegate, this property is set automatically
  */
-@property(nonatomic) id<LSUniversalLogDelegate> logDelegate;
+@property(nonatomic, weak) id<LSUniversalLogDelegate> logDelegate;
 
 /**
  *  This delegate is called upon when the call menu is resized.
  */
-@property(nonatomic) NSObject<LSCustomizationDelegate> *customizationDelegate;
+@property(nonatomic, weak) NSObject<LSCustomizationDelegate> *customizationDelegate;
 
 /**
  *  The current connection status. When the connection goes from connecting to active, the call is created.
@@ -424,7 +56,12 @@ typedef struct {
  *  This object is responsible for sending the notifications to a remote contact (e.g. in the Agent-to-guest case). It needs the Apple Notification token to work (see APNS).
  *	 Make sure the app can send a notification before trying to send one (check the LSMobile2MobileNotification protocol for more info).
  */
-@property(nonatomic, readonly) NSObject<LSMobile2MobileNotification> *mobile2mobile;
+@property(nonatomic, readonly) NSObject<LSMobile2Mobile> *mobile2mobile;
+
+/**
+ *  The picture upload delegate is notified when uploading is started, stopped and when a picture is uploading, along with some information regarding the picture being uploaded.
+ */
+@property(nonatomic, weak) NSObject <LSPictureUpload> *pictureUploadDelegate;
 
 /**
  *  Connects the LSUniversalSDK to SightCall's cloud. The dictionary is a <String *: String *> dictionary, with the key being URL Scheme parameters and the values their value.
@@ -454,5 +91,21 @@ typedef struct {
  *  @sa startWithDictionary:
  */
 - (void)abort;
+
+/**
+ *  Checks if a PushKit notification received by the application can be dealt with by the SDK
+ *  @param notification The notification's payload dictionary.
+ *  @return YES if the notification can be handled by the SDK.
+ *  @sa handleNotification:
+ */
+- (BOOL)canHandleNotification:(NSDictionary *)notification;
+
+
+/**
+ *  Handles the notification if canHandleNotification: returned YES
+ *  @param notification The Push notification's payload dictionary.
+ *  @sa canHandleNotification:
+ */
+- (void)handleNotification:(NSDictionary *)notification;
 
 @end
