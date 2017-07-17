@@ -22,6 +22,9 @@
  You are notified of the connection state through the delegate property. You can check the status of the connection anytime by calling currentConnectionStatus.
 
  You can call abort during connection or during a call. It will either directly disconnect the LSUniversalSDK or hangup the call, which will in turn disconnect the LSUniversalSDK. On your end, calls can be ended either trough this abort method or the hangup button in the call view UI. You are notified of call ends by the [LSUniversalDelegate callReport:].
+ 
+ Upon init, the self.mobile2mobile instance is initialized and attemps to sign in if agent credentials are available.
+ 
  */
 @interface LSUniversal : NSObject
 
@@ -53,15 +56,19 @@
 @property(nonatomic, readonly) lsConnectionStatus_t status;
 
 /**
- *  This object is responsible for sending the notifications to a remote contact (e.g. in the Agent-to-guest case). It needs the Apple Notification token to work (see APNS).
- *	 Make sure the app can send a notification before trying to send one (check the LSMobile2MobileNotification protocol for more info).
+ *  This object is responsible for sending the notifications to a remote contact (e.g. in the Agent-to-Guest case). It needs the Apple Notification token to work (see APNS).
+ *  This object is available after the init is done, until destruction of the LSUniversal instance.
  */
-@property(nonatomic, readonly) NSObject<LSMobile2Mobile> *mobile2mobile;
+@property(nonatomic, readonly) NSObject<LSMAHandler> *agentHandler;
+
+
+@property(nonatomic, readonly) NSObject<LSALContext> *activityHandler;
 
 /**
  *  The picture upload delegate is notified when uploading is started, stopped and when a picture is uploading, along with some information regarding the picture being uploaded.
  */
 @property(nonatomic, weak) NSObject <LSPictureUpload> *pictureUploadDelegate;
+
 
 /**
  *  Connects the LSUniversalSDK to SightCall's cloud. The dictionary is a <String *: String *> dictionary, with the key being URL Scheme parameters and the values their value.

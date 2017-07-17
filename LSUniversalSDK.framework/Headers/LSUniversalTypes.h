@@ -53,9 +53,13 @@ typedef NS_ENUM(NSInteger, lsConnectionStatus_t) {
 	 */
 	lsConnectionStatus_agentConnected,
 	/**
-	 *  The LSUniversalSDK is refreshing the agent data before a call or because of a registration.
+	 *  The LSUniversalSDK is refreshing the agent data.
 	 */
-	lsConnectionStatus_agentConnecting,
+	lsConnectionStatus_agentRefreshing,
+	/**
+	 *  The LSUniversalSDK is registering an agent.
+	 */
+	lsConnectionStatus_agentRegistering,
 	/**
 	 *  The LSUniversalSDK is connecting.
 	 */

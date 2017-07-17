@@ -18,12 +18,20 @@ FOUNDATION_EXPORT const unsigned char LSUniversalSDKVersionString[];
 
 #import <LSUniversalSDK/LSUniversalTypes.h>
 
-#import <LSUniversalSDK/LSMobile2MobileProtocol.h>
+#import <LSUniversalSDK/LSMAHandlerProtocol.h>
+#import <LSUniversalSDK/LSMAUsecase.h>
+#import <LSUniversalSDK/LSMATypes.h>
+
 #import <LSUniversalSDK/LSPictureUploadProtocol.h>
 #import <LSUniversalSDK/LSSurveyInfosProtocol.h>
+
+#import <LSUniversalSDK/LSActivityEntry.h>
+#import <LSUniversalSDK/LSALContext.h>
 
 #import <LSUniversalSDK/LSCustomizationDelegate.h>
 #import <LSUniversalSDK/LSUniversalDelegate.h>
 
+#import <LSUniversalSDK/LSQoSMetrics.h>
+#import <LSUniversalSDK/LSQoSManager.h>
 #import <LSUniversalSDK/LSUniversal.h>
 

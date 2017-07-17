@@ -15,6 +15,8 @@
 
 @end
 
+
+
 /**
  *  The protocol the LSUniversalDelegate is to follow. Make no assumption regarding the thread that is used to trigger those messages.
  */
@@ -68,15 +70,23 @@
  */
 - (void)callSurvey:(id<LSSurveyInfos>)infos;
 
+//MARK: Mobile to Mobile
+
 /**
  *  The mobile2mobile object can be used to send notification to other users.
  */
 - (void)notificationUsecaseAvailable;
 
 /**
- *  You are registered as an agent and you sent an invite to a guest. The guest accepted. Use the URL to start the call.
- *  @param callURL The url to use to start the call.
+ *  The USDK is registered as an agent and sent an invite to a guest. The guest accepted. Use the URL to start the call.
+ *  @param callURL	The url to use to start the call.
  */
 - (void)callTheGuest:(NSString *)callURL;
+
+/**
+ *  The SDK is registered as an agent and is being asked to join a call to another agent. Use this URL to start the call.
+ *  @param callURL	The URL to use to start the call.
+ */
+- (void)callTheAgent:(NSString *)callURL;
 
 @end
