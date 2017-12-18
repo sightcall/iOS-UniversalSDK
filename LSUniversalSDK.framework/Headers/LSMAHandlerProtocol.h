@@ -53,6 +53,8 @@ typedef void (^invitationBlock)(BOOL didSucceed, NSString *_Nullable invite);
  */
 @protocol LSMAHandler <NSObject>
 
+@property (nonatomic, readonly, nullable) NSString *displayName;
+
 /**
  * If YES, the agent is registered and signed in.
  */
@@ -140,14 +142,17 @@ typedef void (^invitationBlock)(BOOL didSucceed, NSString *_Nullable invite);
  * Request an invitation URL. This string is then sent by the Agent to the Guest. This URL is returned in the block. Use this method to invite Guest without using the sendNotificationForUsecase:... methods.
  * @param usecase	The usecase object containing the information to be used
  * @param suffix	The suffix to use in the invitation
+ * @param name		The display name of the invitation
  * @param block	The block to be executed after the URL is received or in case of error.
  */
-- (void)createInvitationForUsecase:(nullable id<LSMAUsecase>)usecase usingSuffix:(nonnull NSString *)suffix andNotify:(nullable invitationBlock)block; 
+- (void)createInvitationForUsecase:(nullable id<LSMAUsecase>)usecase usingSuffix:(nonnull NSString *)suffix andName:(nullable NSString *)name andNotify:(nullable invitationBlock)block;
 
 /**
  * Cancel an invitation based on the suffix. An invitation created through createInvitationForUsecase:usingSuffix:andNotify: should be cancelled.
  *	@param suffix	The suffix used to create the invitation.
  */
 - (void)cancelInvitationOfSuffix:(nonnull NSString *)suffix;
+
+- (BOOL)startACDCallWithUsecase:(nullable id<LSMAUsecase>)usecase andAdditionalReference:(nullable NSString *)reference;
 
 @end

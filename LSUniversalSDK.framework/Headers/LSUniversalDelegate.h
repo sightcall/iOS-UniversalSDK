@@ -81,12 +81,27 @@
  *  The USDK is registered as an agent and sent an invite to a guest. The guest accepted. Use the URL to start the call.
  *  @param callURL	The url to use to start the call.
  */
-- (void)callTheGuest:(NSString *)callURL;
+- (void)callTheGuest:(NSString *)callURL __deprecated_msg("Please use guestAcceptedCall:userResponse:");
+
+
+/**
+ *  The USDK is registered as an agent and sent an invite to a guest. The guest accepted. Use the URL to start the call.
+ *  @param callURL       The url to use to start the call.
+ *  @param userResponse  This block *MUST* be triggered with YES if the user accepted to call the agent, NO if not.
+ */
+- (void)guestAcceptedCall:(NSString *)callURL userResponse:(void(^)(BOOL))userResponse;
 
 /**
  *  The SDK is registered as an agent and is being asked to join a call to another agent. Use this URL to start the call.
  *  @param callURL	The URL to use to start the call.
  */
-- (void)callTheAgent:(NSString *)callURL;
+- (void)callTheAgent:(NSString *)callURL __deprecated_msg("Please use agentAcceptedCall:userResponse:");
+
+/**
+ *  The SDK is registered as an agent and is being asked to join a call to another agent. Use this URL to start the call.
+ *  @param callURL      The URL to use to start the call.
+ *  @param userResponse	This block *MUST* be triggered with YES if the user accepted to call the agent, NO if not.
+ */
+- (void)agentAcceptedCall:(NSString *)callURL userResponse:(void(^)(BOOL))userResponse;
 
 @end
