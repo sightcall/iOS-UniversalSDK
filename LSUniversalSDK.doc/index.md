@@ -2,21 +2,22 @@
 <!-- MarkdownTOC depth=2 autolink=true -->
 
 - [Installation](#installation)
-	- [Dependencies](#dependencies)
-	- [Common link errors](#common-link-errors)
+    - [Dependencies](#dependencies)
+    - [Common link errors](#common-link-errors)
 - [Usage](#usage)
-	- [Instantiation](#instantiation)
-	- [Delegation](#delegation)
-	- [Call UI](#call-ui)
-	- [ACD information](#acd-information)
-	- [Survey](#survey)
-	- [Callflows](#callflows)
-	- [Agent](#agent)
-	- [Save picture](#save-picture)
+    - [Instantiation](#instantiation)
+    - [Delegation](#delegation)
+    - [Call UI](#call-ui)
+    - [ACD information](#acd-information)
+    - [Survey](#survey)
+    - [Callflows](#callflows)
+    - [Agent](#agent)
+    - [Save picture](#save-picture)
 - [Advanced](#advanced)
-	- [Abort](#abort)
-	- [URL Scheme Trigger](#url-scheme-trigger)
-	- [Customization](#customization)
+    - [Logging](#logging)
+    - [Abort](#abort)
+    - [URL Scheme Trigger](#url-scheme-trigger)
+    - [Customization](#customization)
 
 <!-- /MarkdownTOC -->
 
@@ -505,6 +506,54 @@ The cloud mode has the picture uploaded after the call ends. The App is notified
 
 
 ## Advanced
+
+### Logging
+
+The SDK send logs to any object implementing `LSUniversalLogDelegate` and registered as `LSUniversal.logDelegate`.
+
+The following presents a way to receive and print logs on the debugger console. 
+
+Be aware that: 
+* uncontrolled use of `NSLog();` may lead to performance degradation;
+* `NSLog();` send logs to the device console (Xcode -> Window -> Devices and Simulator).
+
+
+```objc
+// An instance of this class will be used as log delegate. 
+// You must instantiate your LSUniversal pointer before instantiating this object.
+
+@interface YourLogDelegate: NSObject <LSUniversalLogDelegate>
+
+- (instancetype)initWithUSDK:(LSUniversal *)yourSDKPointer;
+
+@end
+
+@implementation YourLogDelegate
+
+- (instancetype)initWithUSDK:(LSUniversal *)yourSDKPointer
+{
+    self = [super init];
+    yourSDKPointer.logDelegate = self;
+    return self;
+}
+
+//this delegate method is called when a log line is emitted by the SDK
+- (void)logLevel:(NSInteger)level logModule:(NSInteger)module fromMethod:(NSString *)originalSel message:(NSString *)message, ...;
+{
+    va_list pe;
+    va_start(pe, message);
+    NSString *sMessage = [[NSString alloc] initWithFormat:message arguments:pe];
+    va_end(pe);
+    NSLog(@"%@ %@", originalSel, sMessage);
+}
+
+
+@end
+
+```
+
+
+
 
 
 ### Abort
