@@ -36,6 +36,11 @@ typedef NS_ENUM(NSInteger, LSQoSStop_t)
 
 - (BOOL)startMirrorCallUsingDelegate:(id<LSQoSDelegate>)delegate onPlatform:(NSDictionary *)pfm;
 
+
+/**
+ * During the test, the video is capture from the device and sent back by the backend. Set a view as this property to display it.
+ * @sa LSQoSMetric videoSize
+ */
 @property (nonatomic, weak) UIView *renderView;
 
 /**

@@ -90,7 +90,7 @@ typedef void (^invitationBlock)(BOOL didSucceed, NSString *_Nullable invite);
 @property (nonatomic, nullable) NSString *notificationToken;
 
 /**
- *  The list of usecase. This list is only populated after a call to refreshUsecase:
+ *  The list of usecase. This list is only populated after a call to fetchUsecases:
  */
 @property (nonatomic, readonly, nullable)NSArray<NSObject<LSMAUsecase> *> *usecases;
 
