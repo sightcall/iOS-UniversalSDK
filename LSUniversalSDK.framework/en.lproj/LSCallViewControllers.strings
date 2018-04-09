@@ -11,8 +11,8 @@
 /* Class = "UIButton"; normalTitle = "REC"; ObjectID = "D2S-1D-Hbu"; */
 "D2S-1D-Hbu.normalTitle" = "REC";
 
-/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "EsW-NX-n3y"; */
-"EsW-NX-n3y.normalTitle" = "Cancel";
+/* Class = "UIButton"; normalTitle = "Decline"; ObjectID = "EsW-NX-n3y"; */
+"EsW-NX-n3y.normalTitle" = "Decline";
 
 /* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "Gds-wd-z1r"; */
 "Gds-wd-z1r.normalTitle" = "Accept";
@@ -38,5 +38,5 @@
 /* Class = "UIButton"; normalTitle = "Decline"; ObjectID = "wHV-Qf-hGf"; */
 "wHV-Qf-hGf.normalTitle" = "Decline";
 
-/* Class = "UILabel"; text = "Signature"; ObjectID = "wKa-tx-OyF"; */
-"wKa-tx-OyF.text" = "Signature";
+/* Class = "UILabel"; text = "Sign below"; ObjectID = "wKa-tx-OyF"; */
+"wKa-tx-OyF.text" = "Sign below";
