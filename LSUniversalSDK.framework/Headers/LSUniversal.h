@@ -75,22 +75,20 @@
  *
  *  @param dictionary The key/value used to connect
  *
- *  @return True if the dictionary allows for connection. If false, something is missing from the dictionary.
  *  @sa startWithString:
  *  @sa abort
  */
-- (BOOL)startWithDictionary:(NSDictionary *)dictionary;
+- (void)startWithDictionary:(NSDictionary *)dictionary;
 
 /**
  *  Connects the LSUniversalSDK to SightCall's cloud. From this string is made a dictionary used in startWithDictionary:
  *
  *  @param param The string used to create the dictionary. It can be an URL string such as the one used in the Universal App (i.e. "sightcall://?mode=value&..."), or simply "mode=value&...". `?`, `=` and `&` are used as separators.
  *
- *  @return True if the string allows for connection. If false, something is missing from the library
  *  @sa startWithDictionary:
  *  @sa abort
  */
-- (BOOL)startWithString:(NSString *)param;
+- (void)startWithString:(NSString *)param;
 
 /**
  *  Disconnects the LSUniversalSDK from the cloud. Hangup the call if any.

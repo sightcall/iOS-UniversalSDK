@@ -108,7 +108,7 @@ typedef NS_ENUM(NSInteger, lsConnectionError_t) {
  *  The call ended, the LSUniversalSDK is disconnecting.
  */
 typedef NS_ENUM(NSInteger, lsCallEnd_t) {
-	/**
+    /**
 	 *  The call ended prematuraly
 	 */
 	lsCallEnd_unexpected,
@@ -120,10 +120,23 @@ typedef NS_ENUM(NSInteger, lsCallEnd_t) {
 	 *  the call was ended on your end.
 	 */
 	lsCallEnd_local,
+    /**
+     *
+     */
+    lsCallEnd_eulaRefused,
 };
 
+/**
+ * This structure describes the condition of the call end
+ */
 typedef struct {
+    /**
+     * Reason the call ended
+     */
 	lsCallEnd_t callEnd;
+    /**
+     * Duration of the call
+     */
 	NSTimeInterval callLength;
 } lsCallReport_s;
 

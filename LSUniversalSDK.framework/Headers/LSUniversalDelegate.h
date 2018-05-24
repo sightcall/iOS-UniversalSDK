@@ -16,6 +16,47 @@
 @end
 
 
+/**
+ *  This object describe the content of the consent message to be displayed upon call start.
+ *  This object is provided by the delegate's `displayConsentWithDescription:` callback.
+ */
+@protocol LSConsentDescription <NSObject>
+
+/**
+ *  Title of the consent popup
+ */
+@property (readonly, nonatomic) NSString *title;
+
+/**
+ *  Consent message
+ */
+@property (readonly, nonatomic) NSString *message;
+
+/**
+ *  Label of the `Agree` button
+ */
+@property (readonly, nonatomic) NSString *agreeLabel;
+
+/**
+ *  Label of the `Disagree` button
+ */
+@property (readonly, nonatomic) NSString *cancelLabel;
+
+/**
+ *  Label of the `Open EULA` button
+ */
+@property (readonly, nonatomic) NSString *eulaLabel;
+
+/**
+ *  URL to the EULA
+ */
+@property (readonly, nonatomic) NSString *eulaURL;
+
+/**
+ *  Block to trigger when the user agrees or disagrees with the consent form.
+ */
+@property (readonly, nonatomic) void (^consent)(BOOL);
+@end
 
 /**
  *  The protocol the LSUniversalDelegate is to follow. Make no assumption regarding the thread that is used to trigger those messages.
@@ -79,13 +120,6 @@
 
 /**
  *  The USDK is registered as an agent and sent an invite to a guest. The guest accepted. Use the URL to start the call.
- *  @param callURL	The url to use to start the call.
- */
-- (void)callTheGuest:(NSString *)callURL __deprecated_msg("Please use guestAcceptedCall:userResponse:");
-
-
-/**
- *  The USDK is registered as an agent and sent an invite to a guest. The guest accepted. Use the URL to start the call.
  *  @param callURL       The url to use to start the call.
  *  @param userResponse  This block *MUST* be triggered with YES if the user accepted to call the agent, NO if not.
  */
@@ -93,15 +127,15 @@
 
 /**
  *  The SDK is registered as an agent and is being asked to join a call to another agent. Use this URL to start the call.
- *  @param callURL	The URL to use to start the call.
- */
-- (void)callTheAgent:(NSString *)callURL __deprecated_msg("Please use agentAcceptedCall:userResponse:");
-
-/**
- *  The SDK is registered as an agent and is being asked to join a call to another agent. Use this URL to start the call.
  *  @param callURL      The URL to use to start the call.
  *  @param userResponse	This block *MUST* be triggered with YES if the user accepted to call the agent, NO if not.
  */
 - (void)agentAcceptedCall:(NSString *)callURL userResponse:(void(^)(BOOL))userResponse;
+
+/**
+ *  The display consent must be displayed by the app. Upon accepting (or refusing) the EULA, call the consent block.
+ *  @param description  The variable contains all data to display
+ */
+- (void)displayConsentWithDescription:(NSObject <LSConsentDescription> *)description;
 
 @end
