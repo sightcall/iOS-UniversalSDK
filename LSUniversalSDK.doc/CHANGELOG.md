@@ -1,0 +1,230 @@
+# Changelog
+
+<!-- MarkdownTOC -->
+
+- [1.4.6](#146)
+- [1.4.0](#140)
+- [1.3.0](#130)
+- [1.2.12](#1212)
+- [1.2.11](#1211)
+- [1.2.4](#124)
+- [1.1.2](#112)
+- [1.0.1](#101)
+- [0.10.1](#0101)
+- [0.9.12](#0912)
+- [0.9.3](#093)
+- [0.9.2](#092)
+- [0.9.1](#091)
+- [0.9.0](#090)
+- [0.8.1](#081)
+- [0.8.0](#080)
+
+<!-- /MarkdownTOC -->
+## 1.4.6
+> 2018/06/18  
+> __rtcc 6.9.0__  
+
+### Fix
+- Crash on external/reference returning non HTTP response
+- Taking a snapshot on non portrait returns a rotated picture
+- Video player skip 
+- Incorrect JSON format for attendee and host action
+
+## 1.4.0
+> 2018/05/24  
+> __rtcc 6.9.0__  
+
+### Added
+- Consent form support
+
+
+### Fix
+- Agent could become stuck on connection
+- Crash on camera change
+- Video displayed at the wrong size after a snpashot
+
+
+## 1.3.0
+> 2018/04/09  
+> __rtcc 6.8.6__
+
+### Added
+- OCR
+- Chat
+
+## 1.2.12
+
+> 2018/03/23  
+> __rtcc 6.8.5__
+
+### Fixed
+- Fix the ACD start
+
+## 1.2.11
+> 2018/01/19  
+> __rtcc 6.8.4__
+
+### Fixed
+- Sign-in could fail on agent starting a call as guest
+- Picture uploads freezes the App
+- App crashes on call end
+- Drawing colors displayed by attendees in multiparty calls (host / guest / attendees)
+
+
+## 1.2.4
+> 2017/12/18  
+> __rtcc 6.8.1__
+
+
+### Added
+- Support for Agent to Agent ACD
+- Support for Proposal & Signature
+
+### Fixed
+- Zoom factor returned 100% when no camera is available
+- Process locks during agent registration
+- Drawing with low point counts
+- Crash on share snapshot
+
+### Changed
+- URL and Message (email / SMS) invite creation each add 2 entries to the activity list
+
+
+
+## 1.1.2
+> 2017/11/20  
+> __rtcc 6.8.1__  
+
+### Added
+- Support for new case reports
+- Proposal & Signature
+
+### Fixed
+- Drawing on video and share
+
+
+
+## 1.0.1
+> 2017/09/14  
+> __rtcc 6.7.2__
+
+### Fixed
+- Remote video share stop
+- Invalid call duration returned after call end
+- Agent call would not start after the guest accept the invitation
+- QoS webpage displaying wrong platform info
+- QoS results could not be shared sometimes
+- Drawing while video pause on the image edges
+
+### Added
+- Support for Agent local save picture
+- Support for Agent recording pause / resume
+
+### Changed
+- Call menu buttons behaviour and colours
+
+
+## 0.10.1
+
+> 2017/07/20  
+> __rtcc 6.7.0__
+
+#### Added
+- Quality of Service
+- Agent to Agent
+- Invite creation without notification being sent
+
+
+#### Changed
+- RtccSDK 6.7.0
+
+
+## 0.9.12
+
+> 2017.03.30  
+> __rtcc 6.6.15__
+
+#### Fixed
+- The drawing and pointers were slow
+
+#### Changed
+- RtccSDK 6.6.15
+
+
+## 0.9.3
+
+> 2017.02.15   
+> __rtcc 6.6.5__
+
+#### Added
+- Save picture
+
+#### Fixed
+- Enhanced agent's local menu bar behavior related to player
+
+
+## 0.9.2
+
+> 2017.02.09  
+
+
+#### Fixed
+- MenuBar customization
+- Some drawing points fix
+
+#### Changed
+- RtccSDK 6.6.10
+
+## 0.9.1
+
+> 2017.01.05  
+> __rtcc 6.6.7__
+
+#### Added
+
+
+#### Fixed
+- SMS phone number in international format (+XX) support
+
+
+## 0.9.0
+
+> 2016.12.23  
+> __rtcc 6.6.7__
+
+#### Added
+- Documentation related to Privacy statements declaration
+- Snapshot mode
+
+#### Changed
+- RtccSDK 6.6.7
+
+## 0.8.1
+
+> 2016.12.12  
+> __rtcc 6.6.5__
+
+#### Added
+- RTCCSTATUS command family
+- HAPv3 hidden support
+- Battery and network monitoring support
+
+#### Fixed
+- ACD external waiting time
+
+#### Changed
+- RtccSDK 6.6.5
+
+
+## 0.8.0
+
+> 2016.12.08  
+
+#### Added
+- Support for external ACD 
+
+#### Fixed
+- Default source crash if AVCaptureDevice not available 
+- Various drawing and pointer issues on share
+
+

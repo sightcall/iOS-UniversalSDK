@@ -6,16 +6,16 @@
 "6Vq-uI-cG0.text" = "Remote";
 
 /* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "9xP-r9-U8n"; */
-"9xP-r9-U8n.normalTitle" = "Confirm";
+"9xP-r9-U8n.normalTitle" = "Conferma";
 
 /* Class = "UIButton"; normalTitle = "REC"; ObjectID = "D2S-1D-Hbu"; */
 "D2S-1D-Hbu.normalTitle" = "REC";
 
 /* Class = "UIButton"; normalTitle = "Decline"; ObjectID = "EsW-NX-n3y"; */
-"EsW-NX-n3y.normalTitle" = "Decline";
+"EsW-NX-n3y.normalTitle" = "Annulla";
 
 /* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "Gds-wd-z1r"; */
-"Gds-wd-z1r.normalTitle" = "Accept";
+"Gds-wd-z1r.normalTitle" = "Accetta";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "Kkp-9R-l97"; */
 "Kkp-9R-l97.text" = "Label";
@@ -24,7 +24,7 @@
 "Qof-sA-2M8.text" = "Label";
 
 /* Class = "UILabel"; text = "Proposition Title"; ObjectID = "Sna-sG-dsU"; */
-"Sna-sG-dsU.text" = "Proposition Title";
+"Sna-sG-dsU.text" = "Titolo proposta";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "bWY-yQ-dBR"; */
 "bWY-yQ-dBR.text" = "Label";
@@ -33,10 +33,10 @@
 "dt4-p8-U33.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "lmZ-Y7-lUT"; */
-"lmZ-Y7-lUT.normalTitle" = "Clear";
+"lmZ-Y7-lUT.normalTitle" = "Cancella";
 
 /* Class = "UIButton"; normalTitle = "Decline"; ObjectID = "wHV-Qf-hGf"; */
-"wHV-Qf-hGf.normalTitle" = "Decline";
+"wHV-Qf-hGf.normalTitle" = "Rifiuta";
 
 /* Class = "UILabel"; text = "Sign below"; ObjectID = "wKa-tx-OyF"; */
-"wKa-tx-OyF.text" = "Sign below";
+"wKa-tx-OyF.text" = "Firma";
