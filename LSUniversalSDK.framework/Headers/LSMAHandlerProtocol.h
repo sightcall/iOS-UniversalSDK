@@ -155,4 +155,14 @@ typedef void (^invitationBlock)(BOOL didSucceed, NSString *_Nullable invite);
 
 - (BOOL)startACDCallWithUsecase:(nullable id<LSMAUsecase>)usecase andAdditionalReference:(nullable NSString *)reference;
 
+/**
+ * If set to YES, a picture sent to the LSUniversal.pictureDelegate savedPicture:andMetadata: method is saved locally (in iOS's Library App.) If `albumName` is set when savedPicture:andMetadata: is called, the picture is saved in a separate Album named `albumName`.
+ */
+@property (nonatomic)BOOL saveLocally;
+
+/**
+ * Name of the album in which the images snapshotted with a `local` will be saved in, after being presented to the LSUniversal.pictureDelegate using savedPicture:andMetadata:
+ */
+@property (nonatomic, nullable) NSString *albumName;
+
 @end

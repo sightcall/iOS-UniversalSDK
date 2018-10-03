@@ -1,7 +1,8 @@
 # Changelog
 
-<!-- MarkdownTOC -->
+<!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [1.4.9](#149)
 - [1.4.6](#146)
 - [1.4.0](#140)
 - [1.3.0](#130)
@@ -20,6 +21,20 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
+
+## 1.4.9
+> 2018/08/20  
+> __rtcc 6.9.2__
+
+### Added
+- Agent can save pictures to device's Photo library
+- Bulgarian language translations
+
+### Fix
+- Stuck when attempting to start a call while refreshing agent status
+- Snapshot preventing camera stream to restart
+
+
 ## 1.4.6
 > 2018/06/18  
 > __rtcc 6.9.0__  

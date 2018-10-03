@@ -505,7 +505,7 @@ While connected as agent, a `Save picture` button exists in the Remote bar. This
 
 Where the pictures are saved depends on the usecase's `Agent Controls` `Save picture configuration` section.
 
-The `Media` section can take one of the two values: `local` and `cloud`. They will respectively send the pictures (and its metadata) to the App or upload them to SightCall's back-end after the call ends.
+The `Media` section can take one of the two values: `cloud` and `local`. They will respectively upload them to SightCall's back-end after the call ends, or save the pictures locally.
 
 In both case, the `LSPictureProtocol` delegate is used to update the App.
 
@@ -524,6 +524,10 @@ Set the value of `pictureDelegate` in your LSUniversal variable to be notified e
 
 #### `local` mode
 
+The picture can either be stored in the App storage or in the Library.
+
+###### App storage
+
 The Local mode allows the App to be notified when a picture is taken by the agent. This notification takes the form of a callback in the `LSPictureProtocol` delegate.
 
 ```objc
@@ -537,6 +541,19 @@ The Local mode allows the App to be notified when a picture is taken by the agen
 
 
 The `metadata` variable contains data about the picture, such as GPS location (if requested before), the timestamp of the picture in the call, the origin of the picture (if any), etc.
+
+###### Library storage
+
+To have the picture saved to the device's Library, set the `agentHandler`'s `saveLocally` to `YES`. The image will be stored in a collection named after the `agentHandler`'s `albumName` after the `savedPicture:andMetadata:` callback is called (see above.)
+
+```objc
+    //somewhere in you App code, before the call ends.
+    //yourSDKPointer is your reference to the LSUniversal instance.
+    [yourSDKPointer.agentHandler setSaveLocally:YES];
+    [yourSDKPointer.agentHandler setAlbumName:@"Your Album Name"];
+
+```
+
 
 #### `cloud` mode
 
