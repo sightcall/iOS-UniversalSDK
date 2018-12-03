@@ -2,6 +2,8 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [1.4.11](#1411)
+- [1.4.10](#1410)
 - [1.4.9](#149)
 - [1.4.6](#146)
 - [1.4.0](#140)
@@ -21,6 +23,31 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
+## 1.4.11
+> 2018/11/22  
+> __rtcc 6.9.4__
+
+### Added
+- Support for variable external ACD endpoint
+
+### Changed
+- Enhance camera source selection for iOS10+ devices
+- Uses `uid` for `calleeid` if the later is not present in the queryparameter URL
+- Disable bitcode generation
+
+### Fixed
+- Snapshot not respecting device orientation (MGA-550)
+
+
+## 1.4.10
+> 2018/10/03  
+> __rtcc 6.9.3__  
+
+### Fixed
+- Fix a crash when some mandatory parameters of the hash reference change to optional
+
+### Changed
+- Removed dead code
 
 ## 1.4.9
 > 2018/08/20  
@@ -30,7 +57,7 @@
 - Agent can save pictures to device's Photo library
 - Bulgarian language translations
 
-### Fix
+### Fixed
 - Stuck when attempting to start a call while refreshing agent status
 - Snapshot preventing camera stream to restart
 
@@ -39,7 +66,7 @@
 > 2018/06/18  
 > __rtcc 6.9.0__  
 
-### Fix
+### Fixed
 - Crash on external/reference returning non HTTP response
 - Taking a snapshot on non portrait returns a rotated picture
 - Video player skip 
@@ -53,7 +80,7 @@
 - Consent form support
 
 
-### Fix
+### Fixed
 - Agent could become stuck on connection
 - Crash on camera change
 - Video displayed at the wrong size after a snpashot
