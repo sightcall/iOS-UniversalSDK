@@ -9,6 +9,8 @@
 
 #import <LSUniversalSDK/LSUniversalSDK.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  An object of this type describes the data needed to display the survey at call's end.
  *  If displayPopup, ask the user if she wants to participate in a survey. Otherwise, just use url to open a webbrowser
@@ -35,3 +37,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

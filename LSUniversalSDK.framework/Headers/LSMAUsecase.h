@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol LSMAUsecase <NSObject>
 
 @property (nonatomic, readonly, nullable) NSString *name;
@@ -31,3 +33,5 @@
 - (nullable instancetype)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

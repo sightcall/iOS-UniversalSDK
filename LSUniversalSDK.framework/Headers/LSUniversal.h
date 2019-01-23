@@ -8,6 +8,8 @@
 
 #import <LSUniversalSDK/LSUniversalSDK.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  The LSUniversal object is your point of entry to the connection and call control. The Callflow is simplified to the max:
 
@@ -114,3 +116,5 @@
 - (void)handleNotification:(NSDictionary *)notification;
 
 @end
+
+NS_ASSUME_NONNULL_END

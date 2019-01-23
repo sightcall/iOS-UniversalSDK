@@ -37,6 +37,8 @@ typedef NS_ENUM(int16_t, LSActivity_t)
 	LSActivity_acdCall,
 };
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The basic activity protocol. No entry is *just* an id<LSActivityEntry>, but rather conforms to one of its subprotocols.
  *  Entries are added when the activity actually took place, i.e. calls activity are set when the call ends, invites are set when the invite was sent or failed, etc.
@@ -164,3 +166,5 @@ typedef NS_ENUM(int16_t, LSActivity_t)
 @property (nonatomic, readonly, copy) NSString *suffix;
 
 @end
+
+NS_ASSUME_NONNULL_END

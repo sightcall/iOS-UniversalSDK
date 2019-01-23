@@ -10,6 +10,7 @@
 #import "LSMAUsecase.h"
 #import "LSMATypes.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  The registration block that is fired in registerWithPin:andToken:onRegistration:
@@ -166,3 +167,5 @@ typedef void (^invitationBlock)(BOOL didSucceed, NSString *_Nullable invite);
 @property (nonatomic, nullable) NSString *albumName;
 
 @end
+
+NS_ASSUME_NONNULL_END

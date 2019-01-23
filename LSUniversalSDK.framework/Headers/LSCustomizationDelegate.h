@@ -8,6 +8,8 @@
 
 #import <LSUniversalSDK/LSUniversalSDK.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The customization delegate allows to change a few things in the LSUniversal callViewController's view.
  *  The button customization allows for changing the buttons look and content. Their size is computed by the SDK. The content is dependant on the button's state. See each buttons callback for details.
@@ -91,3 +93,5 @@
 - (void)customizeStopShare:(UIButton *)b;
 
 @end
+
+NS_ASSUME_NONNULL_END

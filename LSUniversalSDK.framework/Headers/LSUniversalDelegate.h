@@ -9,6 +9,8 @@
 
 #import <LSUniversalSDK/LSUniversalSDK.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol LSUniversalLogDelegate <NSObject>
 
 - (void)logLevel:(NSInteger)level logModule:(NSInteger)module fromMethod:(NSString *)from message:(NSString *)message, ... NS_REQUIRES_NIL_TERMINATION;
@@ -139,3 +141,5 @@
 - (void)displayConsentWithDescription:(NSObject <LSConsentDescription> *)description;
 
 @end
+
+NS_ASSUME_NONNULL_END

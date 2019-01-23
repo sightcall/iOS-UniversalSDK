@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LSActivityEntry.h"
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  * Set an object conforming to this protocol as the LSALContext.delegate, and it will be notified when there is a change in the entry list.
  */
@@ -51,3 +52,5 @@
 @property (nonatomic, weak, nullable) id<LSALContextDelegate> delegate;
 
 @end
+
+NS_ASSUME_NONNULL_END

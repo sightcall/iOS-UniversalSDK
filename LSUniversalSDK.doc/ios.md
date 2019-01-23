@@ -19,7 +19,6 @@
     - [Logging](#logging)
     - [Abort](#abort)
     - [URL Scheme Trigger](#url-scheme-trigger)
-    - [Customization](#customization)
 
 <!-- /MarkdownTOC -->
 
@@ -628,10 +627,3 @@ To abort an ongoing connection attempt, call `[mySDKPointer abort]`.
 ### URL Scheme Trigger
 
 To start your application using an URL scheme, declare the scheme in the Xcode project of your app. See [Apple Documentation](https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/Inter-AppCommunication/Inter-AppCommunication.html#//apple_ref/doc/uid/TP40007072-CH6-SW10)
-
-
-### Customization
-
-Several fields can be translated using the `Strings.localizable` file of your project (See [Apple Documentation](https://developer.apple.com/library/ios/documentation/MacOSX/Conceptual/BPInternational/InternationalizingYourUserInterface/InternationalizingYourUserInterface.html#//apple_ref/doc/uid/10000171i-CH3-SW4)):
-
-See [Languages.md](./Languages.md) for the key/value entries and descriptions.
