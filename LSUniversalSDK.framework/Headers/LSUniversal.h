@@ -1,9 +1,6 @@
 //
-//  Model.h
-//  RTCC Generic
-//
-//  Created by Charles Thierry on 19/09/14.
-//  Copyright (c) 2014 Charles Thierry. All rights reserved.
+//  LSUniversal.h
+//  LSUniversalSDK
 //
 
 #import <LSUniversalSDK/LSUniversalSDK.h>
@@ -61,10 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  This object is responsible for sending the notifications to a remote contact (e.g. in the Agent-to-Guest case). It needs the Apple Notification token to work (see APNS).
  *  This object is available after the init is done, until destruction of the LSUniversal instance.
  */
-@property(nonatomic, readonly) NSObject<LSMAHandler> *agentHandler;
+@property(nonatomic, readonly) NSObject<LSMAHandler, LSMAHandlerPincode, LSMAHandlerRegister> *agentHandler;
 
-
-@property(nonatomic, readonly) NSObject<LSALContext> *activityHandler;
 
 /**
  *  The picture upload delegate is notified when uploading is started, stopped and when a picture is uploading, along with some information regarding the picture being uploaded.
@@ -117,4 +112,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
 NS_ASSUME_NONNULL_END
+

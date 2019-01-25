@@ -1,12 +1,11 @@
 //
-//  LSUniversal+Mirror.h
+//  LSQoSManager.h
 //  LSUniversalSDK
-//
-//  Created by Charles Thierry on 29/05/2017.
-//  Copyright © 2017 SightCall. All rights reserved.
 //
 
 #import <LSUniversalSDK/LSUniversalSDK.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Describes how the test ended.
@@ -54,3 +53,5 @@ typedef NS_ENUM(NSInteger, LSQoSStop_t)
 - (void)stopMirrorCall;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -2,12 +2,10 @@
 //  LSUniversalDelegate.h
 //  LSUniversalSDK
 //
-//  Created by Charles Thierry on 21/03/17.
-//  Copyright © 2017 SightCall. All rights reserved.
-//
 
 
 #import <LSUniversalSDK/LSUniversalSDK.h>
+#import "LSConsentDescription.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,49 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)logLevel:(NSInteger)level logModule:(NSInteger)module fromMethod:(NSString *)from message:(NSString *)message, ... NS_REQUIRES_NIL_TERMINATION;
 
-@end
-
-
-/**
- *  This object describe the content of the consent message to be displayed upon call start.
- *  This object is provided by the delegate's `displayConsentWithDescription:` callback.
- */
-@protocol LSConsentDescription <NSObject>
-
-/**
- *  Title of the consent popup
- */
-@property (readonly, nonatomic) NSString *title;
-
-/**
- *  Consent message
- */
-@property (readonly, nonatomic) NSString *message;
-
-/**
- *  Label of the `Agree` button
- */
-@property (readonly, nonatomic) NSString *agreeLabel;
-
-/**
- *  Label of the `Disagree` button
- */
-@property (readonly, nonatomic) NSString *cancelLabel;
-
-/**
- *  Label of the `Open EULA` button
- */
-@property (readonly, nonatomic) NSString *eulaLabel;
-
-/**
- *  URL to the EULA
- */
-@property (readonly, nonatomic) NSString *eulaURL;
-
-/**
- *  Block to trigger when the user agrees or disagrees with the consent form.
- */
-@property (readonly, nonatomic) void (^consent)(BOOL);
 @end
 
 /**
@@ -100,11 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param agentUID The UID of the agent that accepted the call.
  *  @sa acdProgressEvent:
  */
-- (void)acdAcceptedEvent:(NSString *)agentUID;
-
-
-- (void)connectionParameters:(NSDictionary *)parameters;
-- (void)cameraUsedOnStart:(lsCameraUsedOnStart_t)isFront;
+- (void)acdAcceptedEvent:(nullable NSString *)agentUID;
 
 /**
  *  Should this method be called, it will be at the end of a call. It contains all informations needed to open the survey webpage defined in the administration portal.
@@ -122,23 +73,29 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  The USDK is registered as an agent and sent an invite to a guest. The guest accepted. Use the URL to start the call.
- *  @param callURL       The url to use to start the call.
  *  @param userResponse  This block *MUST* be triggered with YES if the user accepted to call the agent, NO if not.
  */
-- (void)guestAcceptedCall:(NSString *)callURL userResponse:(void(^)(BOOL))userResponse;
+- (void)guestAcceptedCall:(nullable void(^)(BOOL))userResponse;
 
 /**
  *  The SDK is registered as an agent and is being asked to join a call to another agent. Use this URL to start the call.
  *  @param callURL      The URL to use to start the call.
  *  @param userResponse	This block *MUST* be triggered with YES if the user accepted to call the agent, NO if not.
  */
-- (void)agentAcceptedCall:(NSString *)callURL userResponse:(void(^)(BOOL))userResponse;
+- (void)agentAcceptedCall:(nullable NSString *)callURL userResponse:(nullable void(^)(BOOL))userResponse;
 
 /**
- *  The display consent must be displayed by the app. Upon accepting (or refusing) the EULA, call the consent block.
+ *  The display consent must be displayed by the app.
+ *  Consent is either guest consent before a call, or agent consent during a fetchIdentity.
+ *  Consent must be agreed to for a call to start or for an agent to properly connect.
  *  @param description  The variable contains all data to display
  */
-- (void)displayConsentWithDescription:(NSObject <LSConsentDescription> *)description;
+- (void)displayConsentWithDescription:(nullable NSObject <LSConsentDescription> *)description;
+
+/**
+ * The registered agent received a push notification.
+ */
+- (void)testNotificationReceivedTitle:(nullable NSString *)title andBody:(nullable NSString *)body;
 
 @end
 

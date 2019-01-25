@@ -1,9 +1,6 @@
 //
-//  LSPictureUpload.h
+//  LSPictureProtocol.h
 //  LSUniversalSDK
-//
-//  Created by Charles Thierry on 23/01/17.
-//  Copyright © 2017 SightCall. All rights reserved.
 //
 
 #import <LSUniversalSDK/LSUniversalSDK.h>
@@ -89,5 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)savedPicture:(UIImage *_Nullable)image andMetadata:(LSPictureMetadata *_Nullable)metadata;
 
 @end
+
+
 
 NS_ASSUME_NONNULL_END

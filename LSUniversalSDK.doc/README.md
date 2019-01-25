@@ -1,24 +1,36 @@
 #iOS SDK
 
-<!-- MarkdownTOC levels="1,2,3" autolink="true" -->
+<!-- MarkdownTOC levels="2,3,4" autolink="true" -->
 
 - [Installation](#installation)
     - [Dependencies](#dependencies)
     - [Common link errors](#common-link-errors)
+        - [Bitcode](#bitcode)
+        - [Architecture](#architecture)
 - [Usage](#usage)
     - [Instantiation](#instantiation)
     - [Delegation](#delegation)
+        - [Connection and Calls](#connection-and-calls)
     - [Consent UI](#consent-ui)
+    - [Start a Call](#start-a-call)
     - [Call UI](#call-ui)
+        - [Customization](#customization)
     - [ACD information](#acd-information)
     - [Survey](#survey)
     - [Callflows](#callflows)
     - [Agent](#agent)
-    - [Save picture](#save-picture)
+        - [Onboarding](#onboarding)
+        - [Registration](#registration)
+        - [Notifications](#notifications)
+        - [Unregister](#unregister)
+        - [Identity](#identity)
+        - [Usecases](#usecases)
+        - [Inviting a Guest](#inviting-a-guest)
+        - [Activity](#activity)
+        - [Save picture](#save-picture)
 - [Advanced](#advanced)
     - [Logging](#logging)
-    - [Abort](#abort)
-    - [URL Scheme Trigger](#url-scheme-trigger)
+    - [Localization](#localization)
 
 <!-- /MarkdownTOC -->
 
@@ -56,7 +68,7 @@ ld: warning: ignoring file LSUniversalSDK.framework/LSUniversalSDK, missing requ
 
 In order to fix that, you must compile for a device target. Either build for `Generic iOS Device` or connect a device and compile for it.
 
-This means the USDK can't run on a `simulator`.
+This also means the USDK can't run on a `simulator`.
 
 ## Usage
 
@@ -102,7 +114,7 @@ The delegate is notified through those 3 methods:
 For example, your delegate can be declared as such:
 
 ```objc
-@interface YouDelegateType: NSObject <LSUniversalDelegate>
+@interface YourDelegateType: NSObject <LSUniversalDelegate>
 
 @end
 
@@ -139,9 +151,12 @@ Please note that the callbacks may not be on the main thread.
 
 ### Consent UI
 
-Before call start and if the usecase is configured to display a consent request, the SDK will trigger `displayConsentWithDescription:` on its delegate.
+Depending on your usecase or tenant configuration, consent may be requested from the Users : 
 
-This method's parameters contains all information about the consent view that should be displayed and a block to trigger with a boolean.
+* Before call start and if the usecase is configured to display a consent request, the SDK will trigger `displayConsentWithDescription:` on its delegate.
+* Upon logging in, an agent may have to validate a consent. The `displayConsentWithDescription:` delegate method is triggered at that point.
+
+This method's parameters contains all information about the consent view that should be displayed and a block to trigger with a boolean. No difference is made for simple users and agent users.
 
 For example, it could be implemented as such:
 
@@ -181,9 +196,18 @@ For example, it could be implemented as such:
 ```
 
 
+### Start a Call
+
+The USDK will start a call automatically when the `startWithString:` method is called with a valid string returned by the backend (i.e. a string containing `/call/` in its path).
+
+Please see the [Callflow section](#callflows) below for an overview of the callbacks triggered.
+
 ### Call UI
 
-A ViewController is available at `mySDKPointer.callViewController`. This VC is the controller of the call UI. An exemple to display it would be something like:
+
+A ViewController is available at `mySDKPointer.callViewController` after the connectionEvent: callback is triggered with `lsConnectionStatus_callActive` as parameter.
+
+This VC is the controller of the call UI. An exemple to display it would be something like:
 
 ```objc
 - (void)connectionEvent:(lsConnectionStatus_t)status
@@ -259,12 +283,15 @@ ACD informations are sent through two optional delegation methods.
 - (void)acdAcceptedEvent:(NSString *)agentUID;
 ```
 
-`update` contains informations pertaining to the ACD current status. If the `update.status` of the request is `ongoing`, the update will inform you about the position in the queue or an ETA. Otherwise, the request is cancelled or invalid and the `update.status` informs you of the reason (service closed, agent unavailable, etc.)
+`acdStatusUpdate:` is called with information pertaining to the ACD current status. If the `update.status` of the request is `ongoing`, the update will inform you about the position in the queue or an ETA. Otherwise, the request is cancelled or otherwise invalid and the `update.status` informs you of the reason (service closed, agent unavailable, etc.)
+
+`acdAcceptedEvent:` is called when an agent accepts the call.
 
 Note that `acdAcceptedEvent:` **may not** be called before the SDK `status` moves to `callActive`.
 
 ### Survey
-If you have configured a survey for the call end, your LSUniversalDelegate will be notified on call end through the `callSurvey:` method. This optional method is called with a `LSSurveyInfo` object. 
+
+If you have configured a survey on call end, your `LSUniversalDelegate` will be notified through the `callSurvey:` method. This optional method is called with a `LSSurveyInfo` object. 
 
 This parameter will tell you if you need to display a popup (if `infos.displayPopup` is equal to YES) and the text in this popup (`infos.popupLabel` and `infos.popupButton`), and give you the URL to the survey (`infos.url`).
 
@@ -287,21 +314,26 @@ The standard callflow is as such:
 <!--
 
 https://www.websequencediagrams.com/
-title Connection callflow
+title Call Connection callflow
 participant BROWSER
 participant APP
 participant SDK
 
-BROWSER->APP: URL scheme trigger
-    APP->SDK: Universal.start(scheme)
+BROWSER->APP: URL received through Deeplinking
+    APP->SDK: Universal.startWithString:URL
     SDK->SDK: parse
 
 alt Invalid URL scheme
-    SDK->APP: UniversalConfigurationErrorEvent
+    SDK->APP: connectionError:
 else Valid URL scheme
     SDK->APP: connectionEvent: lsConnectionStatus_connecting
     SDK->SDK: connect
     SDK->APP: connectionEvent: lsConnectionStatus_active
+    opt ACD Call
+        SDK->APP: acdProgressEvent:
+        SDK->APP: acdStatusUpdate:
+        SDK->APP: acdAcceptedEvent:
+    end
     SDK->APP: connectionEvent:lsConnectionStatus_calling
     SDK->SDK: call
     SDK->APP: connectionEvent:lsConnectionStatus_callActive
@@ -311,47 +343,72 @@ else Valid URL scheme
     end note
     SDK->SDK: hangup
     SDK->APP: callReport:
+    opt Call survey
+        SDK->APP: callSurvey:
+    end
     SDK->APP: connectionEvent:lsConnectionStatus_disconnecting
     SDK->SDK: disconnect
     SDK->APP: connectionEvent:lsConnectionStatus_idle
 end
+
+
+
 !-->
 
 ### Agent
 
-This functionality uses Apple's Push Notifications.
+The agent is handled by the UniversalSDK `agentHandler` property.
+
+As our backend uses notifications (UserNotifications) to start agent-to-guest calls, you must register an APN key/secret to generate Authentication Tokens in the Administration portal.
+
+#### Onboarding
+
+A registered agent can ask for a new registration link to be sent using `sendRegistrationCodeTo:usingMedia:andExecute:`.  
+
+This will send a registration link via SMS or Email.
+
 
 #### Registration
-To start the registration, call:
 
+To start the registration, call either one of the `registerWith...:andReference:onSignIn:` methods.
 
+e.g. : 
 ```objc
-[yourSDKPointer.agentHandler registerWithPin:<#the registration pin code#> 
-                                    andToken:<#the registration token#>
-                                    onSignIn:^(BOOL success, NSInteger statusCode, RegistrationError_t status){
-  if (success) {
+[yourSDKPointer.agentHandler registerWithCode:<#The registration code#> 
+                                    andReference:<#The reference to be used when sending notification#>
+                                    onSignIn:^(LSMARegistrationStatus_t statusCode, RegistrationError_t status){
+  if (statusCode == LSMARegistrationStatus_registered) {
     NSLog(@"Registration successful!");
   }
 }];
 
 ```
 
-Both `pinCode` and `token` are received from our backend.
+The register code is provided in the email or SMS sent upon creating the agent or resending a registration link.  
 
-Additionaly, you must set an Apple Push Notification token. 
+The reference is used by our back-end to send the notifications to the correct App, and must be the same as the one set in the Administration portal.
+
+The device/App notification token must be set in the agent before attempting registration (see https://developer.apple.com/documentation/usernotifications/registering_your_app_with_apns)
 
 ```objc
 [yourSDKPointer.agentHandler setNotificationToken:<#yourAPNSToken#>];
 ```
 
-As long as it is not set, registration will not be taking place. You can set it before calling the registration method. If you called the registration method before setting the notification token, the process will be suspended until such time a notification token is set.
-
-This Push Notification token is used to identify your iDevice when push notifications are sent. This token is linked to your agent's account. You can only set one APN token per account.
+Agents can test if their device is correctly registered by using the agentHandler's `sendTestNotification:` method. An Apple notification will be received by the App some time after.
 
 
-The `onSignIn:` block is fired whether the registration was successful or not. 
+#### Notifications
 
-Upon registration, `yourSDKPointer.agentHandler.available` is YES, and you should have access to a list of usecase.
+Apple Notifications are used to notify an agent of a few things:
+- A guest is ready to be called;
+- A test notification was sent (using `sendTestNotification:` or the Administration portal);
+- The agent's registration was revoked (e.g. the agent's account was registered on another device or the Revoke button was pressed in the Administration portal.)
+
+To check if the notification is supported by the Universal SDK, call `LSUniversal canHandleNotification:` with the userInfo NSDictionary provided by `application:didReceiveRemoteNotification:...`.
+If the method returns `YES`, call `LSUniversal handleNotification:` with the same NSDictionary.
+
+
+#### Unregister
 
 You can unregister the Universal SDK using :
 ```
@@ -361,33 +418,46 @@ You can unregister the Universal SDK using :
 This method will clear all information from the Universal SDK.
 
 
-#### List of Usecases
 
-Once registered, the Universal SDK generates a list of usecases that you will use to invite guests and other agents. Those usecases are configured in the Administration Portal.
+#### Identity
+
+The Agent can access some identity (such as its display name, login, date of registration) through the `agentHandler.identity` property.
+
+
+#### Usecases
+
+Once registered, the Universal SDK generates a list of usecases that you can use to invite guests or call other agents. Those usecases are configured in the Administration Portal.
 
 This list is stored at:
 
 ```objc
-[yourSDKPointer.agentHandler usecases];
+[yourSDKPointer.agentHandler.identity usecases];
 ```
 
-The list is automatically fetched upon startup if agent credentials are available. It is also fetched upon registration success.
+There are two type of usecases: 
+* Pincode usecases allows an agent to send invitations to users
+* ACD usecases allows an agent to call another agent
 
-That list can become stale, and can be refreshed using:
+
+The list is refreshed when the call to `fetchIdentity:` triggers its parameter block :
+
 
 ```objc
-[yourSDKPointer.agentHandler fetchUsecases:^((BOOL success, NSArray<NSObject<LSMAUsecase> *> *usecaselist) {
+[yourSDKPointer.agentHandler fetchIdentity:^((BOOL success) {
   if (success) {
     NSLog(@"Usecase list refreshed!");
   }
 }];
 ```
 
-The usecase list should at maximum contain only one instance of each LSMAUsecase protocol-compliant class: 
-`LSMAACDUsecase`, `LSMAAgentUsecase`, `LSMAGuestUsecase`.
 
+#### Inviting a Guest
 
-#### Invite Guests
+##### Usecases
+
+The agent is provided usecases (configured in the Administration portal) to generate pincodes.
+
+Usecases offer a range of information (such as supported media and default media) to be used for UI composition.
 
 ##### Sending invitation
 
@@ -396,176 +466,46 @@ To send an invitation to a Guest (aka a non-registered user), call:
 ```objc
 [yourSDKPointer.agentHandler sendNotificationForUsecase:<#LSMAGuestUsecase#> 
                                                 toEmail:<#Guest Email#> 
-                                         andDisplayName:<#Guest displayname#> 
+                                         withReference:<#Usecase reference#> 
                                               andNotify:<#A block to execute#>];
 
 [yourSDKPointer.agentHandler sendNotificationForUsecase:<#LSMAGuestUsecase#> 
                                                 toPhone:<#Guest phone number#> 
-                                         andDisplayName:<#Guest displayname#> 
+                                         withReference:<#Usecase reference#> 
                                               andNotify:<#A block to execute#>];
 ```
 
-These methods will send an email (or a SMS) to the guest. Once the notification is sent, the notification block will be executed.
+These methods will send an email or a SMS. Once the request is sent, the `andNotify:` block will be executed.
 
 
 A third alternative is to use the 
 ```objc
 [yourSDKPointer.agentHandler createInvitationForUsecase:<#LSMAGuestUsecase#> 
-                                            usingSuffix:<#A unspecified String#>
+                                            withReference:<#Usecase reference#>
                                               andNotify:<#A block to execute#>];
 ```
 
-This method will return the URL that would have been sent by calling either `sendNotificationForUsecase:toPhone:AndNotify:` or `sendNotificationForUsecase:toEmail:AndNotify:`.
+This method will return the URL that would have been sent by calling either `sendNotificationForUsecase:to...:` method.
 
-An invitation created that way must be cancelled when no longer needed using
+Only one pincode is valid at a time. Requesting a new pincode without cancelling the previous one leads to undefined behaviour. You can cancel a pincode before sending another one by using `cancelPincodeAndExecute:`.
 
-```objc
-[yourSDKPointer.agentHandler cancelInvitationOfSuffix:<#The suffix used to create the invite#>];
-```
+An invitation can be resent only one time by using `resendPincodeAndExecute:`.
 
-Invitations sent by using `sendNotificationForUsecase:toEmail:AndNotify:` or `sendNotificationForUsecase:toPhone:AndNotify:` are automatically cancelled on call end.
-
-
-##### Answering invitation
-
-On iOS, the Agent that sent the invitation receives a Push Notification after the Guest starts the Universal SDK with the received URL.
-
-You should check if the Universal SDK can handle the method before providing the method to the SDK (in case your App uses Push Notification for something else):
-
-Check that this notification can be handled by the Universal SDK before
-```objc
-//In your code, a class conforms to the PushKit protocol and receive a notification
-- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type
-{
-  if ([youSDKPointer canHandleNotification:payload.dictionaryPayload]) {
-    [youSDKPointer handleNotification:payload.dictionaryPayload];
-  }
-}
-```
-
-
-#### Invite Agents
-
-
-##### Sending invitation
-
-Inviting another Agent is done by calling
-
-```objc
-[yourSDKPointer.agentHandler sendNotificationForUsecase:<#LSMAAgentUsecase#> 
-                                                toAgent:<#Agent UID#> 
-                                              andNotify:<#A block to execute#>];
-```
-
-##### Answering invitation
-
-On iOS, the called Agent receives a Push Notification by using the dedicated PushKit delegate method.
-
-In that method, you should check if the Universal SDK can handle the method before providing the method to the SDK (in case your App uses Push Notification for something else):
-
-```objc
-//In your code, a class conforms to the PushKit protocol and receive a notification
-- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type
-{
-    //yourSDKPointer is your reference to the LSUniversal instance.
-    if ([yourSDKPointer canHandleNotification:payload.dictionaryPayload]) {
-      [yourSDKPointer handleNotification:payload.dictionaryPayload];
-    } else {
-      NSLog(@"This is not a LSUniversalSDK notification.");
-    }
-}
-```
 
 #### Activity
 
-The Agent keeps a log of the Activity. Activities are invitations being sent (or URL being created), call started and image uploaded. This log can be found in the `activityHandler` property of your LSUniversal object.
+A list of the last 5 invitations is kept in memory. 
+
+It is available in the `agentHandler.invitationHistory`.
 
 
-#### Register a delegate
+#### Save picture
 
-You can assign a delegate to this object to receive notifications when an invite is added to the pool
+Depending on the usecase configuration, picture saved by the agent will either be saved locally or remotely (i.e. sent to the back end at the end of the call).  
 
-```objc
-    //yourSDKPointer is your reference to the LSUniversal instance.
-    //somewhere in your code, you register an `id<LSALContextDelegate>` variable to the activityHandler
-    if (yourSDKPointer.activityHandler) {
-      [yourSDKPointer.activityHandler setDelegate:yourActivityDelegate];
-    } else {
-      NSLog(@"No activity handler on this variable: %@", yourSDKPointer);
-    }
-```
+Locally saved pictures will be available in the device's Photos App.  
 
-This delegate is notified when the `entries` array is modified through firing of the `entriesUpdate` method.
-
-
-### Save picture
-
-While connected as agent, a `Save picture` button exists in the Remote bar. This button triggers an image capture of the current main visual in the App.
-
-Where the pictures are saved depends on the usecase's `Agent Controls` `Save picture configuration` section.
-
-The `Media` section can take one of the two values: `cloud` and `local`. They will respectively upload them to SightCall's back-end after the call ends, or save the pictures locally.
-
-In both case, the `LSPictureProtocol` delegate is used to update the App.
-
-#### Register a delegate
-
-Set the value of `pictureDelegate` in your LSUniversal variable to be notified either of a picture being saved (only in `local`) or of the picture's upload (only in `cloud`): 
-
-```objc
-    //in your App code
-    //yourSDKPointer is your reference to the LSUniversal instance.
-    //yourPictureDelegate is an `id <LSPictureProtocol>` type variable retained in your code App.
-    [yourSDKPointer setPictureDelegate: yourPictureDelegate];
-```
-
-
-
-#### `local` mode
-
-The picture can either be stored in the App storage or in the Library.
-
-###### App storage
-
-The Local mode allows the App to be notified when a picture is taken by the agent. This notification takes the form of a callback in the `LSPictureProtocol` delegate.
-
-```objc
-//In yourPictureDelegate's code
-- (void)savedPicture:(UIImage *)image andMetadata:(LSPictureMetadata *)metadata
-{
-    NSLog(@"A picture has been taken: %@", image);
-}
-
-```
-
-
-The `metadata` variable contains data about the picture, such as GPS location (if requested before), the timestamp of the picture in the call, the origin of the picture (if any), etc.
-
-###### Library storage
-
-To have the picture saved to the device's Library, set the `agentHandler`'s `saveLocally` to `YES`. The image will be stored in a collection named after the `agentHandler`'s `albumName` after the `savedPicture:andMetadata:` callback is called (see above.)
-
-```objc
-    //somewhere in you App code, before the call ends.
-    //yourSDKPointer is your reference to the LSUniversal instance.
-    [yourSDKPointer.agentHandler setSaveLocally:YES];
-    [yourSDKPointer.agentHandler setAlbumName:@"Your Album Name"];
-
-```
-
-
-#### `cloud` mode
-
-The cloud mode has the picture uploaded after the call ends. The App is notified of the picture being uploaded, as well as a thumbnail and index of that picture.
-
-```objc
-//In yourPictureDelegate's code
-- (void)uploadingPicture:(NSInteger)pictureID of:(NSInteger)maxID andThumbnail:(UIImage *)image
-{
-    NSLog(@"Uploading picture %d of %d", (int)pictureID, (int)maxID);
-}
-```
-
+Remotely saved pictures are sent accordingly to the configuration.  
 
 ## Advanced
 
@@ -577,7 +517,7 @@ The following presents a way to receive and print logs on the debugger console.
 
 Be aware that: 
 * uncontrolled use of `NSLog();` may lead to performance degradation;
-* `NSLog();` send logs to the device console (Xcode -> Window -> Devices and Simulator).
+* `NSLog();` send logs to the device console (available in Xcode -> Window -> Devices and Simulator and Console.App).
 
 
 ```objc
@@ -614,16 +554,13 @@ Be aware that:
 
 ```
 
+### Localization
 
+The USDK supports 9 languages: Bulgarian (`bg`), German (`de`), English (`en`, that's also the base language), Spanish (`es`), French (`fr`), Italian (`it`), Japanese (`ja`) and Portugese (`pt`).
 
+Those localized element are only UI elements displayed during a call. In order for the SDK to display those entry, the App must be localized in those languages.
 
+To change those strings (i.e. change the base language) or support a new language, your app should override their key/value pair in its `Localizable.strings` file.
 
-### Abort
+A list of the overridable elements can be found in the base Localizable.strings file found in this folder.
 
-To abort an ongoing connection attempt, call `[mySDKPointer abort]`.
-
-`connectionError:` and a `connectionEvent:` callbacks will then be called.
-
-### URL Scheme Trigger
-
-To start your application using an URL scheme, declare the scheme in the Xcode project of your app. See [Apple Documentation](https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/Inter-AppCommunication/Inter-AppCommunication.html#//apple_ref/doc/uid/TP40007072-CH6-SW10)
