@@ -2,6 +2,7 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [2.0.0](#200)
 - [1.4.11](#1411)
 - [1.4.10](#1410)
 - [1.4.9](#149)
@@ -23,6 +24,16 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
+
+## 2.0.0
+>  
+> __rtcc 6.9.5__
+
+### Changed
+- New agent
+- Upgraded support for localization
+
+
 ## 1.4.11
 > 2018/11/22  
 > __rtcc 6.9.4__

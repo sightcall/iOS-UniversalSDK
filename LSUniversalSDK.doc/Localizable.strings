@@ -1,0 +1,80 @@
+/* 
+  Localizable.strings
+  LSUniversalSDK
+
+  Created by Charles Thierry on 10/12/15.
+  Copyright © 2015 SightCall. All rights reserved.
+*/
+
+"universal_disconnectedError_button" = "Cancel";
+"universal_disconnectedError_message" = "%ds before closing.";
+"universal_disconnectedError_title" = "Reconnecting ...";
+"universal_gpspermission_accept" = "Accept";
+"universal_gpspermission_decline" = "Decline";
+"universal_gpspermission_message" = "Share your location (GPS) with your current contact during 1 minute?";
+"universal_gpsunavailable_message_iOS8" = "The App is not allowed to get your location.\nPlease go to Settings → Privacy → Location Services to allow it.";
+"universal_gpsunavailable_message_iOS9" = "The App is not allowed to get your location.\nPlease go to Settings to allow it.";
+"universal_gpsunavailable_ok" = "OK";
+"universal_gpsunavailable_title" = "Location Unavailable";
+"universal_pickerAlert_cancel" = "Cancel";
+"universal_pickerAlert_sharePhoto" = "Select a Picture";
+"universal_pickerAlert_shareVideo" = "Select a Video";
+"universal_pickerAlert_take" = "Take a Picture";
+"universal_pickerAlert_title" = "Share:";
+"universal_switch_accept" = "Accept";
+"universal_switch_deny" = "Deny";
+"universal_switch_front" = "Switch to front camera?";
+"universal_switch_rear" = "Switch to rear camera?";
+"universal_video_both_disabled" = "Both video streams are disabled";
+"gps_first_start" = "Start GPS";
+"gps_ongoing_start" = "Request updates";
+
+
+/* USDK Call view controller texts*/
+
+/* Class = "UIButton"; normalTitle = "Tap to send the log file"; ObjectID = "2wL-te-SFo"; */
+"2wL-te-SFo.normalTitle" = "Tap to send the log file";
+
+/* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "9xP-r9-U8n"; */
+"9xP-r9-U8n.normalTitle" = "Confirm";
+
+/* Class = "UIButton"; normalTitle = "Decline"; ObjectID = "EsW-NX-n3y"; */
+"EsW-NX-n3y.normalTitle" = "Decline";
+
+/* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "Gds-wd-z1r"; */
+"Gds-wd-z1r.normalTitle" = "Accept";
+
+/* Class = "UILabel"; text = "Proposition Title"; ObjectID = "Sna-sG-dsU"; */
+"Sna-sG-dsU.text" = "Proposition Title";
+
+/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "lmZ-Y7-lUT"; */
+"lmZ-Y7-lUT.normalTitle" = "Clear";
+
+/* Class = "UIButton"; normalTitle = "Decline"; ObjectID = "wHV-Qf-hGf"; */
+"wHV-Qf-hGf.normalTitle" = "Decline";
+
+/* Class = "UILabel"; text = "Sign below"; ObjectID = "wKa-tx-OyF"; */
+"wKa-tx-OyF.text" = "Sign below";
+
+/* Class = "UILabel"; text = "Accuracy"; ObjectID = "Hif-Kh-W5F"; */
+"Hif-Kh-W5F.text" = "Accuracy";
+
+/* Class = "UIButton"; normalTitle = "Coordinates"; ObjectID = "JfO-ag-Ldk"; */
+"JfO-ag-Ldk.normalTitle" = "Coordinates";
+
+/* Class = "UILabel"; text = "Timestamp"; ObjectID = "VGK-05-BqJ"; */
+"VGK-05-BqJ.text" = "Timestamp";
+
+/* USDK Chat view controller */
+
+/* Class = "UILabel"; text = "Messages"; ObjectID = "LYW-kW-Zc3"; */
+"LYW-kW-Zc3.text" = "Messages";
+
+/* Class = "UITextField"; placeholder = "Enter your message here"; ObjectID = "W6x-jm-xWg"; */
+"W6x-jm-xWg.placeholder" = "Enter your message here";
+
+/* Class = "UIButton"; normalTitle = "✓"; ObjectID = "XOQ-LI-Y79"; */
+"XOQ-LI-Y79.normalTitle" = "OK";
+
+/* Class = "UIButton"; normalTitle = "❌"; ObjectID = "dcJ-kY-8jL"; */
+"dcJ-kY-8jL.normalTitle" = "❌";
