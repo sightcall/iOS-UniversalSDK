@@ -2,6 +2,7 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [2.0.2](#202)
 - [2.0.0](#200)
 - [1.4.11](#1411)
 - [1.4.10](#1410)
@@ -25,8 +26,15 @@
 
 <!-- /MarkdownTOC -->
 
+## 2.0.2
+>  2019/03/05  
+> __rtcc 6.9.5__
+
+### Fixed
+- Agent registration fails with an Internal Server error
+
 ## 2.0.0
->  
+>  2019/03/03    
 > __rtcc 6.9.5__
 
 ### Changed
