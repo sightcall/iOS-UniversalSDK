@@ -2,6 +2,7 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [2.0.3](#203)
 - [2.0.2](#202)
 - [2.0.0](#200)
 - [1.4.11](#1411)
@@ -25,6 +26,14 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
+
+## 2.0.3
+>  2019/03/05  
+> __rtcc 6.9.6__
+
+### Changed
+- Enable bitcode for the Universal SDK
+
 
 ## 2.0.2
 >  2019/03/05  

@@ -27,7 +27,8 @@
 "universal_switch_rear" = "Switch to rear camera?";
 "universal_video_both_disabled" = "Both video streams are disabled";
 "gps_first_start" = "Start GPS";
-"gps_ongoing_start" = "Request updates";
+"gps_ongoing" = "Updating";
+"gps_subsequent_start" = "Request updates";
 
 
 /* USDK Call view controller texts*/
