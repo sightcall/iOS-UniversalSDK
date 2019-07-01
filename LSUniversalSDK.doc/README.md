@@ -1,4 +1,4 @@
-#iOS SDK
+# iOS SDK
 
 <!-- MarkdownTOC levels="2,3,4" autolink="true" -->
 
@@ -247,13 +247,15 @@ On call end, simply dismiss the ViewController.
 
 #### Customization
 
-The call controls buttons appearances can be customized through the `LSCustomizationDelegate`. This delegate is entirely optional. Each method allows you to customize the related button.
+The call controls buttons appearances can be customized through the `localBarCustomizationDelegate` and `remoteBarCustomizationDelegate` properties. Those `LSUniversal` properties let you customize either the Local Bar or the Remote Bar by using the `LSLocalCustomizationDelegate` or `LSRemoteCustomizationDelegate` protocol. 
+
+Each methods of these protocols is optional, allowing for the customization of each buttons individually.
 
 Let's say you want to customize the hangup button:
 
 ```objc
 //declare the customization object
-@interface MyCustomizationDelegate: NSObject <LSCustomizationDelegate>
+@interface MyCustomizationDelegate: NSObject <LSLocalCustomizationDelegate>
 @end
 
 @implementation MyCustomizationDelegate
@@ -261,10 +263,10 @@ Let's say you want to customize the hangup button:
 
 //somewhere in your code, after the initialization of mySDKPointer
 id <LSCustomizationDelegate>myCustomizationDelegate = [[MyCustomizationDelegate alloc] init];
-mySDKPointer.customizationDelegate = myCustomizationDelegate;
+mySDKPointer.localBarCustomizationDelegate = myCustomizationDelegate;
 ```
 
-At this point, the SDK will try to inform you every time a button is resized that you can customize it. You will only receive this message if you implement the related button callback.
+At this point, the SDK will inform you every time a button is resized that you can customize it. You will only receive this message if you implement the related button callback.
 
 To customize the hangup button, implement the `customizeHangup:` method in myCustomizationDelegate
 

@@ -2,6 +2,13 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [2.1.0](#210)
+- [2.0.8](#208)
+- [2.0.7](#207)
+- [2.0.6](#206)
+- [2.0.5](#205)
+- [2.0.4](#204)
+- [2.0.3](#203)
 - [2.0.2](#202)
 - [2.0.0](#200)
 - [1.4.11](#1411)
@@ -25,6 +32,84 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
+## 2.1.0
+> 2019/07/01
+> __rtcc 6.10.0__
+
+### Added:
+- Hangup popup 
+- AR
+- Screencast (iOS 11+)
+
+### Fixed
+- MGA-543 Add support for arbitrary URL base for API calls
+- MGA-652 Keep torch during snapshot
+- MGA-461 Reference not appearing in survey 
+- MGA-656 Crash on "Take Picture"
+
+
+
+## 2.0.8
+> Unreleased  
+> __rtcc 6.9.9__
+
+### Fixed
+- Customization callback not covering all buttons
+
+
+## 2.0.7
+> Unreleased  
+> __rtcc 6.9.9__  
+
+### Changed
+- Video player UI
+
+
+## 2.0.6
+> Unreleased  
+> __rtcc 6.9.9__
+
+### Added 
+- Greek (el) localization
+
+### Fixed
+- Status message could not be sent on call start
+
+
+### Changed
+- Tapping hangup will show a confirmation popup
+- Global localization update
+- Podfile update 
+
+
+## 2.0.5
+> Unreleased  
+> __rtcc 6.9.8__
+
+### Added
+- Turkish (tr) localization
+
+### Fixed
+- Fixes invitation as attendee support
+
+
+## 2.0.4
+> Unreleased  
+> __rtcc 6.9.8__
+
+### Changed
+- Registration starts when notificationToken is set and is delayed until then
+
+### Fixed
+- Video profile is not respected on call start
+- Video pause state not kept after a background/foreground cycle
+
+## 2.0.3
+>  Unreleased   
+> __rtcc 6.9.6__
+
+### Changed
+- Enable bitcode for the Universal SDK
 
 ## 2.0.2
 >  2019/03/05  

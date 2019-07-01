@@ -47,7 +47,20 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  This delegate is called upon when the call menu is resized.
  */
-@property(nonatomic, weak) NSObject<LSCustomizationDelegate> *customizationDelegate;
+@property(nonatomic, weak) NSObject<LSCustomizationDelegate> *customizationDelegate __attribute__((deprecated("Please use the localBarCustomizationDelegate.")));
+
+/**
+ * The customization delegate for the local bar.
+ * The local bar controls the call from the user's end.
+ */
+@property(nonatomic, weak) NSObject<LSLocalCustomizationDelegate> *localBarCustomizationDelegate;
+
+/**
+ * The customization delegate for the remote bar.
+ * The remote bar is only available when the user is an agent.
+ */
+@property(nonatomic, weak) NSObject<LSRemoteCustomizationDelegate> *remoteBarCustomizationDelegate;
+
 
 /**
  *  The current connection status. When the connection goes from connecting to active, the call is created.

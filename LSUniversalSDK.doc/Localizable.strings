@@ -6,29 +6,80 @@
   Copyright © 2015 SightCall. All rights reserved.
 */
 
+/* Used to cancel the reconnection */
 "universal_disconnectedError_button" = "Cancel";
-"universal_disconnectedError_message" = "%ds before closing.";
-"universal_disconnectedError_title" = "Reconnecting ...";
-"universal_gpspermission_accept" = "Accept";
-"universal_gpspermission_decline" = "Decline";
-"universal_gpspermission_message" = "Share your location (GPS) with your current contact during 1 minute?";
-"universal_gpsunavailable_message_iOS8" = "The App is not allowed to get your location.\nPlease go to Settings → Privacy → Location Services to allow it.";
-"universal_gpsunavailable_message_iOS9" = "The App is not allowed to get your location.\nPlease go to Settings to allow it.";
-"universal_gpsunavailable_ok" = "OK";
-"universal_gpsunavailable_title" = "Location Unavailable";
-"universal_pickerAlert_cancel" = "Cancel";
-"universal_pickerAlert_sharePhoto" = "Select a Picture";
-"universal_pickerAlert_shareVideo" = "Select a Video";
-"universal_pickerAlert_take" = "Take a Picture";
-"universal_pickerAlert_title" = "Share:";
-"universal_switch_accept" = "Accept";
-"universal_switch_deny" = "Deny";
-"universal_switch_front" = "Switch to front camera?";
-"universal_switch_rear" = "Switch to rear camera?";
-"universal_video_both_disabled" = "Both video streams are disabled";
-"gps_first_start" = "Start GPS";
-"gps_ongoing_start" = "Request updates";
 
+/* Describes the time left before deconnection following network loss */
+"universal_disconnectedError_message" = "%ds before closing.";
+
+/* Title of the network lost popup */
+"universal_disconnectedError_title" = "Reconnecting…";
+
+/* Title of the button to accept GPS use */
+"universal_gpspermission_accept" = "Accept";
+
+/* Title of the button to decline GPS use */
+"universal_gpspermission_decline" = "Decline";
+
+/* Title of the popup for the GPS use */
+"universal_gpspermission_message" = "Share your location (GPS) with your current contact during 1 minute?";
+
+/* Message of the popup to inform the user how to enable GPS on iOS 8- devices */
+"universal_gpsunavailable_message_iOS8" = "The App is not allowed to get your location.\nPlease go to Settings → Privacy → Location Services to allow it.";
+
+/* Message of the popup to inform the user how to enable GPS on iOS 9 and newer devices */
+"universal_gpsunavailable_message_iOS9" = "The App is not allowed to get your location.\nPlease go to Settings to allow it.";
+
+/* Title of the button to close the GPS unavailable popup */
+"universal_gpsunavailable_ok" = "OK";
+
+/* Title of the GPS unavailable popup */
+"universal_gpsunavailable_title" = "Location Unavailable";
+
+/* Title of the cancel share source selection button in the Start share popup */
+"universal_pickerAlert_cancel" = "Cancel";
+
+/* Title of the share a picture from the gallery button in the Start share popup */
+"universal_pickerAlert_sharePhoto" = "Select a Picture";
+
+/* Title of the share a video from the gallery button in the Start share popup */
+"universal_pickerAlert_shareVideo" = "Select a Video";
+
+/* Title of the take a picture button in the Start share popup */
+"universal_pickerAlert_take" = "Take a Picture";
+
+/* Title of the Start share popup */
+"universal_pickerAlert_title" = "Share:";
+
+/* Title of accept camera source change in the switch camera popup */
+"universal_switch_accept" = "Accept";
+
+/* Title of deny camera source change in the switch camera popup */
+"universal_switch_deny" = "Deny";
+
+/* Title of switch camera to use the front one popup */
+"universal_switch_front" = "Switch to front camera?";
+
+/* Title of switch camera to use the back one popup */
+"universal_switch_rear" = "Switch to rear camera?";
+
+/* Title of the Start GPS button in the agent's GPS popover */
+"gps_first_start" = "Start GPS";
+
+/* Title of the Start GPS button in the agent's GPS popover after the GPS was already activated */
+"gps_subsequent_start" = "Request updates";
+
+/* Title of the End Session popup */
+"universal_hangup_title" = "Terminate the session?";
+
+/* Message of the End Session popup */
+"universal_hangup_message" = "Click again to terminate";
+
+/* Title of the Don't end the call button in End Session popup */
+"universal_hangup_cancel" = "No";
+
+/* Title of the End the call button in End Session popup */
+"universal_hangup_hangup" = "Yes";
 
 /* USDK Call view controller texts*/
 
