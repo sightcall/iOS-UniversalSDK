@@ -2,6 +2,7 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [2.1.2](#212)
 - [2.1.1](#211)
 - [2.1.0](#210)
 - [2.0.8](#208)
@@ -33,6 +34,15 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
+
+## 2.1.2
+> 2019/07/15  
+> __rtcc 6.10.1__
+
+### Fixed
+- MGA-688 Localization for disconnecting popup
+- Update documentation
+
 ## 2.1.1
 > 2019/07/01  
 > __rtcc 6.10.0__
@@ -42,7 +52,7 @@
 
 
 ## 2.1.0
-> 2019/07/01
+> 2019/07/01  
 > __rtcc 6.10.0__
 
 ### Added:

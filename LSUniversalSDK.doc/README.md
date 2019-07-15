@@ -5,8 +5,8 @@
 - [Installation](#installation)
     - [Dependencies](#dependencies)
     - [Swift support](#swift-support)
-    - [Common link errors](#common-link-errors)
-        - [Bitcode](#bitcode)
+    - [Permissions](#permissions)
+    - [Common errors](#common-errors)
         - [Architecture](#architecture)
 - [Usage](#usage)
     - [Instantiation](#instantiation)
@@ -18,6 +18,7 @@
         - [Customization](#customization)
     - [ACD information](#acd-information)
     - [Survey](#survey)
+    - [ScreenCasting](#screencasting)
     - [Callflows](#callflows)
     - [Agent](#agent)
         - [Onboarding](#onboarding)
@@ -59,17 +60,35 @@ import LSUniversal;
 
 in your code to use the Framework in your Swift codebase.
 
+### Permissions
 
-### Common link errors
+The Framework requires some permission to be used:
 
-#### Bitcode
+- NSLocationWhenInUseUsageDescription
+- NSCameraUsageDescription
+- NSMicrophoneUsageDescription
+- NSPhotoLibraryUsageDescription
 
-The Framework is not compiled with bitcode. That means you may see an error like:
-```
-ld: 'LSUniversalSDK.framework/LSUniversalSDK' does not contain bitcode. You must rebuild it with bitcode enabled (Xcode setting ENABLE_BITCODE), obtain an updated library from the vendor, or disable bitcode for this target.
-```
+Those permissions must be set in the App's Info.plist.
 
-In order to fix that, you must disable Bitcode generation in your app. See your project Build Settings (in the `Build Options`, the `Enable Bitcode` should be `No`).
+##### NSLocationWhenInUseUsageDescription
+
+This permission is used in response to an Agent's request.  The Framework will display a pop-up to ask the user if they accept to share their location, in addition to the System's "regular" pop-up.
+
+##### NSCameraUsageDescription
+
+This permission is required for the video capture to start.  If never asked, the system pop-up will appear on call start.
+
+##### NSMicrophoneUsageDescription
+
+This permission is required for the audio capture to start.  If never asked, the system pop-up will appear on call start.
+
+##### NSPhotoLibraryUsageDescription
+
+This permission is required to share images from the gallery.
+
+
+### Common errors
 
 
 #### Architecture
@@ -322,6 +341,11 @@ This parameter will tell you if you need to display a popup (if `infos.displayPo
     }
 }
 ```
+
+
+### ScreenCasting
+
+For documentation about the integration of the Screen Casting, see the `LSUniversalBroadcastSDK.doc` folder in [https://github.com/sightcall/iOS-UniversalBroadcastSDK/](https://github.com/sightcall/iOS-UniversalBroadcastSDK/)
 
 ### Callflows
 The standard callflow is as such:
