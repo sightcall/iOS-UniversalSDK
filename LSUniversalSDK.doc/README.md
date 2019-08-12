@@ -5,6 +5,7 @@
 - [Installation](#installation)
     - [Dependencies](#dependencies)
     - [Swift support](#swift-support)
+    - [Bitcode](#bitcode)
     - [Permissions](#permissions)
     - [Common errors](#common-errors)
         - [Architecture](#architecture)
@@ -58,6 +59,10 @@ import LSUniversal;
 ```
 
 in your code to use the Framework in your Swift codebase.
+
+### Bitcode
+
+The Framework is compiled with bitcode support.
 
 ### Permissions
 
