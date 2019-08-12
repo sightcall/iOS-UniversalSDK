@@ -5,7 +5,6 @@
 - [Installation](#installation)
     - [Dependencies](#dependencies)
     - [Swift support](#swift-support)
-    - [Bitcode](#bitcode)
     - [Permissions](#permissions)
     - [Common errors](#common-errors)
         - [Architecture](#architecture)
@@ -19,6 +18,7 @@
         - [Customization](#customization)
     - [ACD information](#acd-information)
     - [Survey](#survey)
+    - [ScreenCasting](#screencasting)
     - [Callflows](#callflows)
     - [Agent](#agent)
         - [Onboarding](#onboarding)
@@ -59,10 +59,6 @@ import LSUniversal;
 ```
 
 in your code to use the Framework in your Swift codebase.
-
-### Bitcode
-
-The Framework is compiled with bitcode support.
 
 ### Permissions
 
@@ -345,6 +341,11 @@ This parameter will tell you if you need to display a popup (if `infos.displayPo
     }
 }
 ```
+
+
+### ScreenCasting
+
+For documentation about the integration of the Screen Casting, see the `LSUniversalBroadcastSDK.doc` folder in [https://github.com/sightcall/iOS-UniversalBroadcastSDK/](https://github.com/sightcall/iOS-UniversalBroadcastSDK/)
 
 ### Callflows
 The standard callflow is as such:
