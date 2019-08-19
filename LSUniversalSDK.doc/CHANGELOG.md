@@ -2,7 +2,9 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [2.1.5](#215)
 - [2.1.4](#214)
+- [2.1.3](#213)
 - [2.1.2](#212)
 - [2.1.1](#211)
 - [2.1.0](#210)
@@ -35,13 +37,28 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
-## 2.1.4
-> 2019/08/12  
+## 2.1.5
+> __2019/08/19__  
 > __rtcc 6.10.2__  
 
-### Fixed 
+### Fixed
+- Crash in the video player
+
+## 2.1.4
+> __2019/08/12__  
+> __rtcc 6.10.2__  
+
+### Fixed
 - MGA-702 Crash on armv7 hardware
 
+
+## 2.1.3
+> Unreleased  
+> __rtcc 6.10.1__
+
+### Fixed 
+- MGA-692 Video stops on share stop
+- MGA-694 ACD External reference and value switched
 
 ## 2.1.2
 > 2019/07/15  

@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  You can call abort during connection or during a call. It will either directly disconnect the LSUniversalSDK or hangup the call, which will in turn disconnect the LSUniversalSDK. On your end, calls can be ended either trough this abort method or the hangup button in the call view UI. You are notified of call ends by the [LSUniversalDelegate callReport:].
  
- Upon init, the self.mobile2mobile instance is initialized and attemps to sign in if agent credentials are available.
+ Upon init, the agent Handler instance is initialized and attemps to sign in if agent credentials are available.
  
  */
 @interface LSUniversal : NSObject
@@ -79,7 +79,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, weak, nullable) NSObject <LSPictureProtocol> *pictureDelegate;
 
+@end
 
+@interface LSUniversal (Start)
 /**
  *  Connects the LSUniversalSDK to SightCall's cloud. The dictionary is a <String *: String *> dictionary, with the key being URL Scheme parameters and the values their value.
  *
@@ -107,6 +109,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)abort;
 
+@end
+
+@interface LSUniversal (Notifications)
+
 /**
  *  Checks if a PushKit notification received by the application can be dealt with by the SDK
  *  @param notification The notification's payload dictionary.
@@ -124,7 +130,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)handleNotification:(NSDictionary *)notification;
 
 @end
-
 
 NS_ASSUME_NONNULL_END
 
