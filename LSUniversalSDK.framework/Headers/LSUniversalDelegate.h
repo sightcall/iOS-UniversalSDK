@@ -25,21 +25,21 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param status The new connection state.
  */
-- (void)connectionEvent:(lsConnectionStatus_t)status;
+- (void)connectionEvent:(LSConnectionStatus_t)status;
 
 /**
  *  An error occured. The SDK is most likely now disconnecting.
  *
  *  @param error The error that occured.
  */
-- (void)connectionError:(lsConnectionError_t)error;
+- (void)connectionError:(LSConnectionError_t)error;
 
 /**
  *  The call ended. You should probably dismiss the Call ViewController here.
  *
  *  @param callEnd The reason the call ended.
  */
-- (void)callReport:(lsCallReport_s)callEnd;
+- (void)callReport:(LSCallReport_s)callEnd;
 
 @optional
 
@@ -96,6 +96,12 @@ NS_ASSUME_NONNULL_BEGIN
  * The registered agent received a push notification.
  */
 - (void)testNotificationReceivedTitle:(nullable NSString *)title andBody:(nullable NSString *)body;
+
+@end
+
+@protocol LSAgentDelegate <NSObject>
+
+- (void)agentStatusUpdate:(LSMAModelStatus_t)status;
 
 @end
 

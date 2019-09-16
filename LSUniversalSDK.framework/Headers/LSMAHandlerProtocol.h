@@ -31,16 +31,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) BOOL hasCredentials;
 
 /**
- 
+ * The APNS notification token to set before registering.
+ * @sa UIApplication registerForRemoteNotifications
  */
 @property (nonatomic, nullable) NSString *notificationToken;
 
 /**
- 
+ * The notification reference that is set in the APNs JWT token info.
  */
 @property (nonatomic, nullable) NSString *notificationReference;
-
-
 
 /**
  * Call this method to test if the notification is correctly stored in the backend.

@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, weak, nullable) id<LSUniversalDelegate> delegate;
 
+@property(nonatomic, weak, nullable) id<LSAgentDelegate> agentDelegate;
+
 /**
  *  If the delegate conforms to LSUniversalLogDelegate, this property is set automatically
  */
@@ -65,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  The current connection status. When the connection goes from connecting to active, the call is created.
  */
-@property(nonatomic, readonly) lsConnectionStatus_t status;
+@property(nonatomic, readonly) LSConnectionStatus_t status;
 
 /**
  *  This object is responsible for sending the notifications to a remote contact (e.g. in the Agent-to-Guest case). It needs the Apple Notification token to work (see APNS).

@@ -2,6 +2,7 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [2.1.6](#216)
 - [2.1.5](#215)
 - [2.1.4](#214)
 - [2.1.3](#213)
@@ -37,6 +38,22 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
+
+## 2.1.6
+> Unreleased  
+> __rtcc 6.10.2__  
+
+### Change
+- The screencasting local button only appears if the feature is supported by the embedding App
+- Use WKWebView instead of depreciated UIWebKitView
+- Rename various unprefixed internal classes
+
+### Fix
+- Broadcast Menu not appearing on iOS 13 
+- MGA-718 Fix zoom level not being reset on webconsole on camera stop
+- MGA-640 Fix Video player frame rotation
+- LSN-4405 Don't send chat transcript if said not to
+
 ## 2.1.5
 > 2019/08/19  
 > __rtcc 6.10.2__  

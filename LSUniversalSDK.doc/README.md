@@ -2,8 +2,9 @@
 
 <!-- MarkdownTOC levels="2,3,4" autolink="true" -->
 
+- [Dependencies](#dependencies)
 - [Installation](#installation)
-    - [Dependencies](#dependencies)
+    - [Xcode Integration](#xcode-integration)
     - [Swift support](#swift-support)
     - [Bitcode](#bitcode)
     - [Permissions](#permissions)
@@ -36,9 +37,26 @@
 
 <!-- /MarkdownTOC -->
 
+## Dependencies
+
+This Framework ships with its own dependencies:
+
+|        Name         | Version | 
+| :-----------------  | :-----  |
+| ARChromeActivity    |  1.0.0  |
+| ARSafariActivity    |  0.0.1  |
+| NJKWebViewProgress  |  0.2.3  |
+| AFNetworking        |  3.2.1  |
+| MMWormhole          |  2.0.0  |
+| libPhoneNumber      |  0.9.13 |
+| FormatterKit        |  1.9.0  |
+| JBWebViewController |  1.0.8  |
+
+
+
 ## Installation
 
-### Dependencies
+### Xcode Integration
 
 To add this Framework to your project, clone it from Github using a tag:
 
@@ -47,6 +65,8 @@ $ git clone https://github.com/sightcall/iOS-UniversalSDK.git -t <YOUR TAG>
 ```
 
 Then add `LSUniversalSDK.framework` in your Xcode project (Drag and drop the Framework in your Project Navigator or See [Apple Documentation](https://help.apple.com/xcode/mac/8.0/#/dev51a648b07)).
+
+
 
 ### Swift support
 
@@ -399,7 +419,9 @@ end
 
 The agent is handled by the Universal SDK `agentHandler` property.
 
-As our backend uses notifications (UserNotifications) to start agent-to-guest calls, you must register an APN key/secret to generate Authentication Tokens in the Administration portal.
+As our backend uses notifications (UserNotifications) to start agent-to-guest calls, you must register an APN key/secret to generate Authentication Tokens in the Administration portal.  
+
+Status updates of the agent (not registered, registering, registered, unregistering) are provided returned to the agentDelegate property of the `LSUniversal` variable, through the `LSAgentDelegate` protocol.
 
 #### Onboarding
 
