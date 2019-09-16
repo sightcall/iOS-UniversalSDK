@@ -419,9 +419,7 @@ end
 
 The agent is handled by the Universal SDK `agentHandler` property.
 
-As our backend uses notifications (UserNotifications) to start agent-to-guest calls, you must register an APN key/secret to generate Authentication Tokens in the Administration portal.  
-
-Status updates of the agent (not registered, registering, registered, unregistering) are provided returned to the agentDelegate property of the `LSUniversal` variable, through the `LSAgentDelegate` protocol.
+As our backend uses notifications (UserNotifications) to start agent-to-guest calls, you must register an APN key/secret to generate Authentication Tokens in the Administration portal.
 
 #### Onboarding
 

@@ -40,7 +40,7 @@
 <!-- /MarkdownTOC -->
 
 ## 2.1.6
-> Unreleased  
+> 2019/09/16  
 > __rtcc 6.10.2__  
 
 ### Change

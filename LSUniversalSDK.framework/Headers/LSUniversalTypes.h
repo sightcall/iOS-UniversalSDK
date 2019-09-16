@@ -38,76 +38,85 @@ extern NSString *const kParametersMPID;
 extern NSString *const kParametersMPHash;
 extern NSString *const kParametersTimeout;
 
-typedef NS_ENUM(NSInteger, LSConnectionStatus_t) {
-    LSConnectionStatus_idle,
+
+typedef NS_ENUM(NSInteger, lsConnectionStatus_t) {
+    lsConnectionStatus_idle,
     /**
-     * The LSUniversalSDK is fetching all informations needed before connecting
+     *  The LSUniversalSDK is connected as agent.
      */
-    LSConnectionStatus_fetching,
+    lsConnectionStatus_agentConnected,
+    /**
+     *  The LSUniversalSDK is registering an agent.
+     */
+    lsConnectionStatus_agentRegistering,
+    /**
+     *  The LSUniversalSDK is unregistering as agent.
+     */
+    lsConnectionStatus_agentUnregistering,
     /**
      *  The LSUniversalSDK is connecting.
      */
-    LSConnectionStatus_connecting,
+    lsConnectionStatus_connecting,
     /**
      *  The LSUniversalSDK is connected. Depending on the authentication process, a call is being created.
      */
-    LSConnectionStatus_active,
+    lsConnectionStatus_active,
     /**
      *  A call was started.
      */
-    LSConnectionStatus_calling,
+    lsConnectionStatus_calling,
     /**
      *  A call is active.
      */
-    LSConnectionStatus_callActive,
+    lsConnectionStatus_callActive,
     /**
      *  The LSUniversalSDK is disconnecting.
      */
-    LSConnectionStatus_disconnecting,
+    lsConnectionStatus_disconnecting,
     /*
      *  The connection was lost.
      */
-    LSConnectionStatus_networkLoss
+    lsConnectionStatus_networkLoss
 };
 
 /**
  *  When a connection error occurs, you are notified of it through connectionError:
  */
-typedef NS_ENUM(NSInteger, LSConnectionError_t) {
+typedef NS_ENUM(NSInteger, lsConnectionError_t) {
 	/**
 	 * The error was a network one
 	 */
-	LSConnectionError_networkError,
+	lsConnectionError_networkError,
 	/**
 	 *  The credentials given in the dictionary (or string) were incorrect.
 	 */
-	LSConnectionError_badCredentials,
+	lsConnectionError_badCredentials,
 	/**
 	 *  An unknown error occured.
 	 */
-	LSConnectionError_unknown
+	lsConnectionError_unknown
 } ;
 
 /**
  *  The call ended, the LSUniversalSDK is disconnecting.
  */
-typedef NS_ENUM(NSInteger, LSCallEnd_t) {
+typedef NS_ENUM(NSInteger, lsCallEnd_t) {
     /**
 	 *  The call ended prematuraly
 	 */
-	LSCallEnd_unexpected,
+	lsCallEnd_unexpected,
 	/**
 	 *  The call was ended by the remote client
 	 */
-	LSCallEnd_remote,
+	lsCallEnd_remote,
 	/**
 	 *  the call was ended on your end.
 	 */
-	LSCallEnd_local,
+	lsCallEnd_local,
     /**
      *
      */
-    LSCallEnd_eulaRefused
+    lsCallEnd_eulaRefused
 } ;
 
 /**
@@ -117,12 +126,12 @@ typedef struct {
     /**
      * Reason the call ended
      */
-	LSCallEnd_t callEnd;
+	lsCallEnd_t callEnd;
     /**
      * Duration of the call
      */
 	NSTimeInterval callLength;
-} LSCallReport_s;
+} lsCallReport_s;
 
 
 /**
@@ -146,23 +155,23 @@ typedef struct {
 typedef NS_ENUM(NSInteger, LSACDStatus_t) {
 	/**
 	 */
-	LSACDStatus_invalid = -1,
+	acdStatus_invalid = -1,
 	/**
 	 * Waiting for an agent to pick up.
 	 */
-	LSACDStatus_ongoing,
+	acdStatus_ongoing,
 	/**
 	 * The service is closed.
 	 */
-	LSACDStatus_serviceClosed,
+	acdStatus_serviceClosed,
 	/**
 	 * The service is unavailable.
 	 */
-	LSACDStatus_serviceUnavailable,
+	acdStatus_serviceUnavailable,
 	/**
 	 * There is no agent available.
 	 */
-	LSACDStatus_agentUnavailable
+	acdStatus_agentUnavailable
 } ;
 
 
