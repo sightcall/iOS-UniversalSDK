@@ -43,14 +43,10 @@ This Framework ships with its own dependencies:
 
 |        Name         | Version | 
 | :-----------------  | :-----  |
-| ARChromeActivity    |  1.0.0  |
-| ARSafariActivity    |  0.0.1  |
-| NJKWebViewProgress  |  0.2.3  |
 | AFNetworking        |  3.2.1  |
 | MMWormhole          |  2.0.0  |
 | libPhoneNumber      |  0.9.13 |
 | FormatterKit        |  1.9.0  |
-| JBWebViewController |  1.0.8  |
 
 
 
