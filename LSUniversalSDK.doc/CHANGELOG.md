@@ -2,6 +2,7 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [2.1.7](#217)
 - [2.1.6](#216)
 - [2.1.5](#215)
 - [2.1.4](#214)
@@ -38,6 +39,15 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
+
+## 2.1.7
+> 2019/11/12  
+> __rtcc 6.10.2__
+
+### Fix
+- MGA-737 Warnings on non-main thread UI Activity
+- LSN-4614 Fix fuzzy green video issue
+
 
 ## 2.1.6
 > 2019/09/16  

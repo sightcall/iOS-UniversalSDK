@@ -68,7 +68,7 @@ Then add `LSUniversalSDK.framework` in your Xcode project (Drag and drop the Fra
 
 The Framework can be used with a Swift code base. 
 
-Simply add the Framwork in your project as declared in [Dependencies](#dependencies) and add :
+Simply add the Framework in your project as declared in [Dependencies](#dependencies) and add :
 
 ```swift
 import LSUniversal;
@@ -113,7 +113,7 @@ This permission is required to share images from the gallery.
 
 #### Architecture
 
-The Framework is not compiled for `x86`/`x86_64` architectures. That means you may see errors like:
+The Framework does not ship with `x86`/`x86_64` architectures. That means you may see errors like:
 
 ```
 ld: warning: ignoring file LSUniversalSDK.framework/LSUniversalSDK, missing required architecture i386 in file LSUniversalSDK.framework/LSUniversalSDK (2 slices)
@@ -135,8 +135,9 @@ For example, let's say your application received a URL through your UIApplicatio
 ```objc
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    //yourSDKPointer is a pointer to the LSUniversal instance, that was instantiated somewhere
-    //to start the connection, you would simply call:
+    // yourSDKPointer is a pointer to the LSUniversal instance, that was instantiated somewhere
+    // e.g. in the application:willFinishLaunchingWithOptions:
+    // To start the connection, you would simply call:
     [yourSDKPointer startWithString: [url absoluteString]];
 }
 ```
@@ -147,7 +148,7 @@ For example, let's say your application received a URL through your UIApplicatio
 
 The SDK offers a delegate with three callbacks. Those callbacks informs the application that the connection status changed, that a call ended and that an error occured.
 
-To register a delegate, simply set the LSUniversal variable [mySDKPointer delegate] after intializing it:
+To register a delegate, simply set the LSUniversal property `mySDKPointer.delegate` after intializing it:
 
 ```objc
 id<LSUniversalDelegate> yourDelegatePointer = [[YourDelegateType alloc] init];
@@ -176,12 +177,8 @@ For example, your delegate can be declared as such:
 - (void)connectionEvent:(lsConnectionStatus_t)status
 {
     switch (status) {
-        case lsConnectionStatus_idle: break;
-        case lsConnectionStatus_connecting: break;
-        case lsConnectionStatus_active: break;
-        case lsConnectionStatus_calling: break;
-        case lsConnectionStatus_callActive: break;
-        case lsConnectionStatus_disconnecting: break;
+        default:
+            break;
     }
 }
 
@@ -258,7 +255,7 @@ Please see the [Callflow section](#callflows) below for an overview of the callb
 ### Call UI
 
 
-A ViewController is available at `mySDKPointer.callViewController` after the connectionEvent: callback is triggered with `lsConnectionStatus_callActive` as parameter.
+A ViewController is available at `mySDKPointer.callViewController` after the `connectionEvent:` callback is triggered with `lsConnectionStatus_callActive` as parameter.
 
 This VC is the controller of the call UI. An exemple to display it would be something like:
 
@@ -266,17 +263,14 @@ This VC is the controller of the call UI. An exemple to display it would be some
 - (void)connectionEvent:(lsConnectionStatus_t)status
 {
     switch (status) {
-        case lsConnectionStatus_idle: break;
-        case lsConnectionStatus_connecting: break;
-        case lsConnectionStatus_active: break;
-        case lsConnectionStatus_calling: break;
         case lsConnectionStatus_callActive: 
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [yourPresentationController presentViewController:mySDKPointer.callViewController animated:YES completion:nil];
             });
         }   break;
-        case lsConnectionStatus_disconnecting: break;
+        default: 
+            break;
     }
 }
 
@@ -286,7 +280,7 @@ On call end, simply dismiss the ViewController.
 
 #### Customization
 
-The call controls buttons appearances can be customized through the `localBarCustomizationDelegate` and `remoteBarCustomizationDelegate` properties. Those `LSUniversal` properties let you customize either the Local Bar or the Remote Bar by using the `LSLocalCustomizationDelegate` or `LSRemoteCustomizationDelegate` protocol. 
+The call controls buttons appearances can be customized through the `localBarCustomizationDelegate` and `remoteBarCustomizationDelegate` properties. Those `LSUniversal` properties let you customize either the Local Bar or the Remote Bar by using the `LSLocalCustomizationDelegate` or `LSRemoteCustomizationDelegate` protocols. 
 
 Each methods of these protocols is optional, allowing for the customization of each buttons individually.
 
@@ -307,7 +301,7 @@ mySDKPointer.localBarCustomizationDelegate = myCustomizationDelegate;
 
 At this point, the SDK will inform you every time a button is resized that you can customize it. You will only receive this message if you implement the related button callback.
 
-To customize the hangup button, implement the `customizeHangup:` method in myCustomizationDelegate
+For example, to customize the hangup button, one would implement the `customizeHangup:` method of myCustomizationDelegate
 
 ```objc
 //Somewhere in MyCustomizationDelegate.m
@@ -323,15 +317,13 @@ To customize the hangup button, implement the `customizeHangup:` method in myCus
 
 Each button has an image for state. See the USDK documentation to see the meaning of each button state.
 
-When the call control menu appears on screen, the hangup button will appear customized.
 
-
-**Note:** the callbacks will only be called if the related buttons should appear.
+**Note:** the callbacks will only be called if the related buttons appear.
 
 
 ### ACD information
 
-ACD informations are sent through two optional delegation methods.
+ACD information are provided through two optional delegation methods of the `LSUniversalDelegate`.
 
 
 ```
@@ -339,15 +331,15 @@ ACD informations are sent through two optional delegation methods.
 - (void)acdAcceptedEvent:(NSString *)agentUID;
 ```
 
-`acdStatusUpdate:` is called with information pertaining to the ACD current status. If the `update.status` of the request is `ongoing`, the update will inform you about the position in the queue or an ETA. Otherwise, the request is cancelled or otherwise invalid and the `update.status` informs you of the reason (service closed, agent unavailable, etc.)
+`acdStatusUpdate:` is called with information pertaining to the ACD current status. If the `update.status` of the request is `ongoing`, the update will inform you about the position in the queue or an ETA. Otherwise, the request is cancelled or invalid and the `update.status` informs you of the reason (service closed, agent unavailable, etc.)  
 
-`acdAcceptedEvent:` is called when an agent accepts the call.
+`acdAcceptedEvent:` is called when an agent accepts the call.  
 
 Note that `acdAcceptedEvent:` **may not** be called before the SDK `status` moves to `callActive`.
 
 ### Survey
 
-If you have configured a survey on call end, your `LSUniversalDelegate` will be notified through the `callSurvey:` method. This optional method is called with a `LSSurveyInfo` object. 
+If you have configured a survey on call end, your `LSUniversalDelegate` will be notified through the `callSurvey:` method. This optional method is called with an object responding to `LSSurveyInfo`.
 
 This parameter will tell you if you need to display a popup (if `infos.displayPopup` is equal to YES) and the text in this popup (`infos.popupLabel` and `infos.popupButton`), and give you the URL to the survey (`infos.url`).
 
