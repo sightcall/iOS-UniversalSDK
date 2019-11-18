@@ -2,6 +2,7 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [2.2.0](#220)
 - [2.1.7](#217)
 - [2.1.6](#216)
 - [2.1.5](#215)
@@ -39,6 +40,18 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
+
+## 2.2.0
+> 2019/11/18
+> __rtcc 6.10.3__
+
+### Change
+- Add live QR Bar Code scanner
+- Upload UHD pictures in Background task
+
+### Fix
+- Disable camera when guest take a picture
+- Fix Crash on iPad when guest touch share media button
 
 ## 2.1.7
 > 2019/11/12  
