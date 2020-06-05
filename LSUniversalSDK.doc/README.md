@@ -467,9 +467,9 @@ Agents can test if their device is correctly registered by using the agentHandle
 
 This notification is handled by the SDK's `canHandleNotification:`/`handleNotification:` methods (as explained [below](#notifications).) 
 
-The test notification will trigger the SDK delegate's `testNotificationReceivedTitle:andBody:` method, allowing to display a local notification as the App sees fit.
+The test notification will trigger the SDK delegate's `testNotificationReceivedTitle:andBody:` method, allowing to display a local notification as the App sees fit.  
 
-
+Agent credentials are kept within the App. Upon instantiation, a valid agent triggers the `connectionEvent:` callback with a `lsConnectionStatus_agentConnected` parameter. 
 
 
 #### Notifications

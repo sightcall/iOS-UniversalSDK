@@ -129,3 +129,7 @@
 
 /* Class = "UIButton"; normalTitle = "❌"; ObjectID = "dcJ-kY-8jL"; */
 "dcJ-kY-8jL.normalTitle" = "❌";
+
+"consent_agree_button_title" = "Agree";
+"consent_terms_button_title" = "Read Terms of Use And Privacy Policy";
+"consent_disagree_button_title" = "Disagree";
