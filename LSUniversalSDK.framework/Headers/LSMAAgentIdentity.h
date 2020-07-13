@@ -5,6 +5,10 @@
 
 #import <Foundation/Foundation.h>
 #import "LSMAUsecase.h"
+#import "OfflineIncludedIdentity.h"
+#import "LiveARCodeModel.h"
+#import "LiveOCR.h"
+#import "OCRIntegrationModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -60,6 +64,25 @@ NS_ASSUME_NONNULL_BEGIN
  * Can agent.startACDCallWithAdditionalReference: be used ?
  */
 @property (nonatomic, readonly) BOOL canCallACD;
+
+/**
+ live OCR teacher use case number
+ */
+@property (nonatomic, readonly) int liveOCRTeacher;
+
+@property (nonatomic, readonly) NSArray<NSDictionary *> *offlineMedia;
+
+@property (nonatomic, readonly) NSArray<NSDictionary *> *arOverlayMedia;
+
+@property (nonatomic, readonly) NSArray<NSDictionary *> *ocrList;
+
+@property (nonatomic) NSMutableArray<OfflineIncludedIdentity *> *offlineMediaModels;
+
+@property (nonatomic) NSMutableArray<LiveARCodeModel *> *liveARModels;
+
+@property (nonatomic) NSMutableArray<LiveOCR *> *liveOCRModels;
+
+@property (nonatomic) NSMutableArray<OCRIntegrationModel *> *integrations;
 
 @end
 

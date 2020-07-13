@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   LSUniversalSDK
 
@@ -130,6 +130,41 @@
 /* Class = "UIButton"; normalTitle = "❌"; ObjectID = "dcJ-kY-8jL"; */
 "dcJ-kY-8jL.normalTitle" = "❌";
 
+"offline_media_select_usecase_title" = "Select a usecase";
+"offline_media_gallery_button_title" = "gallery";
+"offline_media_submit_button_title" = "submit";
+"offline_media_uploading_files" = "Upload %d/%d";
+
+"live_ocr_select_usecase_title" = "Select an OCR model";
+"ocr_teacher_new_model_title" = "New OCR model";
+"ocr_teacher_edit_field_title" = "Edit field";
+
+"offline_media_upload_complete_title" = "%d Files upload completed";
+"offline_media_upload_complete_usecase" = "Usescase: %@";
+"offline_media_upload_complete_reference" = "Reference: %@";
+"offline_media_upload_complete_object_id" = "ObjectId: %@";
+"offline_media_upload_complete_number_of_file" = "Number of files: %d";
+"offline_media_upload_complete_time" = "Upload en time: %@";
+"offline_media_upload_complete_duration" = "Upload duration: %@";
+
+
+/* Class = "UILabel"; text = "Select a picture from your gallery to create a model.\nThe picture must be straight and cropped precisely."; ObjectID = "IIv-Gx-IBt"; */
+"IIv-Gx-IBt.text" = "Select a picture from your gallery to create a model.\n\nThe picture must be straight and cropped precisely.";
+
+/* Class = "UIButton"; normalTitle = "GALLERY"; ObjectID = "P4w-yz-0Va"; */
+"P4w-yz-0Va.normalTitle" = "GALLERY";
+
+/* Class = "UIButton"; normalTitle = "VALIDATE"; ObjectID = "f3I-AP-Y0N"; */
+"f3I-AP-Y0N.normalTitle" = "VALIDATE";
+
+"live_ocr_next_button_title" = "next";
+"live_ocr_retry_button_title" = "retry";
+"live_ocr_create_button_title" = "create";
+"live_ocr_update_button_title" = "update";
+"live_ocr_error_status_label" = "An error has occured";
+"live_ocr_create_new_asset_label" = "Not found in %@.\nDo you want to create it?";
+"live_ocr_update_asset_label" = "Was found in %@.\nDo you want to update it?";
 "consent_agree_button_title" = "Agree";
 "consent_terms_button_title" = "Read Terms of Use And Privacy Policy";
 "consent_disagree_button_title" = "Disagree";
+"offline_media_is_mandatory" = "is Mandatory";

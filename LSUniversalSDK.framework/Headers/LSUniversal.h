@@ -4,6 +4,8 @@
 //
 
 #import <LSUniversalSDK/LSUniversalSDK.h>
+#import "OfflineIncludedIdentity.h"
+#import "LiveOCR.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -109,6 +111,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)abort;
 
+-(void) uploadUHDInBackground;
+
 @end
 
 @interface LSUniversal (Notifications)
@@ -128,6 +132,33 @@ NS_ASSUME_NONNULL_BEGIN
  *  @sa canHandleNotification:
  */
 - (void)handleNotification:(NSDictionary *)notification;
+
+@end
+
+
+@interface LSUniversal (OCR)
+
+/**
+ */
+- (UIViewController*)getLiveOCRVC;
+
+
+/**
+ */
+- (UIViewController*)getOCRTeacherVC;
+
+
+/**
+ */
+- (UIViewController *)getOfflineUseCaseVC;
+
+/**
+ */
+- (UIViewController *)getARLiveCodeVC;
+
+- (UIViewController *) getSingleUploadOfflineVC:(OfflineIncludedIdentity *) offlineMedia;
+
+-(void) goToLiveOCR:(LiveOCR *) liveOCRModel completion:(void(^)(UIViewController *viewController))block;
 
 @end
 

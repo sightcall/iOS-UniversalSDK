@@ -32,3 +32,7 @@ FOUNDATION_EXPORT const unsigned char LSUniversalSDKVersionString[];
 #import <LSUniversalSDK/LSQoSManager.h>
 #import <LSUniversalSDK/LSUniversal.h>
 
+#import <LSUniversalSDK/UILabel+TitleView.h>
+#import <LSUniversalSDK/LSMaterialTextField.h>
+#import <LSUniversalSDK/LSActivityIndicator.h>
+
