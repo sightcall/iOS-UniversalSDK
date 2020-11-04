@@ -482,6 +482,59 @@ Apple Notifications are used to notify an agent of a few things:
 To check if the notification is supported by the Universal SDK, call `LSUniversal canHandleNotification:` with the userInfo NSDictionary provided by `application:didReceiveRemoteNotification:...`.
 If the method returns `YES`, call `LSUniversal handleNotification:` with the same NSDictionary.
 
+e.g.
+
+```objc
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    if (yourSDKPointer.agentHandler != nil &&
+        yourSDKPointer.agentHandler.identity == nil) {
+        [yourSDKPointer.agentHandler fetchIdentity:^(BOOL success) {
+            if (!success) {
+                return;
+            }
+            // call notification
+            [self handleNotification:userInfo fetchCompletionHandler:completionHandler];
+        }];
+    } else {
+        [self handleNotification:userInfo fetchCompletionHandler:completionHandler];
+    }
+}
+
+-(void) handleNotification:(NSDictionary *) userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    NSString *notif = [NSString stringWithFormat:@"%@", userInfo ];
+    if ([yourSDKPointer.universal canHandleNotification:userInfo])
+    {
+        
+        [yourSDKPointer.universal handleNotification:userInfo];
+    }
+    if (completionHandler)
+    {
+        completionHandler(UIBackgroundFetchResultNoData);
+    }
+}
+
+```
+And when user doesn't click in push notification incoming call, we need to handle the notification when application did become active :
+
+```objc
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    if (@available(iOS 10.0, *))
+    {
+        UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+        [center getDeliveredNotificationsWithCompletionHandler:^(NSArray<UNNotification *> * notifications) {
+            for (UNNotification* notification in notifications) {
+                if ([notification.request.content.categoryIdentifier isEqualToString:@"INCOMING_CALL"]) {
+                    [self handleNotification:notification.request.content.userInfo fetchCompletionHandler:nil];
+                }
+            }
+            [center removeAllDeliveredNotifications];
+        }];
+    }
+}
+
+```
+
 
 #### Unregister
 
