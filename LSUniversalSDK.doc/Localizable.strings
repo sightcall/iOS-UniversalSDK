@@ -39,6 +39,9 @@
 /* Title of the cancel share source selection button in the Start share popup */
 "universal_pickerAlert_cancel" = "Cancel";
 
+/* Title of the done share source selection button in the gallery popup */
+"universal_pickerAlert_done" = "Done";
+
 /* Title of the share a picture from the gallery button in the Start share popup */
 "universal_pickerAlert_sharePhoto" = "Select a Picture";
 
@@ -164,7 +167,9 @@
 "live_ocr_error_status_label" = "An error has occured";
 "live_ocr_create_new_asset_label" = "Not found in %@.\nDo you want to create it?";
 "live_ocr_update_asset_label" = "Was found in %@.\nDo you want to update it?";
-"consent_agree_button_title" = "Agree";
-"consent_terms_button_title" = "Read Terms of Use And Privacy Policy";
-"consent_disagree_button_title" = "Disagree";
+"consent_agree_button_title" = "Accept";
+"consent_terms_button_title" = "Read Terms of Use";
+"consent_disagree_button_title" = "Decline";
 "offline_media_is_mandatory" = "is Mandatory";
+"alert_start_camera_message" = "Activate the camera?";
+"alert_start_micro_message" = "Activate the microphone?";

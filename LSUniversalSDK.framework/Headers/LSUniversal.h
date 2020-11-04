@@ -158,6 +158,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIViewController *) getSingleUploadOfflineVC:(OfflineIncludedIdentity *) offlineMedia;
 
+- (UIViewController *) getSingleUploadOfflineVC:(OfflineIncludedIdentity *) offlineMedia withReference:(nullable NSString*)reference objectId:(nullable NSString*)objectId;
+
 -(void) goToLiveOCR:(LiveOCR *) liveOCRModel completion:(void(^)(UIViewController *viewController))block;
 
 @end

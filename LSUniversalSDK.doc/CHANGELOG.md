@@ -2,6 +2,8 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [2.3.1](#231)
+- [2.3.0](#230)
 - [2.2.0](#220)
 - [2.1.7](#217)
 - [2.1.6](#216)
@@ -40,6 +42,33 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
+
+## 2.3.1
+> 2020/07/13
+> __mucl 5a1a3791__
+
+### Change
+- Add Offline media upload
+- Add OCR teacher
+- Add Live OCR
+
+### Fix
+- MultiPart Call participants flush view
+- Screen cast issue
+- Hide take screenshot button when pause video is enabled
+- Save picture issue
+- Chat View design
+
+## 2.3.0
+> 2020/06/05
+> __mucl 6a17a032__
+
+### Fix
+- Screen cast issue
+- Agent push notification
+- MGA-827 Notes on Picture feature is not localized
+- MGA-830 Recording SightCall sessions using Mobile Agent App is not working
+- MGA-835 Redirect to agent survey
 
 ## 2.2.0
 > 2019/11/18

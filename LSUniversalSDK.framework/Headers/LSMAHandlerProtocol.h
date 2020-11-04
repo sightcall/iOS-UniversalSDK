@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nullable) NSString *notificationReference;
 
 
-@property (nonatomic, strong) void(^backgroundTransferCompletionHandler)();
+@property (nonatomic, strong) void(^backgroundTransferCompletionHandler)(void);
 
 
 /**

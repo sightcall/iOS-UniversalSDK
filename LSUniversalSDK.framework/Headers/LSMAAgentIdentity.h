@@ -78,9 +78,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) NSMutableArray<OfflineIncludedIdentity *> *offlineMediaModels;
 
+/**
+ * Get a specific offline media model using its ID
+ */
+- (OfflineIncludedIdentity *_Nullable)offlineModelForID:(NSString*)modelId;
+
 @property (nonatomic) NSMutableArray<LiveARCodeModel *> *liveARModels;
 
 @property (nonatomic) NSMutableArray<LiveOCR *> *liveOCRModels;
+
+/**
+ * Get a specific offline media model using its ID
+ */
+- (LiveOCR *_Nullable)liveOCRModelForID:(NSString*)modelId;
 
 @property (nonatomic) NSMutableArray<OCRIntegrationModel *> *integrations;
 
