@@ -4,8 +4,8 @@
 //
 
 #import <LSUniversalSDK/LSUniversalSDK.h>
-#import "OfflineIncludedIdentity.h"
-#import "LiveOCR.h"
+#import <LSUniversalSDK/OfflineIncludedIdentity.h>
+#import <LSUniversalSDK/LiveOCR.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

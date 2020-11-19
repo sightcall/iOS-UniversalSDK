@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MaterialTextFields.h"
+#import <LSUniversalSDK/MaterialTextFields.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

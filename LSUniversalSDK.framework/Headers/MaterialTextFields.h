@@ -12,19 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "MDCIntrinsicHeightTextView.h"
-#import "MDCMultilineTextField.h"
-#import "MDCMultilineTextInputDelegate.h"
-#import "MDCTextField.h"
-#import "MDCTextFieldPositioningDelegate.h"
-#import "MDCTextInput.h"
-#import "MDCTextInputCharacterCounter.h"
-#import "MDCTextInputController.h"
-#import "MDCTextInputControllerFilled.h"
-#import "MDCTextInputControllerFullWidth.h"
-#import "MDCTextInputControllerLegacyDefault.h"
-#import "MDCTextInputControllerLegacyFullWidth.h"
-#import "MDCTextInputControllerOutlined.h"
-#import "MDCTextInputControllerOutlinedTextArea.h"
-#import "MDCTextInputControllerUnderline.h"
-#import "MDCTextInputUnderlineView.h"
+#import <LSUniversalSDK/MDCIntrinsicHeightTextView.h>
+#import <LSUniversalSDK/MDCMultilineTextField.h>
+#import <LSUniversalSDK/MDCMultilineTextInputDelegate.h>
+#import <LSUniversalSDK/MDCTextField.h>
+#import <LSUniversalSDK/MDCTextFieldPositioningDelegate.h>
+#import <LSUniversalSDK/MDCTextInput.h>
+#import <LSUniversalSDK/MDCTextInputCharacterCounter.h>
+#import <LSUniversalSDK/MDCTextInputController.h>
+#import <LSUniversalSDK/MDCTextInputControllerFilled.h>
+#import <LSUniversalSDK/MDCTextInputControllerFullWidth.h>
+#import <LSUniversalSDK/MDCTextInputControllerLegacyDefault.h>
+#import <LSUniversalSDK/MDCTextInputControllerLegacyFullWidth.h>
+#import <LSUniversalSDK/MDCTextInputControllerOutlined.h>
+#import <LSUniversalSDK/MDCTextInputControllerOutlinedTextArea.h>
+#import <LSUniversalSDK/MDCTextInputControllerUnderline.h>
+#import <LSUniversalSDK/MDCTextInputUnderlineView.h>

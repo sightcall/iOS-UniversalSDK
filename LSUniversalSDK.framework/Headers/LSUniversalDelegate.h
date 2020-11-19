@@ -7,6 +7,7 @@
 #import <LSUniversalSDK/LSUniversalSDK.h>
 #import <LSUniversalSDK/LSConsentDescription.h>
 #import <LSUniversalSDK/LSNotification.h>
+#import <LSUniversalSDK/LSDisplayNameDescription.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -65,6 +66,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)callSurvey:(id<LSSurveyInfos>)infos;
 
+/**
+ *  Should this method be called, it will be at the end of a call. It contains all informations needed to open the agent poll popup defined in the administration portal.
+ *
+ *  @param pollInfos The informations needed to show the agent poll popup
+ */
+- (void)callAgentPoll:(UIAlertController *)agentPollAlert;
+
 //MARK: Mobile to Mobile
 
 /**
@@ -112,6 +120,12 @@ NS_ASSUME_NONNULL_BEGIN
  * The registration did fail with the given status
  */
 - (void)registrationFailureWithStatus:(LSMARegistrationStatus_t)status;
+
+/**
+ * show Display Name alert
+ */
+
+- (void)showDisplayNameAlert:(nullable UIAlertController *)alertController;
 
 @end
 

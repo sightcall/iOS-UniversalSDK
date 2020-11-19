@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RegionOfInterest.h"
+#import <LSUniversalSDK/RegionOfInterest.h>
 
 @interface OCRGroupModel : NSObject
 

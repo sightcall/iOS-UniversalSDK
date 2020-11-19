@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LSMATypes.h"
+#import <LSUniversalSDK/LSMATypes.h>
 
 @class LSDeeplinkCommand;
 

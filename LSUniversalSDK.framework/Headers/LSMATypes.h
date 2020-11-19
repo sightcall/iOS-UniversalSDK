@@ -97,6 +97,27 @@ typedef NS_ENUM(NSUInteger, LSMATestNotification_t)
 } ;
 
 
+typedef NS_ENUM(NSUInteger, LSMACapabities_t)
+{
+    LSMACapabities_response,
+    LSMACapabities_cameraStarted,
+    LSMACapabities_cameraStopped,
+    LSMACapabities_arStarted,
+    LSMACapabities_arStopped,
+    LSMACapabities_pauseStart,
+    LSMACapabities_pauseStop,
+    LSMACapabities_snapshotStart,
+    LSMACapabities_snapshotStop,
+    LSMACapabities_galleryStart,
+    LSMACapabities_galleryStop,
+    LSMACapabities_cameraSwitch,
+    LSMACapabities_screencastStart,
+    LSMACapabities_cobrowsingStart,
+    LSMACapabities_cobrowsingStop,
+    LSMACapabities_colimatorStart,
+    LSMACapabities_colimatorStop,
+    LSMACapabities_takeocr
+};
 
 /**
  *  The registration block that is fired by registerWith...:andReference:onSignIn:

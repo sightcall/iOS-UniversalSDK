@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "MDCTextInputController.h"
+#import <LSUniversalSDK/MDCTextInputController.h>
 
 /**
  Material Design compliant text field for full width applications like email forms.

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "MDCTextInputController.h"
+#import <LSUniversalSDK/MDCTextInputController.h>
 
 /** Controllers that have the ability to move the placeholder to a title position. */
 @protocol MDCTextInputControllerFloatingPlaceholder <MDCTextInputController>

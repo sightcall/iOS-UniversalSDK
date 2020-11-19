@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LiveARAttributeModel.h"
+#import <LSUniversalSDK/LiveARAttributeModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

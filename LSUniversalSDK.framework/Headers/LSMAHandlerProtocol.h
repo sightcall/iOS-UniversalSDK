@@ -4,8 +4,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LSMAUsecase.h"
-#import "LSMATypes.h"
+#import <LSUniversalSDK/LSMAUsecase.h>
+#import <LSUniversalSDK/LSMATypes.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

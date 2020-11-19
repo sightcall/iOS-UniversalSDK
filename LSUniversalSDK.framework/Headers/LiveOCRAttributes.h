@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RegionOfInterest.h"
-#import "OCRGroupModel.h"
+#import <LSUniversalSDK/RegionOfInterest.h>
+#import <LSUniversalSDK/OCRGroupModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

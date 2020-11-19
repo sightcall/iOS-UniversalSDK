@@ -14,7 +14,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "MDCTextInput.h"
+#import <LSUniversalSDK/MDCTextInput.h>
 
 /** When text is manually set via .text or setText:, this notification fires. */
 extern NSString *_Nonnull const MDCTextFieldTextDidSetTextNotification;

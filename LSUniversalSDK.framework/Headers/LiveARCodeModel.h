@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LiveARModel.h"
+#import <LSUniversalSDK/LiveARModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

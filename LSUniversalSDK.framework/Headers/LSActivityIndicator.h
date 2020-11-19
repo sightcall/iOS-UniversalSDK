@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MaterialActivityIndicator.h"
+#import <LSUniversalSDK/MaterialActivityIndicator.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

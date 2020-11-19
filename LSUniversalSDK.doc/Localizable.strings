@@ -66,6 +66,13 @@
 /* Title of switch camera to use the back one popup */
 "universal_switch_rear" = "Switch to rear camera?";
 
+/* Title of switch role confirmation popup */
+"universal_switchrole_title" = "Switch role?";
+/* Title of switch role accept button */
+"universal_switchrole_accept" = "Accept";
+/* Title of switch role decline button */
+"universal_switchrole_decline" = "Decline";
+
 /* Title of the Start GPS button in the agent's GPS popover */
 "gps_first_start" = "Start GPS";
 
@@ -173,3 +180,6 @@
 "offline_media_is_mandatory" = "is Mandatory";
 "alert_start_camera_message" = "Activate the camera?";
 "alert_start_micro_message" = "Activate the microphone?";
+"alert_display_name_title" = "Enter Your Name";
+"alert_display_name_subtitle" = "Your display name must be 1-60 characters long.";
+"alert_display_name_skip_button" = "Skip";

@@ -4,11 +4,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LSMAUsecase.h"
-#import "OfflineIncludedIdentity.h"
-#import "LiveARCodeModel.h"
-#import "LiveOCR.h"
-#import "OCRIntegrationModel.h"
+#import <LSUniversalSDK/LSMAUsecase.h>
+#import <LSUniversalSDK/OfflineIncludedIdentity.h>
+#import <LSUniversalSDK/LiveARCodeModel.h>
+#import <LSUniversalSDK/LiveOCR.h>
+#import <LSUniversalSDK/OCRIntegrationModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

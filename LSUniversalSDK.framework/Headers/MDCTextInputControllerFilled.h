@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "MDCTextInputControllerBase.h"
+#import <LSUniversalSDK/MDCTextInputControllerBase.h>
 
 /**
  Material Design compliant filled background text field from 2017.
