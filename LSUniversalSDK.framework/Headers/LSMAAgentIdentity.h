@@ -6,11 +6,11 @@
 #import <Foundation/Foundation.h>
 #import <LSUniversalSDK/LSMAUsecase.h>
 #import <LSUniversalSDK/OfflineIncludedIdentity.h>
-#import <LSUniversalSDK/LiveARCodeModel.h>
 #import <LSUniversalSDK/LiveOCR.h>
-#import <LSUniversalSDK/OCRIntegrationModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class LiveARCodeModel, OCRIntegrationModel;
 
 /**
  * The Agent identity describes the agent information stored in the backend.

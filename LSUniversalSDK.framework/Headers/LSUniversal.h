@@ -6,6 +6,8 @@
 #import <LSUniversalSDK/LSUniversalSDK.h>
 #import <LSUniversalSDK/OfflineIncludedIdentity.h>
 #import <LSUniversalSDK/LiveOCR.h>
+#import <LSUniversalSDK/LSCustomizationDelegate.h>
+#import <LSUniversalSDK/LSPictureProtocol.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

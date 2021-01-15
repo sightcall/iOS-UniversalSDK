@@ -6,10 +6,10 @@
 
 #import <LSUniversalSDK/LSUniversalSDK.h>
 #import <LSUniversalSDK/LSConsentDescription.h>
-#import <LSUniversalSDK/LSNotification.h>
-#import <LSUniversalSDK/LSDisplayNameDescription.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class LSNotification, LSDeeplinkCommand;
 
 @protocol LSUniversalLogDelegate <NSObject>
 

@@ -3,8 +3,6 @@
 //  LSUniversalSDK
 //
 
-#import <LSUniversalSDK/LSUniversalSDK.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
 /** @name Connection parameters ID keys.*/

@@ -37,3 +37,4 @@ FOUNDATION_EXPORT const unsigned char LSUniversalSDKVersionString[];
 #import <LSUniversalSDK/LSActivityIndicator.h>
 
 #import <LSUniversalSDK/LSDeeplinkCommand.h>
+#import <LSUniversalSDK/LSNotification.h>

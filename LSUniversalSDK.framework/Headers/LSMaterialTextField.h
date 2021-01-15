@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <LSUniversalSDK/MaterialTextFields.h>
+#import <MaterialComponents/MDCTextInputControllerOutlined.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

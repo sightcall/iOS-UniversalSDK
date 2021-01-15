@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <LSUniversalSDK/LiveOCRAttributes.h>
+
+@class LiveOCRAttributes;
 
 NS_ASSUME_NONNULL_BEGIN
 
