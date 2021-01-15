@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   
     s.homepage         = 'https://git.core.cloud.weemo.com/ios/livesight-universalsdk'
     s.author           = { 'martinprot' => 'martin.prot@sightcall.com' }
-    s.source           = { :http => 'https://github.com/sightcall/iOS-UniversalSDK/LSUniversalSDK.xcframework.zip' }
+    s.source           = { :http => 'https://github.com/aymenmaad/iOS-UniversalSDK/blob/xcframework/LSUniversalSDK.xcframework.zip' }
   s.vendored_frameworks = 'LSUniversalSDK.xcframework'
   
     s.ios.deployment_target = '9.0'
