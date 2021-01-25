@@ -2,6 +2,7 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [2.4.1](#241)
 - [2.3.1](#231)
 - [2.3.0](#230)
 - [2.2.0](#220)
@@ -42,6 +43,31 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
+
+## 2.4.1
+> 2021/01/19
+> __mucl 00331739__
+
+### Change
+- Update OpenSSL version in mobile SDKs
+- Manual Display name for Guest and Attendee
+- Implement role switching Guest-Attendee
+- Agent Poll for Mobile Agent
+- Implement multiparty chat
+- Add capabilities handling
+- Support mute/unmute in conference
+
+### Fix
+- Add notes after share from agent
+- Enable attendee ssl
+- Fix Bypass consent with display name
+- Add JPEG support for multiparty snapshot with WebRTC participants
+- Attendee bar does not show up when clicking on the video window
+- Annotations are not properly displayed on a paused video share
+- Dismissing the media picker by sliding it to the bottom blocks the guest app until he hangs up.
+- Co-browsing not working
+- Failing UHD image uploads try to upload forever, and block the app UI
+- Consent Declined does not inform the agent 
 
 ## 2.3.1
 > 2020/07/13

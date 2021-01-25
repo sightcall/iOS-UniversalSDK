@@ -5,10 +5,12 @@
 - [Dependencies](#dependencies)
 - [Installation](#installation)
     - [Xcode Integration](#xcode-integration)
+    	- [CocoaPods](#cocoapods)
+    	- [Fat Framework](#fat-framework)
+    	- [Update project with CocoaPods](#update_project_with_cocoapods)
     - [Swift support](#swift-support)
     - [Bitcode](#bitcode)
     - [Permissions](#permissions)
-    - [Common errors](#common-errors)
         - [Architecture](#architecture)
 - [Usage](#usage)
     - [Instantiation](#instantiation)
@@ -47,12 +49,56 @@ This Framework ships with its own dependencies:
 | MMWormhole          |  2.0.0  |
 | libPhoneNumber      |  0.9.13 |
 | FormatterKit        |  1.9.0  |
+| MaterialComponents        |  119.5.0  |
 
 
 
 ## Installation
 
 ### Xcode Integration
+
+#### CocoaPods
+
+[CocoaPods](https://cocoapods.org/) is the easiest way to get started (if you're new to CocoaPods, check out their [getting started documentation](https://guides.cocoapods.org/using/getting-started.html).)
+
+To install CocoaPods, run the following commands:
+
+```shell
+$ sudo gem install cocoapods
+```
+
+To integrate LSUniversalSDK into your Xcode project using CocoaPods, specify it in your Podfile:
+
+
+> **Requirements**: 
+
+- CocoaPods version >= 1.10.0
+- Xcode 11 and above
+- Swift 5.1 and above
+
+
+```shell
+platform :ios, '9.0'
+source 'https://github.com/CocoaPods/Specs.git'
+
+target '<Your Target Name>' do
+    pod 'LSUniversalSDK', :git => 'https://github.com/sightcall/iOS-UniversalSDK.git'
+end
+```
+
+Then, run the following command:
+
+```shell
+$ pod install
+```
+
+> **PS**: CocoaPods will install LSUniversalSDK as XCFramework 
+
+**What Is an XCFramework?**
+
+The XCFramework format allows developers to conveniently distribute binary libraries for multiple platforms and architectures in a single bundle. For example, with XCFrameworks, vendors no longer need to merge (lipo) multiple architectures into a single binary, only to later have to remove the Simulator slice during the archive phase.
+
+#### Fat Framework
 
 To add this Framework to your project, clone it from Github using a tag:
 
@@ -61,6 +107,76 @@ $ git clone https://github.com/sightcall/iOS-UniversalSDK.git -t <YOUR TAG>
 ```
 
 Then add `LSUniversalSDK.framework` in your Xcode project (Drag and drop the Framework in your Project Navigator or See [Apple Documentation](https://help.apple.com/xcode/mac/8.0/#/dev51a648b07)).
+
+> **Xcode 12.3 issue**: iOS and iOS Simulator code has never been supported in the same binary 
+
+The problem is that the USDK framework contains a build for both the simulator (x86_64) and the actual devices (ARM).
+
+The only correct way to resolve this is to change project settings in Xcode : Build Settings → Validate Workspace → Yes
+
+You aren't allowed to submit to the App Store a binary for an unsupported architecture, so the solution is to "manually" remove the unneeded architectures from the final binary, before submitting it.
+
+Use the following run script code to remove unsupported architectures from added libraries, frameworks.
+
+Project Name -> Build Phases -> create new run script past the below code. 
+
+```shell
+APP_PATH="${TARGET_BUILD_DIR}/${WRAPPER_NAME}"
+
+# This script loops through the frameworks embedded in the application and
+# removes unused architectures.
+find "$APP_PATH" -name '*.framework' -type d | while read -r FRAMEWORK
+do
+    FRAMEWORK_EXECUTABLE_NAME=$(defaults read "$FRAMEWORK/Info.plist" CFBundleExecutable)
+    FRAMEWORK_EXECUTABLE_PATH="$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME"
+    echo "Executable is $FRAMEWORK_EXECUTABLE_PATH"
+
+    EXTRACTED_ARCHS=()
+
+    for ARCH in $ARCHS
+    do
+        echo "Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME"
+        lipo -extract "$ARCH" "$FRAMEWORK_EXECUTABLE_PATH" -o "$FRAMEWORK_EXECUTABLE_PATH-$ARCH"
+        EXTRACTED_ARCHS+=("$FRAMEWORK_EXECUTABLE_PATH-$ARCH")
+    done
+
+    echo "Merging extracted architectures: ${ARCHS}"
+    lipo -o "$FRAMEWORK_EXECUTABLE_PATH-merged" -create "${EXTRACTED_ARCHS[@]}"
+    rm "${EXTRACTED_ARCHS[@]}"
+
+    echo "Replacing original executable with thinned version"
+    rm "$FRAMEWORK_EXECUTABLE_PATH"
+    mv "$FRAMEWORK_EXECUTABLE_PATH-merged" "$FRAMEWORK_EXECUTABLE_PATH"
+
+done
+```
+
+#### Update project with CocoaPods
+
+To Replace compiled framework with CocoaPods you need to:
+
+- Remove LSUniversalSDK framework
+- If you don't use CocoaPods you need to run the following command:
+
+```shell
+$ pod init
+```
+- Open Podfile and add LSUniversalSDK pod 
+
+```shell
+platform :ios, '9.0'
+source 'https://github.com/CocoaPods/Specs.git'
+
+target '<Your Target Name>' do
+    pod 'LSUniversalSDK', :git => 'https://github.com/sightcall/iOS-UniversalSDK.git'
+end
+```
+
+- Then, run the following command:
+
+```shell
+$ pod install
+```
 
 
 
@@ -71,7 +187,7 @@ The Framework can be used with a Swift code base.
 Simply add the Framework in your project as declared in [Dependencies](#dependencies) and add :
 
 ```swift
-import LSUniversal;
+import LSUniversalSDK
 ```
 
 in your code to use the Framework in your Swift codebase.
@@ -106,22 +222,6 @@ This permission is required for the audio capture to start.  If never asked, the
 ##### NSPhotoLibraryUsageDescription
 
 This permission is required to share images from the gallery.
-
-
-### Common errors
-
-
-#### Architecture
-
-The Framework does not ship with `x86`/`x86_64` architectures. That means you may see errors like:
-
-```
-ld: warning: ignoring file LSUniversalSDK.framework/LSUniversalSDK, missing required architecture i386 in file LSUniversalSDK.framework/LSUniversalSDK (2 slices)
-```
-
-In order to fix that, you must compile for an arm device target. Either build for `Generic iOS Device` or connect a device and compile for it.
-
-This also means the USDK can't run on `simulator` targets.
 
 ## Usage
 
