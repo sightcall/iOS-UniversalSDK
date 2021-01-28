@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'LSUniversalSDK'
-    s.version          = '2.4.1.6'
+    s.version          = '2.4.1.7'
     s.summary          = 'The higher level "Universal App" SDK'
     s.swift_version    = '5.3.1'
   
