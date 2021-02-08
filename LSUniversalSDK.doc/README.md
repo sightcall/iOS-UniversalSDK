@@ -1,27 +1,26 @@
+
+
 # iOS SDK
 
 <!-- MarkdownTOC levels="2,3,4" autolink="true" -->
-
-- [Dependencies](#dependencies)
+- [Introduction](#introduction)
+    - [SightCall SDK](#sightcall-sdk)
+    - [Dependencies](#dependencies)
 - [Installation](#installation)
-    - [Xcode Integration](#xcode-integration)
-    	- [CocoaPods](#cocoapods)
-    	- [Fat Framework](#fat-framework)
-    	- [Update project with CocoaPods](#update_project_with_cocoapods)
-    - [Swift support](#swift-support)
-    - [Bitcode](#bitcode)
-    - [Permissions](#permissions)
-        - [Architecture](#architecture)
+    - [Installation with CocoaPods](#installation-with-cocoapods)
+    - [Update from older versions](#update-from-older-versions)
+    - [Direct Framework import](#direct-import)
 - [Usage](#usage)
+    - [Permissions](#permissions)
+    - [Entitlements](#entitlements)
     - [Instantiation](#instantiation)
-    - [Delegation](#delegation)
-        - [Connection and Calls](#connection-and-calls)
     - [Consent UI](#consent-ui)
-    - [Start a Call](#start-a-call)
-    - [Call UI](#call-ui)
-        - [Customization](#customization)
-    - [ACD information](#acd-information)
     - [Survey](#survey)
+    - [Logging](#logging)
+    - [Localization](#localization)
+- [Advanced](#advanced)
+    - [Customization](#customization)
+    - [ACD information](#acd-information)
     - [Callflows](#callflows)
     - [Agent](#agent)
         - [Onboarding](#onboarding)
@@ -33,13 +32,19 @@
         - [Inviting a Guest](#inviting-a-guest)
         - [Invitation history](#invitation-history)
         - [Save picture](#save-picture)
-- [Advanced](#advanced)
-    - [Logging](#logging)
-    - [Localization](#localization)
 
 <!-- /MarkdownTOC -->
 
-## Dependencies
+## Introduction
+
+### SightCall SDK
+
+This SDK is dedicated to Sightcall customers. It can be integrated in an existing app flow and brings a seamless access to the Sightcall experience. 
+It is packaged in an XCFramework easily integrated with CocoaPods. It is compiled with bitcode support and can be used with a Swift code base.
+It supports nine languages: Bulgarian, German, English (default language), Spanish, French, Italian, Japanese and Portugese.
+
+
+### Dependencies
 
 This Framework ships with its own dependencies:
 
@@ -51,334 +56,260 @@ This Framework ships with its own dependencies:
 | FormatterKit        |  1.9.0  |
 | MaterialComponents        |  119.5.0  |
 
-
-
 ## Installation
 
-### Xcode Integration
-
-#### CocoaPods
+### Installation with CocoaPods
 
 [CocoaPods](https://cocoapods.org/) is the easiest way to get started (if you're new to CocoaPods, check out their [getting started documentation](https://guides.cocoapods.org/using/getting-started.html).)
 
-To install CocoaPods, run the following commands:
+To integrate the Sightcall sdk into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```shell
-$ sudo gem install cocoapods
-```
-
-To integrate LSUniversalSDK into your Xcode project using CocoaPods, specify it in your Podfile:
-
-
-> **Requirements**: 
-
-- CocoaPods version >= 1.10.0
-- Xcode 11 and above
-- Swift 5.1 and above
-
-
-```shell
-platform :ios, '9.0'
-source 'https://github.com/CocoaPods/Specs.git'
-
-target '<Your Target Name>' do
     pod 'LSUniversalSDK', :git => 'https://github.com/sightcall/iOS-UniversalSDK.git'
-end
 ```
 
-Then, run the following command:
+### Update from older versions
 
-```shell
-$ pod install
-```
-
-> **PS**: CocoaPods will install LSUniversalSDK as XCFramework 
-
-**What Is an XCFramework?**
-
-The XCFramework format allows developers to conveniently distribute binary libraries for multiple platforms and architectures in a single bundle. For example, with XCFrameworks, vendors no longer need to merge (lipo) multiple architectures into a single binary, only to later have to remove the Simulator slice during the archive phase.
-
-#### Fat Framework
-
-To add this Framework to your project, clone it from Github using a tag:
-
-```shell
-$ git clone https://github.com/sightcall/iOS-UniversalSDK.git -t <YOUR TAG>
-```
-
-Then add `LSUniversalSDK.framework` in your Xcode project (Drag and drop the Framework in your Project Navigator or See [Apple Documentation](https://help.apple.com/xcode/mac/8.0/#/dev51a648b07)).
-
-> **Xcode 12.3 issue**: iOS and iOS Simulator code has never been supported in the same binary 
-
-The problem is that the USDK framework contains a build for both the simulator (x86_64) and the actual devices (ARM).
-
-The only correct way to resolve this is to change project settings in Xcode : Build Settings → Validate Workspace → Yes
-
-You aren't allowed to submit to the App Store a binary for an unsupported architecture, so the solution is to "manually" remove the unneeded architectures from the final binary, before submitting it.
-
-Use the following run script code to remove unsupported architectures from added libraries, frameworks.
-
-Project Name -> Build Phases -> create new run script past the below code. 
-
-```shell
-APP_PATH="${TARGET_BUILD_DIR}/${WRAPPER_NAME}"
-
-# This script loops through the frameworks embedded in the application and
-# removes unused architectures.
-find "$APP_PATH" -name '*.framework' -type d | while read -r FRAMEWORK
-do
-    FRAMEWORK_EXECUTABLE_NAME=$(defaults read "$FRAMEWORK/Info.plist" CFBundleExecutable)
-    FRAMEWORK_EXECUTABLE_PATH="$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME"
-    echo "Executable is $FRAMEWORK_EXECUTABLE_PATH"
-
-    EXTRACTED_ARCHS=()
-
-    for ARCH in $ARCHS
-    do
-        echo "Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME"
-        lipo -extract "$ARCH" "$FRAMEWORK_EXECUTABLE_PATH" -o "$FRAMEWORK_EXECUTABLE_PATH-$ARCH"
-        EXTRACTED_ARCHS+=("$FRAMEWORK_EXECUTABLE_PATH-$ARCH")
-    done
-
-    echo "Merging extracted architectures: ${ARCHS}"
-    lipo -o "$FRAMEWORK_EXECUTABLE_PATH-merged" -create "${EXTRACTED_ARCHS[@]}"
-    rm "${EXTRACTED_ARCHS[@]}"
-
-    echo "Replacing original executable with thinned version"
-    rm "$FRAMEWORK_EXECUTABLE_PATH"
-    mv "$FRAMEWORK_EXECUTABLE_PATH-merged" "$FRAMEWORK_EXECUTABLE_PATH"
-
-done
-```
-
-#### Update project with CocoaPods
-
-To Replace compiled framework with CocoaPods you need to:
+If the sdk has been directly imported in your application, from our Github repository, we highly recommend that you use CocoaPods:
 
 - Remove LSUniversalSDK framework
-- If you don't use CocoaPods you need to run the following command:
+- Then follow the step described in [Installation with CocoaPods](#installation-with-cocoapods)
 
-```shell
-$ pod init
-```
-- Open Podfile and add LSUniversalSDK pod 
+>Note: The API contract remains unchanged. 
 
-```shell
-platform :ios, '9.0'
-source 'https://github.com/CocoaPods/Specs.git'
+### Direct Framework import
 
-target '<Your Target Name>' do
-    pod 'LSUniversalSDK', :git => 'https://github.com/sightcall/iOS-UniversalSDK.git'
-end
-```
+Direct import steps are described in [Direct Import](#direct-import)
 
-- Then, run the following command:
-
-```shell
-$ pod install
-```
-
-
-
-### Swift support
-
-The Framework can be used with a Swift code base. 
-
-Simply add the Framework in your project as declared in [Dependencies](#dependencies) and add :
-
-```swift
-import LSUniversalSDK
-```
-
-in your code to use the Framework in your Swift codebase.
-
-### Bitcode
-
-The Framework is compiled with bitcode support.
-
-### Permissions
-
-The Framework requires some permission to be used:
-
-- NSLocationWhenInUseUsageDescription
-- NSCameraUsageDescription
-- NSMicrophoneUsageDescription
-- NSPhotoLibraryUsageDescription
-
-Those permissions must be set in the App's Info.plist.
-
-##### NSLocationWhenInUseUsageDescription
-
-This permission is used in response to an Agent's request.  The Framework will display a pop-up to ask the user if they accept to share their location, in addition to the System's "regular" pop-up.
-
-##### NSCameraUsageDescription
-
-This permission is required for the video capture to start.  If never asked, the system pop-up will appear on call start.
-
-##### NSMicrophoneUsageDescription
-
-This permission is required for the audio capture to start.  If never asked, the system pop-up will appear on call start.
-
-##### NSPhotoLibraryUsageDescription
-
-This permission is required to share images from the gallery.
 
 ## Usage
 
+### Permissions
+
+The Framework requires some permissions to be used and must be set in the App's Info.plist.
+
+* **NSLocationWhenInUseUsageDescription**
+
+This permission is used in response to an Agent's request.  The sdk will display a pop-up to prompt the user about sharing their location, in addition to the System's "regular" pop-up.
+
+* **NSCameraUsageDescription**
+
+This permission is required for starting the video capture. If never asked, the system pop-up will appear on call start.
+
+* **NSMicrophoneUsageDescription**
+
+This permission is required for starting the audio capture. If never asked, the system pop-up will appear on call start.
+
+* **NSPhotoLibraryUsageDescription**
+
+This permission is required for sharing images from the gallery.
+
+### Entitlements
+
+#### Universal link
+
+In order to setup universal link, some domains should be added to the **Associated Domains** section (in Signing and  Capabilities of your target). 
+Common domains are usually: 
+
+* **applinks:guest.sightcall.com**
+* **applinks:guest-ppr.sightcall.com**
+
+> Note: Depending on your use case, you may need specific domains. Don't forget to ask your SightCall contact for them.
+
+#### Deeplink
+
+When user comes from the guest webpage, a deeplink can be displayed to open your application. So, at least, one scheme should be added to the **URL Types** section (in Info section of your target). 
+Common scheme is: **sightcall**
+
+> Note: Depending on your use case, you may need specific schemes. Don't forget to ask your SightCall contact for them.
+
+#### Background Modes
+
+If you need to be able to continue the call on background, you should setup the associated section (in Signing and  Capabilities of your target, then **Background Modes**):
+
+* **Audio, AirPlay, and Picture in Picture**
+* **Voice over IP**
+* **Remote notifications**
+
+
 ### Instantiation
 
-To start a connection, create a `LSUniversal` variable and retain it. Then call `startWithString:` with your start URL in string form (see `-[NSURL absoluteString]` for more info).
+First, import `LSUniversalSDK` and create a `LSUniversal` variable:
 
-
-For example, let's say your application received a URL through your UIApplication delegate's `application:openURL:sourceApplication:annotation:` method:
-
-```objc
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    // yourSDKPointer is a pointer to the LSUniversal instance, that was instantiated somewhere
-    // e.g. in the application:willFinishLaunchingWithOptions:
-    // To start the connection, you would simply call:
-    [yourSDKPointer startWithString: [url absoluteString]];
+```swift
+func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    guard let _ = (scene as? UIWindowScene) else { return }
+    self.lsUniversal = LSUniversal()
+    /**
+    **/
 }
 ```
 
-### Delegation
+ Then call `start:` providing the start URL. This, usually, takes place in SceneDelegate:
 
-#### Connection and Calls
-
-The SDK offers a delegate with three callbacks. Those callbacks informs the application that the connection status changed, that a call ended and that an error occured.
-
-To register a delegate, simply set the LSUniversal property `mySDKPointer.delegate` after intializing it:
-
-```objc
-id<LSUniversalDelegate> yourDelegatePointer = [[YourDelegateType alloc] init];
-mySDKPointer.delegate = yourDelegatePointer;
+```swift
+func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+    guard let url = userActivity.webpageURL else { return }
+    lsUniversal?.start(with: url.absoluteString)
+}
 ```
 
-The delegate is notified through those 3 methods:
+The SDK offers a delegate with three callbacks. Those inform the application that the connection status changed, that a call ended and that an error occurred. It can be set on `self.lsUniversal.delegate`.
 
+This is also where the `self.lsUniversal.callViewController` of the sdk should be added on your stack if the call is currently active. It will display the UI of the call. When the latter is finished, just dismiss the viewController:
 
-```objc
-[yourDelegatePointer connectionEvent: ] //Connection Status update event
-[yourDelegatePointer connectionError: ] //Connection Errors
-[yourDelegatePointer callReport: ] //Calls end report
-
-```
-
-For example, your delegate can be declared as such:
-
-```objc
-@interface YourDelegateType: NSObject <LSUniversalDelegate>
-
-@end
-
-
-@implementation YourDelegateType
-- (void)connectionEvent:(lsConnectionStatus_t)status
-{
-    switch (status) {
-        default:
-            break;
+```swift
+extension SceneDelegate: LSUniversalDelegate {
+    func connectionEvent(_ status: lsConnectionStatus_t) {
+        DispatchQueue.main.async {
+            switch status {
+            case .callActive:
+            /**
+                Add self.lsUniversal.callViewController to your view hierarchy
+            **/
+            case .disconnecting:
+            /**
+                Remove self.lsUniversal.callViewController from your view hierarchy
+            **/
+            default:
+                break
+            }
+        }
     }
-}
 
-- (void)connectionError:(lsConnectionError_t)error
-{
+    func connectionError(_ error: lsConnectionError_t) {
+        DispatchQueue.main.async {
+            switch error {
+            default:
+                break
+            }
+        }
+    }
 
-}
+    func callReport(_ callEnd: LSCallReport) {
+    }
 
-- (void)callReport:(lsCallReport_s)callEnd
-{
-
-}
-@end
 
 ```
 
-In addition to those mandatory callbacks, optional callbacks are offered to display informations about your queue position if you are connected to an ACD system, if a survey is to be displayed after a call, etc.
-
-Please note that the callbacks may not be on the main thread.
-
-### Consent UI
-
-Depending on your usecase or tenant configuration, consent may be requested from the User : 
-
-* Before call start and if the usecase is configured to display a consent request, the SDK will trigger `displayConsentWithDescription:` on its delegate.
-* Upon logging in, an agent may have to validate a consent. The `displayConsentWithDescription:` delegate method is triggered at that point.
-
-This method's parameters contains all information about the consent view that should be displayed and a block to trigger with a boolean. No difference is made for guest users and agent users.
-
-For example, it could be implemented as such:
-
-```objc
-- (void)displayConsentWithDescription:(id<LSConsentDescription>)consent
-{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle: [consent title]
-                                                                             message: [consent message]
-                                                                      preferredStyle: UIAlertControllerStyleAlert];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle: [consent cancelLabel] style: UIAlertActionStyleDestructive handler: ^(UIAlertAction * _Nonnull action) {
-        //trigger the consent block with `NO`
-        if (consent.consent) {
-            consent.consent(NO);
-        }
-    }];
-    UIAlertAction *agree = [UIAlertAction actionWithTitle: [consent agreeLabel] style:UIAlertActionStyleDefault handler: ^(UIAlertAction * _Nonnull action) {
-        //trigger the consent block with `YES`
-        if (consent.consent) {
-            consent.consent(YES);
-        }
-    }];
-    UIAlertAction *showEULA = [UIAlertAction actionWithTitle: [consent eulaLabel] style:UIAlertActionStyleDefault handler: ^(UIAlertAction * _Nonnull action) {
-        //Opens the URL in a web browser 
-        NSURL *url = [NSURL URLWithString: [consent eulaURL]];
-        if ([[UIApplication sharedApplication] canOpenURL: url]) {
-            [[UIApplication sharedApplication] openURL: url];
-        }
-    }];
-    
-    [alertController addAction: agree];
-    [alertController addAction: showEULA];
-    [alertController addAction: cancel];
-    
-    // Display the controller in your current view hierarchy
-
-}
-```
-
-
-### Start a Call
-
-The USDK will start a call automatically when the `startWithString:` method is called with a valid string returned by the backend.
+>Note: The callbacks may not operate on the main thread.
 
 Please see the [Callflow section](#callflows) below for an overview of the callbacks triggered.
 
-### Call UI
+### Display Name
 
+Sometime, the guest is prompted for entering his/her name. The delegate method is `showDisplayNameAlert`:
 
-A ViewController is available at `mySDKPointer.callViewController` after the `connectionEvent:` callback is triggered with `lsConnectionStatus_callActive` as parameter.
-
-This VC is the controller of the call UI. An exemple to display it would be something like:
-
-```objc
-- (void)connectionEvent:(lsConnectionStatus_t)status
-{
-    switch (status) {
-        case lsConnectionStatus_callActive: 
-        {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [yourPresentationController presentViewController:mySDKPointer.callViewController animated:YES completion:nil];
-            });
-        }   break;
-        default: 
-            break;
+```swift
+    func showDisplayNameAlert(_ alertController: UIAlertController?) {
+        guard let alertController = alertController else { return }
+        /**
+            Present the alertController, here
+        **/
     }
-}
+```
+### Consent UI
+
+Depending on your usecase configuration, consent may be requested from the user. This will be triggered by the sdk on  `displayConsentWithDescription:` delegate method.
+
+This method's parameters contains all information about the consent view that should be displayed and a block to trigger with a boolean:
+
+```swift
+    func displayConsent(with description: LSConsentDescription?) {
+        let controller = UIAlertController(title: description?.title, message: description?.message, preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: description?.cancelLabel, style: .cancel, handler: { _ in
+            description?.consent?(false)
+        }))
+        controller.addAction(UIAlertAction(title: description?.eulaURL, style: .default, handler: { _ in
+            guard let urlString = description?.eulaURL,
+                let url = URL(string: urlString)
+            else { return }
+            /**
+                Show the content of the url page
+            **/
+        }))
+        controller.addAction(UIAlertAction(title: description?.agreeLabel, style: .default, handler: { _ in
+            description?.consent?(true)
+        }))
+        /**
+            Display the controller in your current view hierarchy
+        **/
+    }
 
 ```
 
-On call end, simply dismiss the ViewController.
+### ACD Information
 
-#### Customization
+ACD information are provided through two optional delegation methods of the `LSUniversalDelegate`.
+
+```
+func acdStatusUpdate(_ update: LSACDQueue)
+func acdAcceptedEvent(_ agentUID: String?)
+```
+
+`acdStatusUpdate` is called with information pertaining to the ACD current status. If the `update.status` of the request is `ongoing`, the update will inform you about the position in the queue or an ETA. Otherwise, the request is cancelled or invalid and the `update.status` informs you of the reason (service closed, agent unavailable, etc.)  
+
+`acdAcceptedEvent` is called when an agent accepts the call.  
+
+Note that `acdAcceptedEvent` **may not** be called before the SDK `status` moves to `callActive`.
+
+
+## Advanced
+
+### Logging
+
+The SDK send logs to any object implementing `LSUniversalLogDelegate` and registered as `LSUniversal.logDelegate`.
+
+The following presents a way to receive and print logs on the debugger console. 
+
+Be aware that: 
+* uncontrolled use of `NSLog();` may lead to performance degradation;
+* `NSLog();` send logs to the device console (available in Xcode -> Window -> Devices and Simulator and Console.App).
+
+
+```objc
+// An instance of this class will be used as log delegate. 
+// You must instantiate your LSUniversal pointer before instantiating this object.
+
+@interface YourLogDelegate: NSObject <LSUniversalLogDelegate>
+
+- (instancetype)initWithUSDK:(LSUniversal *)yourSDKPointer;
+
+@end
+
+@implementation YourLogDelegate
+
+- (instancetype)initWithUSDK:(LSUniversal *)yourSDKPointer
+{
+    self = [super init];
+    yourSDKPointer.logDelegate = self;
+    return self;
+}
+
+//this delegate method is called when a log line is emitted by the SDK
+- (void)logLevel:(NSInteger)level logModule:(NSInteger)module fromMethod:(NSString *)originalSel message:(NSString *)message, ...;
+{
+    va_list pe;
+    va_start(pe, message);
+    NSString *sMessage = [[NSString alloc] initWithFormat:message arguments:pe];
+    va_end(pe);
+    NSLog(@"%@ %@", originalSel, sMessage);
+}
+
+
+@end
+
+```
+
+### Localization
+
+The localized elements are only UI elements displayed during a call. In order for the SDK to display those entries, the App must be localized in those languages.
+
+To change those strings (i.e. change the base language) or support a new language, your app should override their key/value pair in its `Localizable.strings` file.
+
+A list of the overridable elements can be found in the base Localizable.strings file found in this folder.
+
+### Customization
 
 The call controls buttons appearances can be customized through the `localBarCustomizationDelegate` and `remoteBarCustomizationDelegate` properties. Those `LSUniversal` properties let you customize either the Local Bar or the Remote Bar by using the `LSLocalCustomizationDelegate` or `LSRemoteCustomizationDelegate` protocols. 
 
@@ -420,39 +351,6 @@ Each button has an image for state. See the USDK documentation to see the meanin
 
 **Note:** the callbacks will only be called if the related buttons appear.
 
-
-### ACD information
-
-ACD information are provided through two optional delegation methods of the `LSUniversalDelegate`.
-
-
-```
-- (void)acdStatusUpdate:(LSACDQueue_s)update;
-- (void)acdAcceptedEvent:(NSString *)agentUID;
-```
-
-`acdStatusUpdate:` is called with information pertaining to the ACD current status. If the `update.status` of the request is `ongoing`, the update will inform you about the position in the queue or an ETA. Otherwise, the request is cancelled or invalid and the `update.status` informs you of the reason (service closed, agent unavailable, etc.)  
-
-`acdAcceptedEvent:` is called when an agent accepts the call.  
-
-Note that `acdAcceptedEvent:` **may not** be called before the SDK `status` moves to `callActive`.
-
-### Survey
-
-If you have configured a survey on call end, your `LSUniversalDelegate` will be notified through the `callSurvey:` method. This optional method is called with an object responding to `LSSurveyInfo`.
-
-This parameter will tell you if you need to display a popup (if `infos.displayPopup` is equal to YES) and the text in this popup (`infos.popupLabel` and `infos.popupButton`), and give you the URL to the survey (`infos.url`).
-
-```objc
-- (void)callSurvey:(LSSurveyInfos *)infos
-{
-    if (!infos.displayPopup) {
-        //open infos.url in a webbrowser
-    } else {
-        //ask the user if she wants to participate in a survey
-    }
-}
-```
 
 ### Callflows
 The standard callflow is as such:
@@ -502,6 +400,24 @@ end
 
 
 !-->
+
+### Survey
+
+If the usecase is configured to display a survey on call end, your `LSUniversalDelegate` will be notified through the `callSurvey:` method. This optional method is called with an object responding to `LSSurveyInfo`.
+
+This parameter will tell you if you need to display a popup (if `infos.displayPopup` is equal to YES) and the text in this popup (`infos.popupLabel` and `infos.popupButton`), and give you the URL to the survey (`infos.url`).
+
+```objc
+- (void)callSurvey:(LSSurveyInfos *)infos
+{
+    if (!infos.displayPopup) {
+        //open infos.url in a webbrowser
+    } else {
+        //ask the user if he wants to participate in a survey
+    }
+}
+```
+
 
 ### Agent
 
@@ -750,60 +666,58 @@ Please see the Administration portal to set the folder path.
 If you don't want the pictures to be saved by the SDK in either way, please set the pictureDelegate's `ignoreUsecaseConfiguration` to `YES`. In this case, only the picture's `savedPicture:andMetadata:` delegate is called.
 
 
-## Advanced
 
-### Logging
+## Direct Import 
 
-The SDK send logs to any object implementing `LSUniversalLogDelegate` and registered as `LSUniversal.logDelegate`.
+This method is not recommended. Please, use it only if you can't use CocoaPods.
 
-The following presents a way to receive and print logs on the debugger console. 
+To add this Framework to your project, clone it from Github using a tag:
 
-Be aware that: 
-* uncontrolled use of `NSLog();` may lead to performance degradation;
-* `NSLog();` send logs to the device console (available in Xcode -> Window -> Devices and Simulator and Console.App).
-
-
-```objc
-// An instance of this class will be used as log delegate. 
-// You must instantiate your LSUniversal pointer before instantiating this object.
-
-@interface YourLogDelegate: NSObject <LSUniversalLogDelegate>
-
-- (instancetype)initWithUSDK:(LSUniversal *)yourSDKPointer;
-
-@end
-
-@implementation YourLogDelegate
-
-- (instancetype)initWithUSDK:(LSUniversal *)yourSDKPointer
-{
-    self = [super init];
-    yourSDKPointer.logDelegate = self;
-    return self;
-}
-
-//this delegate method is called when a log line is emitted by the SDK
-- (void)logLevel:(NSInteger)level logModule:(NSInteger)module fromMethod:(NSString *)originalSel message:(NSString *)message, ...;
-{
-    va_list pe;
-    va_start(pe, message);
-    NSString *sMessage = [[NSString alloc] initWithFormat:message arguments:pe];
-    va_end(pe);
-    NSLog(@"%@ %@", originalSel, sMessage);
-}
-
-
-@end
-
+```shell
+$ git clone https://github.com/sightcall/iOS-UniversalSDK.git -t <YOUR TAG>
 ```
 
-### Localization
+Then add `LSUniversalSDK.framework` in your Xcode project (Drag and drop the Framework in your Project Navigator or See [Apple Documentation](https://help.apple.com/xcode/mac/8.0/#/dev51a648b07)).
 
-The USDK supports 9 languages: Bulgarian (`bg`), German (`de`), English (`en`, that's also the base language), Spanish (`es`), French (`fr`), Italian (`it`), Japanese (`ja`) and Portugese (`pt`).
+> **Xcode 12.3 issue**: iOS and iOS Simulator code has never been supported in the same binary 
 
-Those localized element are only UI elements displayed during a call. In order for the SDK to display those entry, the App must be localized in those languages.
+The problem is that the USDK framework contains a build for both the simulator (x86_64) and the actual devices (ARM).
 
-To change those strings (i.e. change the base language) or support a new language, your app should override their key/value pair in its `Localizable.strings` file.
+The only correct way to resolve this is to change project settings in Xcode : Build Settings → Validate Workspace → Yes
 
-A list of the overridable elements can be found in the base Localizable.strings file found in this folder.
+You aren't allowed to submit to the App Store a binary for an unsupported architecture, so the solution is to "manually" remove the unneeded architectures from the final binary, before submitting it.
 
+Use the following run script code to remove unsupported architectures from added libraries, frameworks.
+
+Project Name -> Build Phases -> create new run script past the below code. 
+
+```shell
+APP_PATH="${TARGET_BUILD_DIR}/${WRAPPER_NAME}"
+
+# This script loops through the frameworks embedded in the application and
+# removes unused architectures.
+find "$APP_PATH" -name '*.framework' -type d | while read -r FRAMEWORK
+do
+    FRAMEWORK_EXECUTABLE_NAME=$(defaults read "$FRAMEWORK/Info.plist" CFBundleExecutable)
+    FRAMEWORK_EXECUTABLE_PATH="$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME"
+    echo "Executable is $FRAMEWORK_EXECUTABLE_PATH"
+
+    EXTRACTED_ARCHS=()
+
+    for ARCH in $ARCHS
+    do
+        echo "Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME"
+        lipo -extract "$ARCH" "$FRAMEWORK_EXECUTABLE_PATH" -o "$FRAMEWORK_EXECUTABLE_PATH-$ARCH"
+        EXTRACTED_ARCHS+=("$FRAMEWORK_EXECUTABLE_PATH-$ARCH")
+    done
+
+    echo "Merging extracted architectures: ${ARCHS}"
+    lipo -o "$FRAMEWORK_EXECUTABLE_PATH-merged" -create "${EXTRACTED_ARCHS[@]}"
+    rm "${EXTRACTED_ARCHS[@]}"
+
+    echo "Replacing original executable with thinned version"
+    rm "$FRAMEWORK_EXECUTABLE_PATH"
+    mv "$FRAMEWORK_EXECUTABLE_PATH-merged" "$FRAMEWORK_EXECUTABLE_PATH"
+
+done
+```

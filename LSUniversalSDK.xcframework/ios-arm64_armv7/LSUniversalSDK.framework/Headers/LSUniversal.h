@@ -107,6 +107,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)startWithString:(NSString *)param;
 
 /**
+ *  Connects the LSUniversalSDK to SightCall's cloud.
+ *
+ *  @param param The string used to create the dictionary. It can be an URL string such as the one used in the Universal App (i.e. "sightcall://?mode=value&..."), or simply "mode=value&...". `?`, `=` and `&` are used as separators.
+ *  @param wss YES if the sdk should connect with websocket secure. Websocket secure is much slower but works with AppClips
+ *
+ *  @sa startWithString:
+ */
+- (void)startWithString:(NSString *)param useWebSocketSecure:(BOOL)wss;
+
+/**
  *  Disconnects the LSUniversalSDK from the cloud. Hangup the call if any.
  *  @sa startWithString:
  *  @sa startWithDictionary:
