@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'LSUniversalSDK'
-    s.version          = '2.4.1.9'
+    s.version          = '2.4.2.0'
     s.summary          = 'The higher level "Universal App" SDK'
     s.swift_version    = '5.3.1'
   
@@ -34,5 +34,6 @@ Pod::Spec.new do |s|
     s.dependency 'MaterialComponents/TextFields+Theming'
     s.dependency 'MaterialComponents/TextFields+TypographyThemer'
     s.dependency 'MaterialComponents/ActivityIndicator'
+    s.dependency 'AdvancedAnnotation'
   end
   

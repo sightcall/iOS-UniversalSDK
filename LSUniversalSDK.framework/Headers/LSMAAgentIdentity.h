@@ -35,6 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) NSString *osVersion;
 
+
+@property (nonatomic, readonly) NSString *urlAnnotation;
+
 /**
  * The reference used to send notifications
  */

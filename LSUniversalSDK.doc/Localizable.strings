@@ -22,7 +22,7 @@
 "universal_gpspermission_decline" = "Decline";
 
 /* Title of the popup for the GPS use */
-"universal_gpspermission_message" = "Share your location (GPS) with your current contact during 1 minute?";
+"universal_gpspermission_message" = "Share your location (GPS) with your current contact for the next 1 minute?";
 
 /* Message of the popup to inform the user how to enable GPS on iOS 8- devices */
 "universal_gpsunavailable_message_iOS8" = "The App is not allowed to get your location.\nPlease go to Settings → Privacy → Location Services to allow it.";

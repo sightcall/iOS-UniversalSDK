@@ -117,6 +117,7 @@ typedef NS_ENUM(NSUInteger, LSMACapabities_t)
     LSMACapabities_colimatorStart,
     LSMACapabities_colimatorStop,
     LSMACapabities_takeocr,
+    LSMACapabities_advancedAnnotationStart,
     LSMACapabities_agent_screencastStart,
     LSMACapabities_agent_screencastStop
 };
