@@ -2,6 +2,7 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [2.4.2](#242)
 - [2.4.1](#241)
 - [2.3.1](#231)
 - [2.3.0](#230)
@@ -43,6 +44,22 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
+
+## 2.4.2
+> 2021/04/28
+> __mucl 78870cc__
+
+### Change
+- Advanced Annotations
+- Visual Support is now compatible with AppClip
+
+### Fix
+- Annotations not working in recorded mobile agent use case
+- Handle guest’s pointer deactivation at start
+- Cannot join as an attendee with AppClip when consent agree required
+- Add Italian Translation in Visual Support
+- URL are now clickable in the mobile chat
+- Mobile agent can now navigate backwards or forward when sharing a video from the gallery
 
 ## 2.4.1
 > 2021/01/19
