@@ -4,8 +4,3 @@ framework module LSUniversalSDK {
   export *
   module * { export * }
 }
-
-module LSUniversalSDK.Swift {
-    header "LSUniversalSDK-Swift.h"
-    requires objc
-}

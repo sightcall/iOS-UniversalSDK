@@ -34,6 +34,6 @@ Pod::Spec.new do |s|
     s.dependency 'MaterialComponents/TextFields+Theming'
     s.dependency 'MaterialComponents/TextFields+TypographyThemer'
     s.dependency 'MaterialComponents/ActivityIndicator'
-    s.dependency 'AdvancedAnnotation'
+    s.dependency 'SVGgh'
   end
   
