@@ -4,53 +4,5 @@
 import Foundation
 @_exported import LSUniversalSDK
 import Photos
-import SVGgh
 import Swift
 import UIKit
-@objc(SCAdvancedAnnotationEventType) public enum AdvancedAnnotationEventType : Swift.Int {
-  case none = 0, touchDown, touchMove, touchUp
-  public typealias RawValue = Swift.Int
-  public init?(rawValue: Swift.Int)
-  public var rawValue: Swift.Int {
-    get
-  }
-}
-@objc(SCAdvancedAnnotationError) public enum AdvancedAnnotationError : Swift.Int, Swift.Error {
-  case nilUrl = 0, nilView, nilProtocolString
-  public typealias RawValue = Swift.Int
-  public init?(rawValue: Swift.Int)
-  public var rawValue: Swift.Int {
-    get
-  }
-  public static var _nsErrorDomain: Swift.String {
-    get
-  }
-}
-@objc(SCAdvancedAnnotationAPI) public class AdvancedAnnotationAPI : ObjectiveC.NSObject {
-  @objc public var enable: Swift.Bool
-  @objc public init?(url: Foundation.URL?, delegate: LSUniversalSDK.AdvancedAnnotationAPIDelegate?)
-  @objc deinit
-  @objc override dynamic public init()
-}
-extension AdvancedAnnotationAPI {
-  @objc dynamic public func bind(currentView: UIKit.UIView?)
-  @objc dynamic public func unbindFromCurrentView()
-  @objc dynamic public func setAnnotationCommand(protocolString: Swift.String?)
-  @objc dynamic public func clearAllAnnotations()
-  @objc dynamic public func processEvent(type: LSUniversalSDK.AdvancedAnnotationEventType, position: CoreGraphics.CGPoint)
-}
-extension AdvancedAnnotationAPI {
-  @objc dynamic public func setUserId(_ userId: Swift.UInt8)
-  @objc dynamic public func rtccAnnotationRequest(string: Swift.String)
-}
-@objc(SCAdvancedAnnotationAPIDelegate) public protocol AdvancedAnnotationAPIDelegate : AnyObject {
-  @objc func didFail(error: LSUniversalSDK.AdvancedAnnotationError)
-  @objc func advancedAnnotationIsReady()
-  @objc func annotationCommandAvailable(_ command: Swift.String)
-}
-extension LSUniversalSDK.AdvancedAnnotationEventType : Swift.Equatable {}
-extension LSUniversalSDK.AdvancedAnnotationEventType : Swift.Hashable {}
-extension LSUniversalSDK.AdvancedAnnotationEventType : Swift.RawRepresentable {}
-extension LSUniversalSDK.AdvancedAnnotationError : Swift.Equatable {}
-extension LSUniversalSDK.AdvancedAnnotationError : Swift.Hashable {}
-extension LSUniversalSDK.AdvancedAnnotationError : Swift.RawRepresentable {}
