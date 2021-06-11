@@ -2,6 +2,7 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [2.5.0](#250)
 - [2.4.2](#242)
 - [2.4.1](#241)
 - [2.3.1](#231)
@@ -44,6 +45,17 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
+
+## 2.5.0
+> 2021/06/11
+> __mucl de0e88b__
+
+### Change
+- Picture editing is now available for mobile guest
+
+### Fix
+- Calls now start without trouble on iOS 14.0
+- Recording auto-start is now correctly handled
 
 ## 2.4.2
 > 2021/04/28
