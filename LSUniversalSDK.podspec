@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'LSUniversalSDK'
-    s.version          = '2.4.3.0'
+    s.version          = '2.5.0.0'
     s.summary          = 'The higher level "Universal App" SDK'
     s.swift_version    = '5.3.1'
   
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
     s.homepage         = 'https://github.com/sightcall/iOS-UniversalSDK'
     s.author           = { 'developer' => 'developer@sightcall.com' }
     s.source           = { :git => 'https://github.com/sightcall/iOS-UniversalSDK.git' }
-    s.vendored_frameworks = 'LSUniversalSDK.xcframework'
+    s.vendored_frameworks = 'LSUniversalSDK.framework'
   
     s.ios.deployment_target = '9.0'
 
