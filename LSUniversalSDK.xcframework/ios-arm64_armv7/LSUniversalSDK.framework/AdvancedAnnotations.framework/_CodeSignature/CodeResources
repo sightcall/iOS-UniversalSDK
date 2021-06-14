@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/AdvancedAnnotations-Swift.h</key>
 		<data>
-		p++jG5KoNxn2v7Yx1KFerFRivj8=
+		SWxmF0E00o13vv9JcrYis88Zj2I=
 		</data>
 		<key>Headers/AdvancedAnnotations.h</key>
 		<data>
@@ -14,47 +14,67 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		KlFxonAwHv9TDQl6STywM1UPQ60=
+		F4LxeWhCJIozIXegnuA5Z4q6Dok=
 		</data>
 		<key>Modules/AdvancedAnnotations.swiftmodule/arm.swiftdoc</key>
 		<data>
 		00uMMXMVu1AqgfcmcbJRxsv63eM=
 		</data>
+		<key>Modules/AdvancedAnnotations.swiftmodule/arm.swiftinterface</key>
+		<data>
+		/3Tc6Phfghd7q8063uCEMydI/m0=
+		</data>
 		<key>Modules/AdvancedAnnotations.swiftmodule/arm.swiftmodule</key>
 		<data>
-		zndrXQNFePLnX6s5ll5+2wKeNTs=
+		jhn7BSNBr6Brn7dNFD6PNecYBDc=
 		</data>
 		<key>Modules/AdvancedAnnotations.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
 		Uqxf+JUWl0QwpK+P5XfnGySpdbk=
 		</data>
+		<key>Modules/AdvancedAnnotations.swiftmodule/arm64-apple-ios.swiftinterface</key>
+		<data>
+		BifVMSVE5/bVkeTuNkzfkZnODmM=
+		</data>
 		<key>Modules/AdvancedAnnotations.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		TWaB3HyA+P8Sxue941WOzz1W2ZQ=
+		3KDajJUsf3Xm2okB5NiTCpJA39k=
 		</data>
 		<key>Modules/AdvancedAnnotations.swiftmodule/arm64.swiftdoc</key>
 		<data>
 		Uqxf+JUWl0QwpK+P5XfnGySpdbk=
 		</data>
+		<key>Modules/AdvancedAnnotations.swiftmodule/arm64.swiftinterface</key>
+		<data>
+		BifVMSVE5/bVkeTuNkzfkZnODmM=
+		</data>
 		<key>Modules/AdvancedAnnotations.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		TWaB3HyA+P8Sxue941WOzz1W2ZQ=
+		3KDajJUsf3Xm2okB5NiTCpJA39k=
 		</data>
 		<key>Modules/AdvancedAnnotations.swiftmodule/armv7-apple-ios.swiftdoc</key>
 		<data>
 		00uMMXMVu1AqgfcmcbJRxsv63eM=
 		</data>
+		<key>Modules/AdvancedAnnotations.swiftmodule/armv7-apple-ios.swiftinterface</key>
+		<data>
+		/3Tc6Phfghd7q8063uCEMydI/m0=
+		</data>
 		<key>Modules/AdvancedAnnotations.swiftmodule/armv7-apple-ios.swiftmodule</key>
 		<data>
-		zndrXQNFePLnX6s5ll5+2wKeNTs=
+		jhn7BSNBr6Brn7dNFD6PNecYBDc=
 		</data>
 		<key>Modules/AdvancedAnnotations.swiftmodule/armv7.swiftdoc</key>
 		<data>
 		00uMMXMVu1AqgfcmcbJRxsv63eM=
 		</data>
+		<key>Modules/AdvancedAnnotations.swiftmodule/armv7.swiftinterface</key>
+		<data>
+		/3Tc6Phfghd7q8063uCEMydI/m0=
+		</data>
 		<key>Modules/AdvancedAnnotations.swiftmodule/armv7.swiftmodule</key>
 		<data>
-		zndrXQNFePLnX6s5ll5+2wKeNTs=
+		jhn7BSNBr6Brn7dNFD6PNecYBDc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -67,11 +87,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			p++jG5KoNxn2v7Yx1KFerFRivj8=
+			SWxmF0E00o13vv9JcrYis88Zj2I=
 			</data>
 			<key>hash2</key>
 			<data>
-			ukt9d+aDdm7xFS61KKyq4wQ6zpKupSl2rSrNMNPcsLg=
+			oAqa/8YT0KcQcOvXdqVxQ2RyanTGkcCCdcf4YVr1xSA=
 			</data>
 		</dict>
 		<key>Headers/AdvancedAnnotations.h</key>
@@ -96,15 +116,26 @@
 			5SzO5OpNHaOgFOyv5QkHXkC6Pm/syy5iar4LJDkp540=
 			</data>
 		</dict>
+		<key>Modules/AdvancedAnnotations.swiftmodule/arm.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/3Tc6Phfghd7q8063uCEMydI/m0=
+			</data>
+			<key>hash2</key>
+			<data>
+			I3N/h2LwQVBc+M3JyPgXkSnjKSwioii5RW5fCigsvXA=
+			</data>
+		</dict>
 		<key>Modules/AdvancedAnnotations.swiftmodule/arm.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zndrXQNFePLnX6s5ll5+2wKeNTs=
+			jhn7BSNBr6Brn7dNFD6PNecYBDc=
 			</data>
 			<key>hash2</key>
 			<data>
-			MYd3py5iCfuS8jEzyEiz20QTwRCR6ibX80j3cstlb0w=
+			IVEKb7cxIrlasY7IFB410BwtLW1TfTSjbddrjUsslL4=
 			</data>
 		</dict>
 		<key>Modules/AdvancedAnnotations.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -118,15 +149,26 @@
 			T5r7Z+sDjtWPg2aos5FlCe62+f7KWO820hEECXM6xWU=
 			</data>
 		</dict>
+		<key>Modules/AdvancedAnnotations.swiftmodule/arm64-apple-ios.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			BifVMSVE5/bVkeTuNkzfkZnODmM=
+			</data>
+			<key>hash2</key>
+			<data>
+			io0l9NmHLSpkDRP1jARsh/Z9HZwZk69BM2eL6JDKyhE=
+			</data>
+		</dict>
 		<key>Modules/AdvancedAnnotations.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			TWaB3HyA+P8Sxue941WOzz1W2ZQ=
+			3KDajJUsf3Xm2okB5NiTCpJA39k=
 			</data>
 			<key>hash2</key>
 			<data>
-			YwBrXzNniX7kWCXbGXwTVeT32tamK5K+HZVSDLmdWdE=
+			/3Jn2bgYia405sOWSDAfQGp/HX7Oty5IvfvxPwy++qc=
 			</data>
 		</dict>
 		<key>Modules/AdvancedAnnotations.swiftmodule/arm64.swiftdoc</key>
@@ -140,15 +182,26 @@
 			T5r7Z+sDjtWPg2aos5FlCe62+f7KWO820hEECXM6xWU=
 			</data>
 		</dict>
+		<key>Modules/AdvancedAnnotations.swiftmodule/arm64.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			BifVMSVE5/bVkeTuNkzfkZnODmM=
+			</data>
+			<key>hash2</key>
+			<data>
+			io0l9NmHLSpkDRP1jARsh/Z9HZwZk69BM2eL6JDKyhE=
+			</data>
+		</dict>
 		<key>Modules/AdvancedAnnotations.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			TWaB3HyA+P8Sxue941WOzz1W2ZQ=
+			3KDajJUsf3Xm2okB5NiTCpJA39k=
 			</data>
 			<key>hash2</key>
 			<data>
-			YwBrXzNniX7kWCXbGXwTVeT32tamK5K+HZVSDLmdWdE=
+			/3Jn2bgYia405sOWSDAfQGp/HX7Oty5IvfvxPwy++qc=
 			</data>
 		</dict>
 		<key>Modules/AdvancedAnnotations.swiftmodule/armv7-apple-ios.swiftdoc</key>
@@ -162,15 +215,26 @@
 			5SzO5OpNHaOgFOyv5QkHXkC6Pm/syy5iar4LJDkp540=
 			</data>
 		</dict>
+		<key>Modules/AdvancedAnnotations.swiftmodule/armv7-apple-ios.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/3Tc6Phfghd7q8063uCEMydI/m0=
+			</data>
+			<key>hash2</key>
+			<data>
+			I3N/h2LwQVBc+M3JyPgXkSnjKSwioii5RW5fCigsvXA=
+			</data>
+		</dict>
 		<key>Modules/AdvancedAnnotations.swiftmodule/armv7-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zndrXQNFePLnX6s5ll5+2wKeNTs=
+			jhn7BSNBr6Brn7dNFD6PNecYBDc=
 			</data>
 			<key>hash2</key>
 			<data>
-			MYd3py5iCfuS8jEzyEiz20QTwRCR6ibX80j3cstlb0w=
+			IVEKb7cxIrlasY7IFB410BwtLW1TfTSjbddrjUsslL4=
 			</data>
 		</dict>
 		<key>Modules/AdvancedAnnotations.swiftmodule/armv7.swiftdoc</key>
@@ -184,15 +248,26 @@
 			5SzO5OpNHaOgFOyv5QkHXkC6Pm/syy5iar4LJDkp540=
 			</data>
 		</dict>
+		<key>Modules/AdvancedAnnotations.swiftmodule/armv7.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/3Tc6Phfghd7q8063uCEMydI/m0=
+			</data>
+			<key>hash2</key>
+			<data>
+			I3N/h2LwQVBc+M3JyPgXkSnjKSwioii5RW5fCigsvXA=
+			</data>
+		</dict>
 		<key>Modules/AdvancedAnnotations.swiftmodule/armv7.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zndrXQNFePLnX6s5ll5+2wKeNTs=
+			jhn7BSNBr6Brn7dNFD6PNecYBDc=
 			</data>
 			<key>hash2</key>
 			<data>
-			MYd3py5iCfuS8jEzyEiz20QTwRCR6ibX80j3cstlb0w=
+			IVEKb7cxIrlasY7IFB410BwtLW1TfTSjbddrjUsslL4=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -249,14 +249,14 @@ SWIFT_PROTOCOL_NAMED("AdvancedAnnotationAPIDelegate")
 - (void)annotationCommandAvailable:(NSString * _Nonnull)command;
 @end
 
-typedef SWIFT_ENUM_NAMED(NSInteger, SCAdvancedAnnotationError, "AdvancedAnnotationError", closed) {
+typedef SWIFT_ENUM_NAMED(NSInteger, SCAdvancedAnnotationError, "AdvancedAnnotationError", open) {
   SCAdvancedAnnotationErrorNilUrl = 0,
   SCAdvancedAnnotationErrorNilView = 1,
   SCAdvancedAnnotationErrorNilProtocolString = 2,
 };
 static NSString * _Nonnull const SCAdvancedAnnotationErrorDomain = @"AdvancedAnnotations.AdvancedAnnotationError";
 
-typedef SWIFT_ENUM_NAMED(NSInteger, SCAdvancedAnnotationEventType, "AdvancedAnnotationEventType", closed) {
+typedef SWIFT_ENUM_NAMED(NSInteger, SCAdvancedAnnotationEventType, "AdvancedAnnotationEventType", open) {
   SCAdvancedAnnotationEventTypeNone = 0,
   SCAdvancedAnnotationEventTypeTouchDown = 1,
   SCAdvancedAnnotationEventTypeTouchMove = 2,
@@ -520,14 +520,14 @@ SWIFT_PROTOCOL_NAMED("AdvancedAnnotationAPIDelegate")
 - (void)annotationCommandAvailable:(NSString * _Nonnull)command;
 @end
 
-typedef SWIFT_ENUM_NAMED(NSInteger, SCAdvancedAnnotationError, "AdvancedAnnotationError", closed) {
+typedef SWIFT_ENUM_NAMED(NSInteger, SCAdvancedAnnotationError, "AdvancedAnnotationError", open) {
   SCAdvancedAnnotationErrorNilUrl = 0,
   SCAdvancedAnnotationErrorNilView = 1,
   SCAdvancedAnnotationErrorNilProtocolString = 2,
 };
 static NSString * _Nonnull const SCAdvancedAnnotationErrorDomain = @"AdvancedAnnotations.AdvancedAnnotationError";
 
-typedef SWIFT_ENUM_NAMED(NSInteger, SCAdvancedAnnotationEventType, "AdvancedAnnotationEventType", closed) {
+typedef SWIFT_ENUM_NAMED(NSInteger, SCAdvancedAnnotationEventType, "AdvancedAnnotationEventType", open) {
   SCAdvancedAnnotationEventTypeNone = 0,
   SCAdvancedAnnotationEventTypeTouchDown = 1,
   SCAdvancedAnnotationEventTypeTouchMove = 2,

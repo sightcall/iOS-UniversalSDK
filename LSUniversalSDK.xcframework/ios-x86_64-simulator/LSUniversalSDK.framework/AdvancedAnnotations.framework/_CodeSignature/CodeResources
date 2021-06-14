@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/AdvancedAnnotations-Swift.h</key>
 		<data>
-		m5zvKUsdaiVRyjlZlGhgmySVDrQ=
+		LLkn3fLDaiexV5QQFciTAKpTLD0=
 		</data>
 		<key>Headers/AdvancedAnnotations.h</key>
 		<data>
@@ -14,23 +14,31 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Uu92OkRbdc3od5yHGkLKQPZD230=
+		BUtNB3kthh5M8S+fwv6VNvKigM4=
 		</data>
 		<key>Modules/AdvancedAnnotations.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
 		lOey2w+hFpGZXTaj5DsTcruzDio=
 		</data>
+		<key>Modules/AdvancedAnnotations.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
+		<data>
+		rkBUZz3kfwOUdYjEtEyTAYZUoJ8=
+		</data>
 		<key>Modules/AdvancedAnnotations.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		+tShf4Jcz633lsMcyd294IENj28=
+		45S+V9D+sgm3RcKHW4p1kMr94+A=
 		</data>
 		<key>Modules/AdvancedAnnotations.swiftmodule/x86_64.swiftdoc</key>
 		<data>
 		lOey2w+hFpGZXTaj5DsTcruzDio=
 		</data>
+		<key>Modules/AdvancedAnnotations.swiftmodule/x86_64.swiftinterface</key>
+		<data>
+		rkBUZz3kfwOUdYjEtEyTAYZUoJ8=
+		</data>
 		<key>Modules/AdvancedAnnotations.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		+tShf4Jcz633lsMcyd294IENj28=
+		45S+V9D+sgm3RcKHW4p1kMr94+A=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -43,11 +51,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			m5zvKUsdaiVRyjlZlGhgmySVDrQ=
+			LLkn3fLDaiexV5QQFciTAKpTLD0=
 			</data>
 			<key>hash2</key>
 			<data>
-			WNArIKGCKOEd29VX4sRImtUWQY2KPiC2YX2Jy3dEMy8=
+			ycx+07El9hnK89W2UZWo86j693ZQmugFeOZtOOZtA7g=
 			</data>
 		</dict>
 		<key>Headers/AdvancedAnnotations.h</key>
@@ -72,15 +80,26 @@
 			PDEiAr79jTzqamzivSzsQSBuYtAMq1o5GdkYK0tVPYs=
 			</data>
 		</dict>
+		<key>Modules/AdvancedAnnotations.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rkBUZz3kfwOUdYjEtEyTAYZUoJ8=
+			</data>
+			<key>hash2</key>
+			<data>
+			sbhP4ILjql50nISD7e/X5yetejzGAHNOiS5r6m2rGwM=
+			</data>
+		</dict>
 		<key>Modules/AdvancedAnnotations.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+tShf4Jcz633lsMcyd294IENj28=
+			45S+V9D+sgm3RcKHW4p1kMr94+A=
 			</data>
 			<key>hash2</key>
 			<data>
-			xVfJaxEkhsKcexfRFq6EWKfPfDgWLS2dK3vfb4bGFkg=
+			OqajQVrOQJ0pg2IN086/Oy1gFdZcWyINPc6of1I2L7o=
 			</data>
 		</dict>
 		<key>Modules/AdvancedAnnotations.swiftmodule/x86_64.swiftdoc</key>
@@ -94,15 +113,26 @@
 			PDEiAr79jTzqamzivSzsQSBuYtAMq1o5GdkYK0tVPYs=
 			</data>
 		</dict>
+		<key>Modules/AdvancedAnnotations.swiftmodule/x86_64.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rkBUZz3kfwOUdYjEtEyTAYZUoJ8=
+			</data>
+			<key>hash2</key>
+			<data>
+			sbhP4ILjql50nISD7e/X5yetejzGAHNOiS5r6m2rGwM=
+			</data>
+		</dict>
 		<key>Modules/AdvancedAnnotations.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+tShf4Jcz633lsMcyd294IENj28=
+			45S+V9D+sgm3RcKHW4p1kMr94+A=
 			</data>
 			<key>hash2</key>
 			<data>
-			xVfJaxEkhsKcexfRFq6EWKfPfDgWLS2dK3vfb4bGFkg=
+			OqajQVrOQJ0pg2IN086/Oy1gFdZcWyINPc6of1I2L7o=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
