@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
     s.name             = 'LSUniversalSDK'
     s.version          = '2.5.1'
-    s.summary          = 'The SDK to integrate SightCall's services into your iOS and iPadOS applications'
+    s.summary          = 'The SDK to integrate SightCall services into your iOS and iPadOS applications'
     s.swift_version    = '5.3.1'
   
     s.description      = <<-DESC
