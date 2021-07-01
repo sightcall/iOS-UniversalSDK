@@ -1,0 +1,55 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
+// swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name AdvancedAnnotations
+@_exported import AdvancedAnnotations
+import Foundation
+import SVGgh
+import Swift
+import UIKit
+@objc(SCAdvancedAnnotationAPI) public class AdvancedAnnotationAPI : ObjectiveC.NSObject {
+  @objc public var enable: Swift.Bool
+  @objc public init?(url: Foundation.URL?, delegate: AdvancedAnnotations.AdvancedAnnotationAPIDelegate?)
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension AdvancedAnnotationAPI {
+  @objc dynamic public func bind(currentView: UIKit.UIView?)
+  @objc dynamic public func unbindFromCurrentView()
+  @objc dynamic public func setAnnotationCommand(protocolString: Swift.String?)
+  @objc dynamic public func clearAllAnnotations()
+  @objc dynamic public func processEvent(type: AdvancedAnnotations.AdvancedAnnotationEventType, position: CoreGraphics.CGPoint)
+}
+extension AdvancedAnnotationAPI {
+  @objc dynamic public func setUserId(_ userId: Swift.UInt8)
+  @objc dynamic public func rtccAnnotationRequest(string: Swift.String)
+}
+@objc(SCAdvancedAnnotationAPIDelegate) public protocol AdvancedAnnotationAPIDelegate {
+  @objc func didFail(error: AdvancedAnnotations.AdvancedAnnotationError)
+  @objc func advancedAnnotationIsReady()
+  @objc func annotationCommandAvailable(_ command: Swift.String)
+}
+@objc(SCAdvancedAnnotationEventType) public enum AdvancedAnnotationEventType : Swift.Int {
+  case none = 0, touchDown, touchMove, touchUp
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc(SCAdvancedAnnotationError) public enum AdvancedAnnotationError : Swift.Int, Swift.Error {
+  case nilUrl = 0, nilView, nilProtocolString
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public static var _nsErrorDomain: Swift.String {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension AdvancedAnnotations.AdvancedAnnotationEventType : Swift.Equatable {}
+extension AdvancedAnnotations.AdvancedAnnotationEventType : Swift.Hashable {}
+extension AdvancedAnnotations.AdvancedAnnotationEventType : Swift.RawRepresentable {}
+extension AdvancedAnnotations.AdvancedAnnotationError : Swift.Equatable {}
+extension AdvancedAnnotations.AdvancedAnnotationError : Swift.Hashable {}
+extension AdvancedAnnotations.AdvancedAnnotationError : Swift.RawRepresentable {}
