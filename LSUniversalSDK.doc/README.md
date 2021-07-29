@@ -64,8 +64,18 @@ This Framework ships with its own dependencies:
 
 To integrate the Sightcall sdk into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
-```shell
+```ruby
     pod 'LSUniversalSDK', :git => 'https://github.com/sightcall/iOS-UniversalSDK.git'
+```
+
+We are migrating our Pod, you can now integrate it simply like this:
+```ruby
+    pod 'LSUniversalSDK'
+```
+
+Or specify a version range like that:
+```ruby
+    pod 'LSUniversalSDK', '~> 2.6.0'
 ```
 
 ### Update from older versions

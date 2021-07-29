@@ -183,3 +183,4 @@
 "alert_display_name_title" = "Enter Your Name";
 "alert_display_name_subtitle" = "Your display name must be 1-60 characters long.";
 "alert_display_name_skip_button" = "Skip";
+"multiparty_agent_name" = "Me";

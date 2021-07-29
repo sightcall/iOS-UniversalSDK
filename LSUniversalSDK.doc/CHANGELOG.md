@@ -2,6 +2,7 @@
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
+- [2.6.0](#260)
 - [2.5.0](#250)
 - [2.4.2](#242)
 - [2.4.1](#241)
@@ -45,6 +46,16 @@
 - [0.8.0](#080)
 
 <!-- /MarkdownTOC -->
+
+## 2.6.0
+> 2021/06/11
+> __mucl d5c88113__
+
+### New
+- Multiparty support
+
+### Fixes
+- Live translation container
 
 ## 2.5.0
 > 2021/06/11
