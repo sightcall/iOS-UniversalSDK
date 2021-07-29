@@ -1,0 +1,763 @@
+[
+
+    {
+
+      "tag": "ar-BH",
+
+      "name": "Arabic (Bahrain), modern standard"
+
+    },
+
+    {
+
+      "tag": "ar-EG",
+
+      "name": "Arabic (Egypt)"
+
+    },
+
+    {
+
+      "tag": "ar-IQ",
+
+      "name": "Arabic (Iraq)"
+
+    },
+
+    {
+
+      "tag": "ar-IL",
+
+      "name": "Arabic (Israel)"
+
+    },
+
+    {
+
+      "tag": "ar-JO",
+
+      "name": "Arabic (Jordan)"
+
+    },
+
+    {
+
+      "tag": "ar-KW",
+
+      "name": "Arabic (Kuwait)"
+
+    },
+
+    {
+
+      "tag": "ar-LB",
+
+      "name": "Arabic (Lebanon)"
+
+    },
+
+    {
+
+      "tag": "ar-OM",
+
+      "name": "Arabic (Oman)"
+
+    },
+
+    {
+
+      "tag": "ar-QA",
+
+      "name": "Arabic (Qatar)"
+
+    },
+
+    {
+
+      "tag": "ar-SA",
+
+      "name": "Arabic (Saudi Arabia)"
+
+    },
+
+    {
+
+      "tag": "ar-PS",
+
+      "name": "Arabic (State of Palestine)"
+
+    },
+
+    {
+
+      "tag": "ar-SY",
+
+      "name": "Arabic (Syria)"
+
+    },
+
+    {
+
+      "tag": "ar-AE",
+
+      "name": "Arabic (United Arab Emirates)"
+
+    },
+
+    {
+
+      "tag": "bg-BG",
+
+      "name": "Bulgarian (Bulgaria)"
+
+    },
+
+    {
+
+      "tag": "ca-ES",
+
+      "name": "Catalan (Spain)"
+
+    },
+
+    {
+
+      "tag": "zh-HK",
+
+      "name": "Chinese (Cantonese, Traditional)"
+
+    },
+
+    {
+
+      "tag": "zh-CN",
+
+      "name": "Chinese (Mandarin, Simplified)"
+
+    },
+
+    {
+
+      "tag": "zh-TW",
+
+      "name": "Chinese (Taiwanese Mandarin)"
+
+    },
+
+    {
+
+      "tag": "hr-HR",
+
+      "name": "Croatian (Croatia)"
+
+    },
+
+    {
+
+      "tag": "cs-CZ",
+
+      "name": "Czech (Czech Republic)"
+
+    },
+
+    {
+
+      "tag": "da-DK",
+
+      "name": "Danish (Denmark)"
+
+    },
+
+    {
+
+      "tag": "nl-NL",
+
+      "name": "Dutch (Netherlands)"
+
+    },
+
+    {
+
+      "tag": "en-AU",
+
+      "name": "English (Australia)"
+
+    },
+
+    {
+
+      "tag": "en-CA",
+
+      "name": "English (Canada)"
+
+    },
+
+    {
+
+      "tag": "en-GH",
+
+      "name": "English (Ghana)"
+
+    },
+
+    {
+
+      "tag": "en-HK",
+
+      "name": "English (Hong Kong)"
+
+    },
+
+    {
+
+      "tag": "en-IN",
+
+      "name": "English (India)"
+
+    },
+
+    {
+
+      "tag": "en-IE",
+
+      "name": "English (Ireland)"
+
+    },
+
+    {
+
+      "tag": "en-KE",
+
+      "name": "English (Kenya)"
+
+    },
+
+    {
+
+      "tag": "en-NZ",
+
+      "name": "English (New Zealand)"
+
+    },
+
+    {
+
+      "tag": "en-NG",
+
+      "name": "English (Nigeria)"
+
+    },
+
+    {
+
+      "tag": "en-PH",
+
+      "name": "English (Philippines)"
+
+    },
+
+    {
+
+      "tag": "en-SG",
+
+      "name": "English (Singapore)"
+
+    },
+
+    {
+
+      "tag": "en-ZA",
+
+      "name": "English (South Africa)"
+
+    },
+
+    {
+
+      "tag": "en-TZ",
+
+      "name": "English (Tanzania)"
+
+    },
+
+    {
+
+      "tag": "en-GB",
+
+      "name": "English (United Kingdom)"
+
+    },
+
+    {
+
+      "tag": "en-US",
+
+      "name": "English (United States)"
+
+    },
+
+    {
+
+      "tag": "et-EE",
+
+      "name": "Estonian (Estonia)"
+
+    },
+
+    {
+
+      "tag": "fil-PH",
+
+      "name": "Filipino (Philippines)"
+
+    },
+
+    {
+
+      "tag": "fi-FI",
+
+      "name": "Finnish (Finland)"
+
+    },
+
+    {
+
+      "tag": "fr-CA",
+
+      "name": "French (Canada)"
+
+    },
+
+    {
+
+      "tag": "fr-FR",
+
+      "name": "French (France)"
+
+    },
+
+    {
+
+      "tag": "fr-CH",
+
+      "name": "French (Switzerland)"
+
+    },
+
+    {
+
+      "tag": "de-AT",
+
+      "name": "German (Austria)"
+
+    },
+
+    {
+
+      "tag": "de-DE",
+
+      "name": "German (Germany)"
+
+    },
+
+    {
+
+      "tag": "el-GR",
+
+      "name": "Greek (Greece)"
+
+    },
+
+    {
+
+      "tag": "gu-IN",
+
+      "name": "Gujarati (Indian)"
+
+    },
+
+    {
+
+      "tag": "hi-IN",
+
+      "name": "Hindi (India)"
+
+    },
+
+    {
+
+      "tag": "hu-HU",
+
+      "name": "Hungarian (Hungary)"
+
+    },
+
+    {
+
+      "tag": "id-ID",
+
+      "name": "Indonesian (Indonesia)"
+
+    },
+
+    {
+
+      "tag": "ga-IE",
+
+      "name": "Irish(Ireland)"
+
+    },
+
+    {
+
+      "tag": "it-IT",
+
+      "name": "Italian (Italy)"
+
+    },
+
+    {
+
+      "tag": "ja-JP",
+
+      "name": "Japanese (Japan)"
+
+    },
+
+    {
+
+      "tag": "ko-KR",
+
+      "name": "Korean (Korea)"
+
+    },
+
+    {
+
+      "tag": "lv-LV",
+
+      "name": "Latvian (Latvia)"
+
+    },
+
+    {
+
+      "tag": "lt-LT",
+
+      "name": "Lithuanian (Lithuania)"
+
+    },
+
+    {
+
+      "tag": "ms-MY",
+
+      "name": "Malay (Malaysia)"
+
+    },
+
+    {
+
+      "tag": "mt-MT",
+
+      "name": "Maltese (Malta)"
+
+    },
+
+    {
+
+      "tag": "mr-IN",
+
+      "name": "Marathi (India)"
+
+    },
+
+    {
+
+      "tag": "nb-NO",
+
+      "name": "Norwegian (Bokmål, Norway)"
+
+    },
+
+    {
+
+      "tag": "pl-PL",
+
+      "name": "Polish (Poland)"
+
+    },
+
+    {
+
+      "tag": "pt-BR",
+
+      "name": "Portuguese (Brazil)"
+
+    },
+
+    {
+
+      "tag": "pt-PT",
+
+      "name": "Portuguese (Portugal)"
+
+    },
+
+    {
+
+      "tag": "ro-RO",
+
+      "name": "Romanian (Romania)"
+
+    },
+
+    {
+
+      "tag": "ru-RU",
+
+      "name": "Russian (Russia)"
+
+    },
+
+    {
+
+      "tag": "sk-SK",
+
+      "name": "Slovak (Slovakia)"
+
+    },
+
+    {
+
+      "tag": "sl-SI",
+
+      "name": "Slovenian (Slovenia)"
+
+    },
+
+    {
+
+      "tag": "es-AR",
+
+      "name": "Spanish (Argentina)"
+
+    },
+
+    {
+
+      "tag": "es-BO",
+
+      "name": "Spanish (Bolivia)"
+
+    },
+
+    {
+
+      "tag": "es-CL",
+
+      "name": "Spanish (Chile)"
+
+    },
+
+    {
+
+      "tag": "es-CO",
+
+      "name": "Spanish (Colombia)"
+
+    },
+
+    {
+
+      "tag": "es-CR",
+
+      "name": "Spanish (Costa Rica)"
+
+    },
+
+    {
+
+      "tag": "es-CU",
+
+      "name": "Spanish (Cuba)"
+
+    },
+
+    {
+
+      "tag": "es-DO",
+
+      "name": "Spanish (Dominican Republic)"
+
+    },
+
+    {
+
+      "tag": "es-EC",
+
+      "name": "Spanish (Ecuador)"
+
+    },
+
+    {
+
+      "tag": "es-SV",
+
+      "name": "Spanish (El Salvador)"
+
+    },
+
+    {
+
+      "tag": "es-GQ",
+
+      "name": "Spanish (Equatorial Guinea)"
+
+    },
+
+    {
+
+      "tag": "es-GT",
+
+      "name": "Spanish (Guatemala)"
+
+    },
+
+    {
+
+      "tag": "es-HN",
+
+      "name": "Spanish (Honduras)"
+
+    },
+
+    {
+
+      "tag": "es-MX",
+
+      "name": "Spanish (Mexico)"
+
+    },
+
+    {
+
+      "tag": "es-NI",
+
+      "name": "Spanish (Nicaragua)"
+
+    },
+
+    {
+
+      "tag": "es-PA",
+
+      "name": "Spanish (Panama)"
+
+    },
+
+    {
+
+      "tag": "es-PY",
+
+      "name": "Spanish (Paraguay)"
+
+    },
+
+    {
+
+      "tag": "es-PE",
+
+      "name": "Spanish (Peru)"
+
+    },
+
+    {
+
+      "tag": "es-PR",
+
+      "name": "Spanish (Puerto Rico)"
+
+    },
+
+    {
+
+      "tag": "es-ES",
+
+      "name": "Spanish (Spain)"
+
+    },
+
+    {
+
+      "tag": "es-UY",
+
+      "name": "Spanish (Uruguay)"
+
+    },
+
+    {
+
+      "tag": "es-US",
+
+      "name": "Spanish (USA)"
+
+    },
+
+    {
+
+      "tag": "es-VE",
+
+      "name": "Spanish (Venezuela)"
+
+    },
+
+    {
+
+      "tag": "sv-SE",
+
+      "name": "Swedish (Sweden)"
+
+    },
+
+    {
+
+      "tag": "ta-IN",
+
+      "name": "Tamil (India)"
+
+    },
+
+    {
+
+      "tag": "te-IN",
+
+      "name": "Telugu (India)"
+
+    },
+
+    {
+
+      "tag": "th-TH",
+
+      "name": "Thai (Thailand)"
+
+    },
+
+    {
+
+      "tag": "tr-TR",
+
+      "name": "Turkish (Turkey)"
+
+    },
+
+    {
+
+      "tag": "vi-VN",
+
+      "name": "Vietnamese (Vietnam)"
+
+    }
+
+  ]

@@ -1,0 +1,77 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
+// swift-module-flags: -target armv7-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LiveTranslation
+import Foundation
+@_exported import LiveTranslation
+import Swift
+import UIKit
+public struct LanguageModel : Swift.Decodable {
+  public var tag: Swift.String
+  public var name: Swift.String
+  public init(from decoder: Swift.Decoder) throws
+}
+@objc(SCRole) public enum Role : Swift.Int {
+  case agent = 1, guest, attendee
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @objc(SCCustomAlertController) public class CustomAlertController : UIKit.UIAlertController {
+  @objc public var viewWillAppearBlock: ((UIKit.UIAlertController) -> Swift.Void)?
+  @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc(SCLanguageMode) public enum LanguageMode : Swift.Int {
+  case none = 0, auto, confirmation
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc(SCLiveTranslationDelegate) public protocol LiveTranslationDelegate {
+  @objc func liveTranslationDidSelectLanguage(_ language: Swift.String)
+  @objc func liveTranslationStateDidChange(_ state: Swift.Bool)
+  @objc func liveTranslationFontSizeDidChange(_ size: Swift.Int)
+  @objc func liveTranslationSettingsClosed()
+  @objc func liveTranslationCurrentRole() -> LiveTranslation.Role
+}
+@objc(SCLiveTranslation) public class LiveTranslation : ObjectiveC.NSObject {
+  @objc public var colors: [Swift.String] {
+    @objc get
+  }
+  @objc public var languageModeIsConfirmation: Swift.Bool {
+    @objc get
+  }
+  @objc public var translationIsEnabled: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc public init(languageListURL: Foundation.URL?, settings: Swift.Dictionary<Swift.String, Any>?, delegate: LiveTranslation.LiveTranslationDelegate?)
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension LiveTranslation {
+  @objc dynamic public func openLanguageSelector(parentViewController: UIKit.UIViewController?)
+  @objc dynamic public func addLanguageSelectorTo(alertController: LiveTranslation.CustomAlertController)
+  @objc dynamic public func setSafeBottomOffset(_ offset: CoreGraphics.CGFloat)
+}
+extension LiveTranslation {
+  @objc dynamic public func openSettingsPanel(parentViewController: UIKit.UIViewController?)
+  @objc dynamic public func closeSettingsPanel()
+}
+extension LiveTranslation {
+  @objc dynamic public func showTranslationContainer(parentViewController: UIKit.UIViewController?)
+  @objc dynamic public func removeTranslationContainer()
+  @objc dynamic public func translationAvailable(sentance: Swift.String, speakerName: Swift.String, hexColor: Swift.String)
+}
+extension LiveTranslation.Role : Swift.Equatable {}
+extension LiveTranslation.Role : Swift.Hashable {}
+extension LiveTranslation.Role : Swift.RawRepresentable {}
+extension LiveTranslation.LanguageMode : Swift.Equatable {}
+extension LiveTranslation.LanguageMode : Swift.Hashable {}
+extension LiveTranslation.LanguageMode : Swift.RawRepresentable {}
