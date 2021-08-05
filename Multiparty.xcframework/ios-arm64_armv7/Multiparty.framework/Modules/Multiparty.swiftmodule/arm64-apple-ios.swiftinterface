@@ -1,0 +1,42 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
+// swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Multiparty
+import Foundation
+@_exported import Multiparty
+import Swift
+import UIKit
+@objc(LSMobileMultipartyDelegate) public protocol MobileMultipartyDelegate {
+  @objc func mobileMultipartyError(error: Swift.Error)
+  @objc func sendMuteUnmute(for contactId: Foundation.NSNumber, isMuted: Foundation.NSNumber, isMainSpeaker: Foundation.NSNumber)
+  @objc func switchRole(for contactId: Foundation.NSNumber, contactUID: Swift.String?)
+  @objc func kickout(for contactId: Foundation.NSNumber)
+}
+@objc(LSMobileMultiparty) public class MobileMultiparty : ObjectiveC.NSObject {
+  @objc public init?(url: Foundation.URL?, token: Swift.String?, callId: Swift.String?, smsCountryDefault: Swift.String?, delegate: Multiparty.MobileMultipartyDelegate?)
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension MobileMultiparty {
+  @objc dynamic public func open(parentViewController: UIKit.UIViewController?)
+  @objc dynamic public func close()
+  @objc dynamic public func addParticipant(participant: Multiparty.Participant)
+  @objc dynamic public func removeParticipant(_ participant: Multiparty.Participant)
+  @objc dynamic public func updateStatus(for participant: Multiparty.Participant)
+  @objc dynamic public func getParticipantsCount() -> Foundation.NSNumber
+  @objc dynamic public func clearParticipantList()
+}
+@objc(Participant) public class Participant : ObjectiveC.NSObject {
+  @objc public init(uid: Swift.String?, contactId: Foundation.NSNumber?, displayName: Swift.String?, isMuted: Foundation.NSNumber?, isAdmin: Foundation.NSNumber?, isHandUp: Foundation.NSNumber?, isMainSpeaker: Foundation.NSNumber?)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class ParticipantCell : UIKit.UITableViewCell {
+  @objc override dynamic public func awakeFromNib()
+  @objc override dynamic public func setSelected(_ selected: Swift.Bool, animated: Swift.Bool)
+  @available(iOS 3.0, *)
+  @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension String : Swift.Error {
+}

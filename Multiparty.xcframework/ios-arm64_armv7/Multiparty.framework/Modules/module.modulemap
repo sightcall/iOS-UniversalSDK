@@ -1,0 +1,11 @@
+framework module Multiparty {
+  umbrella header "Multiparty-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module Multiparty.Swift {
+    header "Multiparty-Swift.h"
+    requires objc
+}

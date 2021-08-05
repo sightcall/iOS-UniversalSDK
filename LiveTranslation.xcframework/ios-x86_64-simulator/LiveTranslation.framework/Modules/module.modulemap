@@ -1,0 +1,11 @@
+framework module LiveTranslation {
+  umbrella header "LiveTranslation-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module LiveTranslation.Swift {
+    header "LiveTranslation-Swift.h"
+    requires objc
+}
